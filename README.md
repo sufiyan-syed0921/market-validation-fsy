@@ -20,7 +20,7 @@ Sample breakdown for each yoke:​
 - Thrustmaster TCA Boeing (n=50)
 
 #### Code
-For more detailed information on data processing, please review this code file and readme
+For more detailed information on data processing, please review this code file and readme:
 [Product Review Data Processing & Analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/product_reviews)
 
 ### Survey
@@ -28,8 +28,8 @@ Surveyed approximately 300 yoke users on the r/flightsim subreddit using Qualtri
 Users who took the survey were entered into a raffle for a $100 Steam gift card​
 
 #### Code
-For more detailed information on data processing, please review this code file and readme
-[Survey Data Processing & Analysis](https://pages.github.com/)
+For more detailed information on data processing, please review this code file and readme:
+[Survey Data Processing & Analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/survey)
 
 
 ## Results 
