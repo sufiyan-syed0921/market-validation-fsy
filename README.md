@@ -24,8 +24,7 @@ For more detailed information on data processing, please review this code file a
 [Product Review Data Processing & Analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/product_reviews)
 
 ### Survey
-Surveyed approximately 300 yoke users on the r/flightsim subreddit using Qualtrics​
-Users who took the survey were entered into a raffle for a $100 Steam gift card​
+Surveyed approximately 300 yoke users on the r/flightsim subreddit using Qualtrics​. Users who took the survey were entered into a raffle for a $100 Steam gift card​. 
 
 #### Code
 For more detailed information on data processing, please review this code file and readme:
