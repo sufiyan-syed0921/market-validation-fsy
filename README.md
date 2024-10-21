@@ -2,11 +2,11 @@
 
 ## Background
 
-This repository aims to summarize research results from an exploratory analysis on the outcome of introducing an additional product offering in the flight simulation yoke controller market.The proposed product has one main advantage over current market offerings, which we aim to test: an increased perceived feel, smoothness, and precision of yoke movement at a price point under $400. Our main product competitors we outlined for this analysis is the Turtle Beach: VelocityOne, Honeycomb Aereonatical XPC, and the Thrustmaster TCA Boeing. Given this, we set out to answer 3 key questions in an attempt to validate a market for this product:
+This repository aims to summarize research results from an exploratory analysis on the outcome of introducing an additional product offering in the flight simulation yoke controller market.The proposed product has one main advantage over current market offerings, which we aim to test: an increased perceived feel, smoothness, and precision of yoke movement at a price point under $400. Our main product competitors we outlined for this analysis is the Turtle Beach: VelocityOne, Honeycomb XPC, and the Thrustmaster TCA Boeing. Given this, we set out to answer 3 key questions in an attempt to validate a market for this product:
 
-#### RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings.​
-#### RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​
-#### RQ 3: Assess the comparative desirability of the current product against its primary competitors.​
+##### *RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings.​*
+##### *RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​*
+##### *RQ 3: Assess the comparative desirability of the current product against its primary competitors.​*
 
 ## Methods & Data Processing
 Our methodological approach to answering these questions included data sources in customer product reviews and survey data
@@ -33,10 +33,19 @@ For more detailed information on data processing, please review this code file a
 
 ## Results 
 
-### RQ 1
+### RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings.​
 
-### RQ 2
+- Amazon Review Descriptives
+- Yoke Smoothness Survey Question
 
-### RQ 3
+### RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​
+
+- Feature Ranking
+
+### RQ 3: Assess the comparative desirability of the current product against its primary competitors.​
+
+- Product Ranking
+
+### Limitations
 
 ## Conclusions
