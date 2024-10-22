@@ -26,6 +26,17 @@ For more detailed information on data processing, please review this code file a
 ### Survey
 Surveyed approximately 300 yoke users on the r/flightsim subreddit using Qualtrics​. Users who took the survey were entered into a raffle for a $100 Steam gift card​. 
 
+Responses were filtered out of the final analysis for 2 key reasons: 
+- **Yoke Ownership:**
+Users who do not own a flight yoke, or those who quit the survey after indicating yoke ownership, were removed.
+
+- **Inconconsitent Location Responses:**
+Respondents were asked if they are local to the SF Bay Area. If so, respondents were further asked if they would be interested in participating in an in-person user study. We received a significant number of responses claiming to be local to the SF Bay Area while having IP addresses far outside the SF Bay Area which raised concerns of untruthful responses. These responses were removed from the sample.​
+
+Respondents were asked if they are local to the SF Bay Area to guage availability in participating in an in-person user study. We received many responses claiming to be local to the SF Bay Area, but with IP addresses from outside the region, raising concerns about dishonest answers. These responses were removed from the sample. 
+
+After these results the posprocessed sample size for the survey data was 157. 
+
 #### Code
 For more detailed information on data processing, please review this code file and readme:
 [Survey Data Processing & Analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/survey)
