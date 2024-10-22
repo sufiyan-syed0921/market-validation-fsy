@@ -33,9 +33,7 @@ Users who do not own a flight yoke, or those who quit the survey after indicatin
 - **Inconconsitent Location Responses:**
 Respondents were asked if they are local to the SF Bay Area. If so, respondents were further asked if they would be interested in participating in an in-person user study. We received a significant number of responses claiming to be local to the SF Bay Area while having IP addresses far outside the SF Bay Area which raised concerns of untruthful responses. These responses were removed from the sample.​
 
-Respondents were asked if they are local to the SF Bay Area to guage availability in participating in an in-person user study. We received many responses claiming to be local to the SF Bay Area, but with IP addresses from outside the region, raising concerns about dishonest answers. These responses were removed from the sample. 
-
-After these results the posprocessed sample size for the survey data was 157. 
+After these filters, the post-processed sample size for the survey data was 157. 
 
 #### Code
 For more detailed information on data processing, please review this code file and readme:
