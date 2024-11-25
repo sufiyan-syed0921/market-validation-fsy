@@ -66,7 +66,7 @@ For more detailed information on data processing, please review this code file a
 
 - Product Ranking
 
-
+![Bar Chart CMR](bar_chart_cmr.svg)
 
 ### Limitations
 
