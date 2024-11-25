@@ -19,7 +19,7 @@ Sample breakdown for each yoke:​
 - Honeycomb Aeronautical XPC (n=82)​
 - Thrustmaster TCA Boeing (n=50)
 
-For more detailed information on data processing, please review this code file and readme:
+For more detailed information on the analysis plan and data processing, please review this code file and readme:
 [Product Review Data Processing & Analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/product_reviews)
 
 ### Survey
@@ -33,7 +33,7 @@ Respondents were asked if they are local to the SF Bay Area. If so, respondents 
 
 After these filters, the post-processed sample size for the survey data was 157. 
 
-For more detailed information on data processing, please review this code file and readme:
+For more detailed information on the analysis plan and data processing, please review this code file and readme:
 [Survey Data Processing & Analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/survey)
 
 
