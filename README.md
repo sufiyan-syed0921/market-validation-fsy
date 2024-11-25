@@ -44,11 +44,15 @@ For more detailed information on data processing, please review this code file a
 
 ### RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings.​
 
-- Amazon Review Descriptives
+<div align="center">
+  <h4>Amazon Reviews</h4>
+</div>
 
 ![Donut Chart AR](donut_chart_ar.svg)
   
-- Yoke Smoothness Survey Question
+<div align="center">
+  <h4>Survey Question</h4>
+</div>
 
 ![Donut Chart S](donut_chart_s.svg)
 
@@ -56,9 +60,13 @@ For more detailed information on data processing, please review this code file a
 
 - Feature Ranking
 
+![Bar Chart AFR](bar_chart_afr.svg)
+
 ### RQ 3: Assess the comparative desirability of the current product against its primary competitors.​
 
 - Product Ranking
+
+
 
 ### Limitations
 
