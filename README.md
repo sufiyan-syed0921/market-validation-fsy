@@ -19,7 +19,6 @@ Sample breakdown for each yoke:​
 - Honeycomb Aeronautical XPC (n=82)​
 - Thrustmaster TCA Boeing (n=50)
 
-#### Code
 For more detailed information on data processing, please review this code file and readme:
 [Product Review Data Processing & Analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/product_reviews)
 
@@ -29,13 +28,11 @@ Surveyed approximately 300 yoke users on the r/flightsim subreddit using Qualtri
 Responses were filtered out of the final analysis for 2 key reasons: 
 - **Yoke Ownership:**
 Users who do not own a flight yoke, or those who quit the survey after indicating yoke ownership, were removed.
-
 - **Inconconsitent Location Responses:**
 Respondents were asked if they are local to the SF Bay Area. If so, respondents were further asked if they would be interested in participating in an in-person user study. We received a significant number of responses claiming to be local to the SF Bay Area while having IP addresses far outside the SF Bay Area which raised concerns of untruthful responses. These responses were removed from the sample.​
 
 After these filters, the post-processed sample size for the survey data was 157. 
 
-#### Code
 For more detailed information on data processing, please review this code file and readme:
 [Survey Data Processing & Analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/survey)
 
@@ -69,5 +66,25 @@ For more detailed information on data processing, please review this code file a
 ![Bar Chart CMR](bar_chart_cmr.svg)
 
 ### Limitations
+
+- These research findings are entirely exploratory in nature and we do not expect them to be statistically reprentative or generalizable. 
+
+- Product Review Data
+  - Adequate Sample Size, Representitve?
+  - Sampling dynamics of Amazon Reviews/Webscraping. Any Bias among captured responses
+    - Can only Webscrape maximum of 100 per filter
+    - Only people who choose to leave a (negative) review is included
+    - Largley Amazon Reviews
+    - Temporal Factors in regards to product updates are ignored for this analysis
+
+- Survey
+  - Limited to user demo of r/flightsim and who chose to answer survey. More niche/ethusiant user group. Does not include casual users. 
+  - Sample size/representative
+  - 
+  - FR
+    - As an unintentional consequence of Qualtrics not shuffling the ranking, it is possible results were biased towards the default order shown in the previous slide. The default order has force feedback ranked last.​
+  - CMR 
+    - The difference in smoothness and feel  between yokes is difficult to capture in words.  ​
+    - It is possible results will skew towards the default ranking (Yoke A, Yoke B, and Yoke C).
 
 ## Conclusions
