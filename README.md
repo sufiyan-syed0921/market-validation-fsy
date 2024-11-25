@@ -47,9 +47,10 @@ For more detailed information on data processing, please review this code file a
 - Amazon Review Descriptives
 
 ![Donut Chart AR](donut_chart_ar.svg)
-
   
 - Yoke Smoothness Survey Question
+
+![Donut Chart S](donut_chart_s.svg)
 
 ### RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​
 
