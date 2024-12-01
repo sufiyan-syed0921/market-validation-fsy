@@ -44,6 +44,7 @@ Using your inputed user agent into the "headers" object the defined get_page() f
 
 The code below runs the get_page() function on the inputed url to retrieve the reviews. The loop aded to the function adds a check to see if the html was successfully parsed.
 
+#### Gather HTML from URL
 ```
 # Loop until header1 is not None
 while True:
@@ -61,6 +62,7 @@ while True:
 
 Now we scrape the key elements from the raw html into a list. We start by locating all 'div' elements with he attribute data-hook="review" which correlates to the html code for each review and save the bs4 output. Then, by using html elements, attributes, and classes as filters to the html code to retrieve the key information as the loop iterates over each element in our reviews_content output. Lastly we append the filtered review information to the emtepy reviews_list object we created at the start. 
 
+#### Extract Review Data 
 ```
 # Create an empty list to store dictionaries for each review
 reviews_list = []
