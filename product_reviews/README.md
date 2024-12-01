@@ -8,7 +8,7 @@ Our primary method to acheive this goal involved a qualitative analysis of produ
 
 Read each section below for more details on the data collection and analysis workflow: 
 
-## Data Management
+## Data Collection & Management
 
 ### Webscraping Program 
 
@@ -100,6 +100,8 @@ for review in review_content:
                          'Review Text': review_text})
 ```
 ### Review Cleaning 
+
+### Survey Questionaire
 
 ## Analysis
 
