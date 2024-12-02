@@ -10,7 +10,7 @@ Read each section below for more details on the data collection and analysis wor
 
 ## Data Collection & Management
 
-### Webscraping Program 
+### Webscraping Program (LINK to file)
 
 To start the data collection process, I designed a program using a python notebook to scrape raw html code for any product review on the page of the inputed URL. In our case the majority of the reviews I scraped originated from Amazon, which limits the amount of reviews per page to 10. For this reason, this program needed to be ran on each page of reviews available on the given retailer website. 
 
@@ -99,7 +99,61 @@ for review in review_content:
                          'Purchase Verification': purchase_verification,
                          'Review Text': review_text})
 ```
-### Review Cleaning 
+### Review Proccessing (LINK) 
+
+Moving on to this next program that manages the review data we just scraped. This program performs the following tasks: 
+ 1. Counts and displays the number of rows in each CSV file, as well as the total number of rows across all files.
+ 2. Concatenates multiple CSV files into a single DataFrame.
+ 3. Cleans the data by removing duplicates and unnecessary columns.
+ 4. Translates non-English review titles and review texts to English using the Google Translate API.
+ 5. Saves the cleaned and consolidated data into an Excel file for further analysis.
+
+#### Dependencies
+
+This program uses *os* to retrieve and manage directories and *pandas* to save and manipulate information in dataframes. I use *numpy* and *string* for futher manipulation and management of the review data. For reviews in languages other than english, I use the *googletrans* package for detecting and translating review text and title information. *traceback* is used for debugging the *translate_to_english* function that I define in the program. Lastly *os* and *datetime* are used to retrieving and managing directories of inputs/outputs and program metadata.  
+
+### Inspect Row Counts for Product Review Data Files
+
+Given the webscraping program did not include pagination functionality, the program needed to be ran every page available of product reviews. This left us with multiple csv files that needed to be concetenated and cleaned to create the analysis file. Given we are working with multiple files, I started off with a check to count the rows of each .csv file while also counting the rows of the concatenated file to ensure no duplicate or missing rows. 
+
+This code below assumes each individual .csv file of review data starts with the same name and is in your current working directory. 
+
+```
+# Note that this program assumes csv files of review data are present in your current working directory. Alter the code
+# under "Directory containing the CSV files" to specify the directory you want the program to look for your files
+
+## Define Function to count rows
+def count_rows(csv_file):
+    df = pd.read_csv(csv_file)
+    return len(df)
+
+## Directory containing the CSV files
+csv_directory = os.getcwd()
+
+## List all CSV files in the directory
+csv_files = [os.path.join(csv_directory, file) for file in os.listdir(csv_directory) if file.startswith('honeycomb') and file.endswith('.csv')]
+
+## Dictionary to store counts for each file
+file_counts = {}
+
+## Variable to store the total number of rows
+total_rows = 0
+
+## Loop through CSV files and count rows
+for file in csv_files:
+    rows_count = count_rows(file)
+    file_name = os.path.basename(file)
+    file_counts[file_name] = rows_count
+    total_rows += rows_count
+    print(f"File: {file_name}, Rows: {rows_count}")
+
+## Display the total number of rows
+print(f"\nTotal number of rows across all files: {total_rows}")
+
+## Clean enviornment
+del csv_directory, file_counts, total_rows, file, file_name, rows_count 
+
+```
 
 ### Survey Questionaire
 
