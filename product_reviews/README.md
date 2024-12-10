@@ -155,6 +155,39 @@ del csv_directory, file_counts, total_rows, file, file_name, rows_count
 
 ```
 
+### Translate any non-english reviews to english  
+
+
+```
+## Define Translation Function
+def translate_to_english(text, src_language='auto'):
+    try:
+        if pd.isnull(text):
+            return text
+        elif all(char in string.punctuation or char.isspace() for char in text):
+            print("Skipping punctuation-only text:", text)
+            return text
+        else: 
+            translator = Translator()
+            print("Translating:", text)
+            translated_text = translator.translate(text, src=src_language, dest='en')
+            print("Translating to English:", translated_text.text)
+            return translated_text.text
+    except Exception as e:
+        print(f"An error occurred during translation: {e}")
+        print(f"Original text: {text}")
+        traceback.print_exc()  # Print the traceback for debugging
+        return text
+
+## Test Function
+text_to_translate = "Bonjour tout le monde"  # French text
+translated_text = translate_to_english(text_to_translate)
+print(translated_text)  # Output: Hello everyone
+
+del text_to_translate, translated_text
+
+```
+
 ### Survey Questionaire
 
 ## Analysis
