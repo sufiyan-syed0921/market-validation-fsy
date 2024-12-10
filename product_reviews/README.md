@@ -22,7 +22,7 @@ This program uses the *urllib* package to interface and connect with the inputed
 
 #### Prepare function to extract reviews 
 
-```
+```Python
 # add headers
 headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"}
 
@@ -45,7 +45,8 @@ Using your inputed user agent into the "headers" object the defined get_page() f
 The code below runs the get_page() function on the inputed url to retrieve the reviews. The loop aded to the function adds a check to see if the html was successfully parsed.
 
 #### Gather HTML from URL
-```
+
+``` Python
 # Loop until header1 is not None
 while True:
     # Get html
@@ -63,7 +64,8 @@ while True:
 Now we scrape the key elements from the raw html into a list. We start by locating all 'div' elements with he attribute data-hook="review" which correlates to the html code for each review and save the bs4 output. Then, by using html elements, attributes, and classes as filters to the html code to retrieve the key information as the loop iterates over each element in our reviews_content output. Lastly we append the filtered review information to the emtepy reviews_list object we created at the start. 
 
 #### Extract Review Data 
-```
+
+``` Python
 # Create an empty list to store dictionaries for each review
 reviews_list = []
 
@@ -118,7 +120,7 @@ Given the webscraping program did not include pagination functionality, the prog
 
 This code below assumes each individual .csv file of review data starts with the same name and is in your current working directory. 
 
-```
+``` Python
 # Note that this program assumes csv files of review data are present in your current working directory. Alter the code
 # under "Directory containing the CSV files" to specify the directory you want the program to look for your files
 
@@ -160,7 +162,7 @@ del csv_directory, file_counts, total_rows, file, file_name, rows_count
 One characteristic of this webscraped data is that we collected multiple reviews that were in languages other than english. Given this I created a function to translate content outside of english using the Google Translate API (googletrans package). The function completes this by (1) detecting any (non-punctuation) text exists and (2) running all other text into an english translator. This function is then ran on all review title and text content.
 
 
-```
+``` Python
 ## Define Translation Function
 def translate_to_english(text, src_language='auto'):
     try:
@@ -192,6 +194,27 @@ del text_to_translate, translated_text
 
 
 ### Survey Questionaire
+
+In survey to over 300 flight simulation enthisiasts and owners of our competitor yokes we asked the following question: 
+
+"Do you find the smoothness and feel of the pitch axis an issue in your current yoke? (select all that apply)" 
+
+with possible answers of: 
+
+- Yes, this is an issue for the Turtle Beach: Velocity One
+- Yes, this is an issue for the Honeycomb Alpha
+- Yes, this is an issue for the Thrustmaster TCA Boeing
+- Yes, this is an issue for [Q1 Text Entry] 
+
+At the very beggining of the survey, respondents were asked if they own any of these yokes and if not any of the 3, to write in the one they own as a text entry response. 
+
+``` R
+q9_tb_data <- data %>%
+  filter(grepl("Turtle Beach Velocity One", q1, ignore.case = TRUE),
+         (grepl("Turtle Beach: Velocity One", q9, ignore.case = TRUE) | 
+          grepl("not", q9, ignore.case = TRUE)))
+
+```
 
 ## Analysis
 
