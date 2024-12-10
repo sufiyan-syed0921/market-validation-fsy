@@ -157,6 +157,8 @@ del csv_directory, file_counts, total_rows, file, file_name, rows_count
 
 ### Translate any non-english reviews to english  
 
+One characteristic of this webscraped data is that we collected multiple reviews that were in languages other than english. Given this I created a function to translate content outside of english using the Google Translate API (googletrans package). The function completes this by (1) detecting any (non-punctuation) text exists and (2) running all other text into an english translator. This function is then ran on all review title and text content.
+
 
 ```
 ## Define Translation Function
@@ -187,6 +189,7 @@ print(translated_text)  # Output: Hello everyone
 del text_to_translate, translated_text
 
 ```
+
 
 ### Survey Questionaire
 
