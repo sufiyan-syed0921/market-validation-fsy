@@ -193,9 +193,10 @@ del text_to_translate, translated_text
 ```
 
 
+
 ### Survey Questionaire
 
-In survey to over 300 flight simulation enthisiasts and owners of our competitor yokes we asked the following question: 
+To supplement the review analysis, in survey to over 300 flight simulation enthisiasts and owners of our competitor yokes we asked the following question: 
 
 "Do you find the smoothness and feel of the pitch axis an issue in your current yoke? (select all that apply)" 
 
@@ -206,7 +207,9 @@ with possible answers of:
 - Yes, this is an issue for the Thrustmaster TCA Boeing
 - Yes, this is an issue for [Q1 Text Entry] 
 
-At the very beggining of the survey, respondents were asked if they own any of these yokes and if not any of the 3, to write in the one they own as a text entry response. 
+At the very beggining of the survey, respondents were asked if they own any of the yokes present in the responses above and if not any of the 3, to write in the one they own as a text entry response. Using the Qualtrics question parameters, respondents were only shown responses options for this question to the yoke's they own. If respondents indicated that they owned more than one yoke, they were presented multiple response options as a select all that apply question that reflects the yoke that they own.
+
+The code below demostrates how I proceeded to process and generate frequencies for this question. This was replicated for each of the three main yokes and an aggregate statistic for respondents who did not own any of the 3 main yokes.
 
 ``` R
 q9_tb_data <- data %>%
@@ -216,9 +219,25 @@ q9_tb_data <- data %>%
 
 ```
 
+```R
+# Create a frequency table for the column 'q9' in the filtered data
+table(q9_tb_data$q9)
+
+```
+
+
+```R
+q9_tb_propy <- q9_tb_data %>%
+  mutate(q9 = ifelse(grepl(" not ", q9, ignore.case = TRUE), "no", "yes")) %>%
+  summarise(yes_p = mean(q9 == "yes"), total_n = n(), yes_n = sum(q9 == "yes"))
+
+q9_tb_propy
+```
+
+
 ## Analysis
 
-### Qualitative Coding 
+### Qualitative Coding & Frequencies
 
 ### Survey Question Frequencies
 
