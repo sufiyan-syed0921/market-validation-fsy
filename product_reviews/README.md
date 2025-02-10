@@ -217,14 +217,22 @@ q9_tb_data <- data %>%
          (grepl("Turtle Beach: Velocity One", q9, ignore.case = TRUE) | 
           grepl("not", q9, ignore.case = TRUE)))
 
-```
-
-```R
 # Create a frequency table for the column 'q9' in the filtered data
 table(q9_tb_data$q9)
 
 ```
 
+To prep for the frequencies, I subsetted datasets for each of these 5 categories that filters on three parameters. Firstly,  
+
+For each of these 5 categories, I subseted the dataset
+
+
+
+## Analysis
+
+### Qualitative Coding & Frequencies
+
+### Survey Question Frequencies
 
 ```R
 q9_tb_propy <- q9_tb_data %>%
@@ -233,13 +241,6 @@ q9_tb_propy <- q9_tb_data %>%
 
 q9_tb_propy
 ```
-
-
-## Analysis
-
-### Qualitative Coding & Frequencies
-
-### Survey Question Frequencies
 
 ## Setup 
 
