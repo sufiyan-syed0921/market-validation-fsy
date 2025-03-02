@@ -205,7 +205,8 @@ with possible answers of:
 - Yes, this is an issue for the Turtle Beach: Velocity One
 - Yes, this is an issue for the Honeycomb Alpha
 - Yes, this is an issue for the Thrustmaster TCA Boeing
-- Yes, this is an issue for [Q1 Text Entry] 
+- Yes, this is an issue for [Q1 Text Entry]
+- Pitch Axis smoothness is not an issue for any of these yokes
 
 At the very beggining of the survey, respondents were asked if they own any of the yokes present in the responses above and if not any of the 3, to write in the one they own as a text entry response. Using the Qualtrics question parameters, respondents were only shown responses options for this question to the yoke's they own. If respondents indicated that they owned more than one yoke, they were presented multiple response options as a select all that apply question that reflects the yoke that they own.
 
@@ -222,10 +223,7 @@ table(q9_tb_data$q9)
 
 ```
 
-To prep for the frequencies, I subsetted datasets for each of these 5 categories that filters on three parameters. Firstly,  
-
-For each of these 5 categories, I subseted the dataset
-
+To prep for the frequencies, I subsetted datasets for each of these 4 yokes that filters on three parameters. In the example above, we first select responses for Q1 that matches to the Turtle Beach yoke name to ensuring our total sample contains only those who own the yoke. The second argument in the filter function selects responses of Q9 that contain the Turtle Beach Yoke name or responses of Q9 that contain "not" (which selects the "Pitch Axis smoothness is not an issue for any of these yokes" response level). In result these filters subset the data to incude only 1. Those who own the Turtle Beach Yoke, 2. Those who either responded that the Turtle Beach yoke had pitch smoothness issues and those who did not. Tabling this subseted dataset can then be used to get the frequency of respondents who had perceived issues with pitch smoothness for the Turtle Beach yoke.
 
 
 ## Analysis
