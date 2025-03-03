@@ -228,8 +228,6 @@ To prep for the frequencies, I subsetted datasets for each of these 4 yokes that
 
 ## Analysis
 
-### Qualitative Coding & Frequencies
-
 ### Survey Question Frequencies
 
 ```R
@@ -239,6 +237,12 @@ q9_tb_propy <- q9_tb_data %>%
 
 q9_tb_propy
 ```
+Using the subseted data from the previous section for Q9, I use the code above to generate the frequencies. Furthermore I create another column named q9 to recode the raw variable to a yes/no binary variable and then use summarize to generate the proportion of those who found issues in pitch smoothness in the yoke (yes), and the denominator and numerator for that calculation (the total sample size and count of "yes" responses". 
+
+
+### Qualitative Coding & Frequencies
+
+
 
 ## Setup 
 
