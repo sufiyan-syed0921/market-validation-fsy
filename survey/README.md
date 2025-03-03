@@ -6,6 +6,8 @@
 Rename question 2 and 3 columns so that they contain the feature/yoke in the suffix 
 of each column name
 
+The raw output of the survey data required some processing to be analyized. For example for questions Q2 and Q3, the columns created that represent the ranking results are not labeled to 
+
 ```R 
 # Question 2 -------------------------------------------------------------------
 # : When purchasing a flight simulator yoke, rank the following features and 
