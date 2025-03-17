@@ -285,6 +285,41 @@ locfilter_check <- data %>%
 
 ## Analysis
 
+### Product Reviews
+
+Our goal with analyzing the qualitative data was to obatain the percentage of reviews (3 stars or lower) that mention issues of yoke smoothness or related issues for each of the 3 yoke models. After coding each of the reviews to determine if they mention smoothness issues, I uploaded a spreadsheet that contains this coding data in a column to table. For more information on the qualitative analysis process see:   
+
+```R
+# Turtle beach
+addmargins(table(turtlebeach_reviewdata$yokesmooth_class_result2))
+
+# save proportion for later graphing
+tb_review_prop <- round(mean(turtlebeach_reviewdata$yokesmooth_class_result2 == "Yes"), 2)
+tb_review_prop 
+
+```
+
+```R
+# Honey comb
+addmargins(table(honeycomb_reviewdata$yksmooth_class_result_10))
+
+# save proportion for later graphing
+hc_review_prop <- round(mean(honeycomb_reviewdata$yksmooth_class_result_10 == "Yes"), 2)
+hc_review_prop
+
+```
+
+```R
+# Thrust master
+addmargins(table(thrustmaster_reviewdata$yksmooth_class_result_r))
+
+# save proportion for later graphing
+tmb_review_prop <- round(mean(thrustmaster_reviewdata$yksmooth_class_result_r == "Yes"), 2)
+tmb_review_prop 
+```
+
+Graphing Pie Charts
+
 
 
 ## Setup 
