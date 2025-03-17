@@ -157,6 +157,8 @@ sticks <- c("Thrustmaster Warthog",
 exc_filter <- paste(sticks, collapse = "|")
 
 ```
+<br> 
+My approach to filtering the data was to create dummy variables for each of the 5 filters and a binary analysis sample variable (ansamp) that defines which rows are part of the final sample. 
 
 ```R
 
@@ -195,7 +197,9 @@ tmp4 <- tmp3 %>%
   )
 
 ```
+<br>
 
+Here I cretate the ansamp variable tha defines the analysis sample and creating the filtered processed data file. 
 ```R
 # Filter data ------------------------------------------------------------------
 
@@ -217,7 +221,7 @@ data <- tmp5 %>%
 
 #### Check Filtering 
 
-
+I run these checks to see how many rows were removed and inspect the removed rows. 
 ```{r}
 # Check Number of Rows Removed ------------------------------------------------------------------
 
@@ -230,6 +234,8 @@ paste0("New N: ", nrow(data))
 ## Spot Check Removed Rows 
 removed_rows <- tmp5 %>% filter(ansamp == 0)
 ```
+<br> 
+This table helps understand why rows were filtered out by displaying how many rows were filtered for each combination of the 5 filter variables. 
 
 ```R
 # Check Filters ----------------------------------------------------------------------------------
@@ -247,6 +253,8 @@ tmp5 %>% select(survey_preview,
   autofit()
 
 ```
+<br>
+These checks inspect the post-processed data to make sure the filters were applied correctly. 
 
 ```R
 # (1) Survey previews and (2) Yoke Ownership
@@ -275,8 +283,9 @@ locfilter_check <- data %>%
 
 ```
 
-
 ## Analysis
+
+
 
 ## Setup 
 
