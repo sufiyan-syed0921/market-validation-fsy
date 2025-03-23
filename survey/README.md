@@ -318,7 +318,104 @@ tmb_review_prop <- round(mean(thrustmaster_reviewdata$yksmooth_class_result_r ==
 tmb_review_prop 
 ```
 
-Graphing Pie Charts
+**Graphing** 
+
+After calcualting the frequencies, I used these objects to to graph them in a series of donut charts for the 3 competitor yokes. First I began by preparing a dataset that I will input into my graphing function. The dataset included 3 columns: the yoke name or "category", the response in either "Yes" or "No" for the smoothness question, and the proportions for the yes and no responses.  
+
+``` R
+# Prepare data: Proportions of responses for 3 sets of responses
+ggpie_rdata <- data.frame(
+  Category = rep(c("turtle beach", "honeycomb", "thrustmaster"), each = 2),  # 3 categories of responses
+  Response = rep(c("Yes", "No"), times = 3),  # Single question, 2 possible answers (Yes/No)
+  Proportion = c(tb_review_prop, (1-tb_review_prop),   # Proportions for turtle beach
+                 hc_review_prop, (1-hc_review_prop),   # Proportions for honeycomb
+                 tmb_review_prop, (1-tmb_review_prop))  # Proportions for thrustmaster
+)
+
+```
+
+Since we were going to be creating multiple charts in this program, I craeted a function to save some of the formating details and specifics to run on all the charts. 
+
+```R
+# Function to create a single-level donut chart with middle label
+create_donut_chart <- function(df, label) {
+  ggplot(df, aes(x = 2, y = Proportion, fill = Response)) +
+    geom_bar(stat = "identity", width = 0.8, color = "white") +  # Single donut
+    coord_polar(theta = "y") +
+    theme_void() +  # Remove axis and background
+    xlim(0.5, 2.5) +  # Adjust the limit to create the hole
+    geom_text(aes(label = ifelse(Response == "Yes", scales::percent(Proportion), "")),
+              position = position_stack(vjust = 0.5), color = "black") +  # Percentage labels in black
+    annotate("text", x = .5, y = 0, label = label, size = 4, color = "black") +  # Center label in black
+    theme(legend.position = "none")  # Remove the legend
+}
+
+```
+
+Next, after running my function for each of the 3 yokes, I  used arrangeGrob to position the 3 plots together and other GridExtra functions to customize aesthetics. 
+
+``` R 
+
+# Prepare graphs for the three categories
+donut1 <- create_donut_chart(filter(ggpie_rdata, Category == "turtle beach"), "Turtle Beach")
+donut2 <- create_donut_chart(filter(ggpie_rdata, Category == "honeycomb"), "Honeycomb")
+donut3 <- create_donut_chart(filter(ggpie_rdata, Category == "thrustmaster"), "Thrustmaster")
+
+# Arrange the three charts horizontally
+g_ar <- arrangeGrob(donut1, donut2, donut3, ncol = 3)
+
+# Add a main title with adjusted positioning
+grid.newpage()  # Clear the current page
+grid.rect(gp = gpar(fill = "white", col = NA))  # Set background color behind all charts
+grid.text("Percentage of reviews (3 stars or lower) that mention yoke smoothness\nand related problems as an issue", x = 0.5, y = 0.85, gp = gpar(fontsize = 11, fontface = "bold"))  # Adjusted title position
+
+grid.draw(g_ar)  # Draw the grob
+
+ggsave("donut_chart_ar.svg", plot = g_ar, width = 12, height = 4, bg = "white")
+
+```
+
+### Survey Results 
+
+#### Baseline Characteristics?
+
+#### Conjoint Analysis / Yoke Comparison Analysis
+
+``` R
+avg_cjrank_data <- data %>%
+  select(starts_with("q3"), response_id) %>% 
+  mutate_at(vars(starts_with("q3")), as.numeric) # Convert to Numeric
+
+avg_cjrank_calc <- avg_cjrank_data %>% 
+  select(-response_id) %>%
+  summarise_all(mean, na.rm = TRUE) %>%  # Calculate the mean rank for each item
+  gather(key = "Item", value = "Average_Rank") %>%  # Convert to long format for easier interpretation
+  arrange(Average_Rank)  # Sort by average rank
+
+avg_cjrank_calc # Mean Ranking Results
+
+```
+
+``` R
+
+```
+
+```R
+
+``` 
+
+
+#### Feature Comparison Analysis
+
+#### General Yoke Pitch Smoothness
+
+
+
+
+
+
+
+
 
 
 
