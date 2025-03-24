@@ -192,53 +192,97 @@ del text_to_translate, translated_text
 
 ```
 
-
-
-### Survey Questionaire
-
-To supplement the review analysis, in survey to over 300 flight simulation enthisiasts and owners of our competitor yokes we asked the following question: 
-
-"Do you find the smoothness and feel of the pitch axis an issue in your current yoke? (select all that apply)" 
-
-with possible answers of: 
-
-- Yes, this is an issue for the Turtle Beach: Velocity One
-- Yes, this is an issue for the Honeycomb Alpha
-- Yes, this is an issue for the Thrustmaster TCA Boeing
-- Yes, this is an issue for [Q1 Text Entry]
-- Pitch Axis smoothness is not an issue for any of these yokes
-
-At the very beggining of the survey, respondents were asked if they own any of the yokes present in the responses above and if not any of the 3, to write in the one they own as a text entry response. Using the Qualtrics question parameters, respondents were only shown responses options for this question to the yoke's they own. If respondents indicated that they owned more than one yoke, they were presented multiple response options as a select all that apply question that reflects the yoke that they own.
-
-The code below demostrates how I proceeded to process and generate frequencies for this question. This was replicated for each of the three main yokes and an aggregate statistic for respondents who did not own any of the 3 main yokes.
-
-``` R
-q9_tb_data <- data %>%
-  filter(grepl("Turtle Beach Velocity One", q1, ignore.case = TRUE),
-         (grepl("Turtle Beach: Velocity One", q9, ignore.case = TRUE) | 
-          grepl("not", q9, ignore.case = TRUE)))
-
-# Create a frequency table for the column 'q9' in the filtered data
-table(q9_tb_data$q9)
-
-```
-
-To prep for the frequencies, I subsetted datasets for each of these 4 yokes that filters on three parameters. In the example above, we first select responses for Q1 that matches to the Turtle Beach yoke name to ensuring our total sample contains only those who own the yoke. The second argument in the filter function selects responses of Q9 that contain the Turtle Beach Yoke name or responses of Q9 that contain "not" (which selects the "Pitch Axis smoothness is not an issue for any of these yokes" response level). In result these filters subset the data to incude only 1. Those who own the Turtle Beach Yoke, 2. Those who either responded that the Turtle Beach yoke had pitch smoothness issues and those who did not. Tabling this subseted dataset can then be used to get the frequency of respondents who had perceived issues with pitch smoothness for the Turtle Beach yoke.
-
-
 ## Analysis
 
-### Survey Question Frequencies
+### Product Reviews
+
+Our goal with analyzing the qualitative data was to obatain the percentage of reviews (3 stars or lower) that mention issues of yoke smoothness or related issues for each of the 3 yoke models. After coding each of the reviews to determine if they mention smoothness issues, I uploaded a spreadsheet that contains this coding data in a column to table. For more information on the qualitative analysis process see:   
 
 ```R
-q9_tb_propy <- q9_tb_data %>%
-  mutate(q9 = ifelse(grepl(" not ", q9, ignore.case = TRUE), "no", "yes")) %>%
-  summarise(yes_p = mean(q9 == "yes"), total_n = n(), yes_n = sum(q9 == "yes"))
+# Turtle beach
+addmargins(table(turtlebeach_reviewdata$yokesmooth_class_result2))
 
-q9_tb_propy
+# save proportion for later graphing
+tb_review_prop <- round(mean(turtlebeach_reviewdata$yokesmooth_class_result2 == "Yes"), 2)
+tb_review_prop 
+
 ```
-Using the subseted data from the previous section for Q9, I use the code above to generate the frequencies. Furthermore I create another column named q9 to recode the raw variable to a yes/no binary variable and then use summarize to generate the proportion of those who found issues in pitch smoothness in the yoke (yes), and the denominator and numerator for that calculation (the total sample size and count of "yes" responses". 
 
+```R
+# Honey comb
+addmargins(table(honeycomb_reviewdata$yksmooth_class_result_10))
+
+# save proportion for later graphing
+hc_review_prop <- round(mean(honeycomb_reviewdata$yksmooth_class_result_10 == "Yes"), 2)
+hc_review_prop
+
+```
+
+```R
+# Thrust master
+addmargins(table(thrustmaster_reviewdata$yksmooth_class_result_r))
+
+# save proportion for later graphing
+tmb_review_prop <- round(mean(thrustmaster_reviewdata$yksmooth_class_result_r == "Yes"), 2)
+tmb_review_prop 
+```
+
+**Graphing** 
+
+After calcualting the frequencies, I used these objects to to graph them in a series of donut charts for the 3 competitor yokes. First I began by preparing a dataset that I will input into my graphing function. The dataset included 3 columns: the yoke name or "category", the response in either "Yes" or "No" for the smoothness question, and the proportions for the yes and no responses.  
+
+``` R
+# Prepare data: Proportions of responses for 3 sets of responses
+ggpie_rdata <- data.frame(
+  Category = rep(c("turtle beach", "honeycomb", "thrustmaster"), each = 2),  # 3 categories of responses
+  Response = rep(c("Yes", "No"), times = 3),  # Single question, 2 possible answers (Yes/No)
+  Proportion = c(tb_review_prop, (1-tb_review_prop),   # Proportions for turtle beach
+                 hc_review_prop, (1-hc_review_prop),   # Proportions for honeycomb
+                 tmb_review_prop, (1-tmb_review_prop))  # Proportions for thrustmaster
+)
+
+```
+
+Since we were going to be creating multiple charts in this program, I craeted a function to save some of the formating details and specifics to run on all the charts. 
+
+```R
+# Function to create a single-level donut chart with middle label
+create_donut_chart <- function(df, label) {
+  ggplot(df, aes(x = 2, y = Proportion, fill = Response)) +
+    geom_bar(stat = "identity", width = 0.8, color = "white") +  # Single donut
+    coord_polar(theta = "y") +
+    theme_void() +  # Remove axis and background
+    xlim(0.5, 2.5) +  # Adjust the limit to create the hole
+    geom_text(aes(label = ifelse(Response == "Yes", scales::percent(Proportion), "")),
+              position = position_stack(vjust = 0.5), color = "black") +  # Percentage labels in black
+    annotate("text", x = .5, y = 0, label = label, size = 4, color = "black") +  # Center label in black
+    theme(legend.position = "none")  # Remove the legend
+}
+
+```
+
+Next, after running my function for each of the 3 yokes, I  used arrangeGrob to position the 3 plots together and other GridExtra functions to customize aesthetics. 
+
+``` R 
+
+# Prepare graphs for the three categories
+donut1 <- create_donut_chart(filter(ggpie_rdata, Category == "turtle beach"), "Turtle Beach")
+donut2 <- create_donut_chart(filter(ggpie_rdata, Category == "honeycomb"), "Honeycomb")
+donut3 <- create_donut_chart(filter(ggpie_rdata, Category == "thrustmaster"), "Thrustmaster")
+
+# Arrange the three charts horizontally
+g_ar <- arrangeGrob(donut1, donut2, donut3, ncol = 3)
+
+# Add a main title with adjusted positioning
+grid.newpage()  # Clear the current page
+grid.rect(gp = gpar(fill = "white", col = NA))  # Set background color behind all charts
+grid.text("Percentage of reviews (3 stars or lower) that mention yoke smoothness\nand related problems as an issue", x = 0.5, y = 0.85, gp = gpar(fontsize = 11, fontface = "bold"))  # Adjusted title position
+
+grid.draw(g_ar)  # Draw the grob
+
+ggsave("donut_chart_ar.svg", plot = g_ar, width = 12, height = 4, bg = "white")
+
+```
 
 ### Qualitative Coding & Frequencies
 
