@@ -379,8 +379,156 @@ ggsave("donut_chart_ar.svg", plot = g_ar, width = 12, height = 4, bg = "white")
 
 #### Baseline Characteristics?
 
+#### General Yoke Pitch Smoothness
+
+To supplement the **review analysisLINK**, in survey to over 300 flight simulation enthisiasts and owners of our competitor yokes we asked the following question:
+
+"Do you find the smoothness and feel of the pitch axis an issue in your current yoke? (select all that apply)"
+
+with possible answers of:
+
+Yes, this is an issue for the Turtle Beach: Velocity One
+Yes, this is an issue for the Honeycomb Alpha
+Yes, this is an issue for the Thrustmaster TCA Boeing
+Yes, this is an issue for [Q1 Text Entry]
+Pitch Axis smoothness is not an issue for any of these yokes
+
+[add pic of survet q]
+
+At the very beggining of the survey, respondents were asked if they own any of the yokes present in the responses above and if not any of the 3, to write in the one they own as a text entry response. Using the Qualtrics question parameters, respondents were only shown responses options for this question to the yoke's they own. If respondents indicated that they owned more than one yoke, they were presented multiple response options as a select all that apply question that reflects the yoke that they own.
+
+The code below demostrates how I proceeded to process and generate frequencies for this question. This was replicated for each of the three main yokes and an aggregate statistic for respondents who did not own any of the 3 main yokes.
+
+```R
+
+q9_tb_data <- data %>%
+  filter(grepl("Turtle Beach Velocity One", q1, ignore.case = TRUE),
+         (grepl("Turtle Beach: Velocity One", q9, ignore.case = TRUE) | 
+          grepl("not", q9, ignore.case = TRUE)))
+
+# Create a frequency table for the column 'q9' in the filtered data
+table(q9_tb_data$q9)
+
+```
+To prep for the frequencies, I subsetted datasets for each of these 4 yokes that filters on three parameters. In the example above, we first select responses for Q1 that matches to the Turtle Beach yoke name to ensuring our total sample contains only those who own the yoke. The second argument in the filter function selects responses of Q9 that contain the Turtle Beach Yoke name or responses of Q9 that contain "not" (which selects the "Pitch Axis smoothness is not an issue for any of these yokes" response level). In result these filters subset the data to incude only 1. Those who own the Turtle Beach Yoke, 2. Those who either responded that the Turtle Beach yoke had pitch smoothness issues and those who did not. Tabling this subseted dataset can then be used to get the frequency of respondents who had perceived issues with pitch smoothness for the Turtle Beach yoke.
+
+```R
+
+q9_tb_propy <- q9_tb_data %>%
+  mutate(q9 = ifelse(grepl(" not ", q9, ignore.case = TRUE), "no", "yes")) %>%
+  summarise(yes_p = mean(q9 == "yes"), total_n = n(), yes_n = sum(q9 == "yes"))
+
+q9_tb_propy
+
+```
+Using the subseted data from the previous section for Q9, I use the code above to generate the frequencies. Furthermore I create another column named q9 to recode the raw variable to a yes/no binary variable and then use summarize to generate the proportion of those who found issues in pitch smoothness in the yoke (yes), and the denominator and numerator for that calculation (the total sample size and count of "yes" responses". The "yes_p" column of this dataset is then used for graphing donut charts of these findings. 
+
+**Graphing** 
+
+The process for creating these charts were very similar to the donut charts created for the product review findings outlined here LINK. 
+
+```R
+# Prepare data: Proportions of responses for 4 sets of responses
+ggdonut_sq_data <- data.frame(
+  Category = rep(c("turtle beach", "honeycomb", "thrustmaster", "other"), each = 2),  # 4 categories of responses
+  Response = rep(c("Yes", "No"), times = 4),  # Only the "Yes" responses
+  Proportion = c(q9_tb_propy$yes_p, (1-q9_tb_propy$yes_p),   # Proportions for turtle beach
+                 q9_hc_propy$yes_p, (1-q9_hc_propy$yes_p),   # Proportions for honeycomb
+                 q9_tmb_propy$yes_p, (1-q9_tmb_propy$yes_p),  # Proportions for thrustmaster
+                 q9_othr_propy$yes_p, (1-q9_othr_propy$yes_p)) # Proportions for other
+)
+
+```
+
+Compared to the donut charts created for the product reviews I altered the graphing function to incorporate a fourth donut chart, slightly decreasing the font size for the labels and increasing the width of the donut. 
+
+```R
+
+# Function to create a single-level donut chart
+create_donut_chart <- function(df, label) {
+  ggplot(df, aes(x = 2, y = Proportion, fill = Response)) +
+    geom_bar(stat = "identity", width = 1, color = "white") +  # Single donut
+    coord_polar(theta = "y") +  
+    theme_void() +  # Remove axis and background
+    xlim(0.5, 2.5) +  # Adjust the limit to create the hole
+    geom_text(aes(label = ifelse(Response == "Yes", scales::percent(Proportion), "")),
+              position = position_stack(vjust = 0.5), color = "black") +  # Percentage labels in black
+    annotate("text", x = 0.5, y = 0, label = label, size = 3.5, color = "black") +  # Center label
+    theme(legend.position = "none")  # Remove the legend
+}
+
+```
+
+Next, after running my function for each of the 4 cateogories, I  used arrangeGrob to position the plots together and other GridExtra functions to customize aesthetics. 
+
+```R
+
+# Prepare graphs for the three categories
+donut1 <- create_donut_chart(filter(ggdonut_pr_data, Category == "turtle beach"), "Turtle Beach")
+donut2 <- create_donut_chart(filter(ggdonut_pr_data, Category == "honeycomb"), "Honeycomb")
+donut3 <- create_donut_chart(filter(ggdonut_pr_data, Category == "thrustmaster"), "Thrustmaster")
+
+# Arrange the three charts horizontally
+gd_pr <- arrangeGrob(donut1, donut2, donut3, ncol = 3)
+
+# Add a main title with adjusted positioning
+grid.newpage()  # Clear the current page
+grid.rect(gp = gpar(fill = "white", col = NA))  # Set background color behind all charts
+grid.text("Percentage of reviews (3 stars or lower) that mention yoke smoothness\nand related problems as an issue", x = 0.5, y = 0.85, gp = gpar(fontsize = 11, fontface = "bold"))  # Adjusted title position
+
+grid.draw(gd_pr)  # Draw the grob
+
+ggsave("donut_chart_ar.svg", plot = gd_pr, width = 12, height = 4, bg = "white")
+
+```
+
+#### Average Feature Rank
+
+To adress our second research question RQ2: "Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features" we asked the following question that asks respondents to rank a list of common flight simulation yoke features: 
+
+When purchasing a flight simulator yoke, rank the following features and capabilities from most important (1) to least important (2) 
+
+To analyze and present the results for this question, I subset the dataset to only include columns that reflect this question, and converted the rows to numeric data to generate the mean ranking for each feature in the next step.
+
+```R
+
+# Display the modified data frame
+avg_rank_data <- data %>%
+  select(starts_with("q2"), response_id) %>% 
+  mutate_at(vars(starts_with("q2")), as.numeric) # Convert to numeric
+
+```
+
+To generate the means, I take the mean of all columns using the summarize_all function and then pivot the resulting output to long format to better view the output and in order using arrange(). 
+
+```R
+avg_rank_calc <- avg_rank_data %>% 
+  select(-response_id) %>%
+  summarise_all(mean, na.rm = TRUE) %>%  # Calculate the mean rank for each item
+  gather(key = "Item", value = "Average_Rank") %>%  # Convert to long format for easier interpretation
+  arrange(Average_Rank)  # Sort by average rank
+
+avg_rank_calc # Mean Ranking Results
+
+```
+
+**Graphing** 
+
+```R
+
+
+
+```
+
 #### Conjoint Analysis / Yoke Comparison Analysis
 
+To answer our third research question R3: "Assess the comparative desirability of the current product against its primary competitors" we employed the use of a survey question aiming to perform a conjoint analysis. Respondents where given a scenario where they were asked to imagine themselves purchasing a flight simulation yoke and given 4 options each with a unique composition of features to rank from most favorable to least. 3 of the 4 options had mimiced features of the competitor yokes in this analysis, but were unamed to remove any branding bias. The fourth yoke had a composition of features that represented our proposed product. Our goal was to see if the composition of features in our product would be competitive to the composition of features to our competitors, thus testing how the product would hold up in this consumer groups market. ...
+
+"Imagine you are looking to purchase a flight simulator yoke and are considering Yoke A, Yoke B, and Toke C. The features of the three yokes are listed in the table below. Please rank the following yokes from (1) most desirable to least desirable (3), assuming each yoke costs $400. Drag and drop to rank the yokes. 
+
+[add pic of survet q]
+
+Similar to the analysis of the feature ranking question, I completed the same workflow for this question
 ``` R
 avg_cjrank_data <- data %>%
   select(starts_with("q3"), response_id) %>% 
@@ -396,6 +544,8 @@ avg_cjrank_calc # Mean Ranking Results
 
 ```
 
+
+
 ``` R
 
 ```
@@ -405,9 +555,6 @@ avg_cjrank_calc # Mean Ranking Results
 ``` 
 
 
-#### Feature Comparison Analysis
-
-#### General Yoke Pitch Smoothness
 
 
 
