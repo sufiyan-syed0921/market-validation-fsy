@@ -454,15 +454,11 @@ avg_cjrank_calc # Mean Ranking Results
 
 ```
 
-
+**Graphing**
 
 ``` R
 
 ```
-
-```R
-
-``` 
 
 
 
