@@ -424,11 +424,83 @@ avg_rank_calc # Mean Ranking Results
 
 **Graphing** 
 
+Before inputting our data into the graphing function, I ran some data processing to prepare the data for the desired aesthetics of the graphs. Particularly in cleaning the values of the "Item" column using regular expressions and wrapping the strings to best fit the y-axis labels of the graph. Additinoally this code rounds the "Average_Rank" column and orders the rows from lowest to largest average rank.
+
 ```R
 
+avg_rank_calc_gg <- avg_rank_calc %>% 
+  mutate(Item = Item %>%
+         sub("q2_[0-9]+_", "", .) %>%  # Remove the dynamic prefix
+         gsub("_", " ", .) %>%         # Replace underscores with spaces
+         toTitleCase(), # Capitalize the first letter of each word
+         Average_Rank = round(Average_Rank, 2), # Round average rank value
+         Item = ifelse( # Wrap text
+           Item == "Smoothness Feel and Precision of the Control Axes", "Smoothness, Feel, and\nPrecision of Control Axes", Item),
+         Item = ifelse(
+           Item == "Included Throttle Control", "Included\nThrottle Control", Item),
+         Item = ifelse(
+           Item == "Included Rudder Brake Control", "Included Rudder\nBrake Control", Item),
+         Item = ifelse(
+           Item == "Adequate Resistance Force", "Adequate Resistance\nForce", Item),
+         Item = ifelse(
+           Item == "Play", "Plug-In-Play", Item)
+         )  %>% 
+  arrange(desc(Average_Rank)) # order from lowest to largest average rank             
+
+```
+
+The preceeding dataset is then inputted into a ggplot function where I create a horizontal bar chart to display the average ranks of features in ascending order. 
+
+```R
+
+gg_afr <- avg_rank_calc_gg %>% 
+  ggplot(aes(x = Average_Rank, y = Item)) +
+  
+  # Bars
+  geom_segment(aes(x=0, xend=Average_Rank, y=Item, yend = Item), lwd=8, color = "#5EC6CC") +
+  
+  geom_rect(aes(xmin = Average_Rank, xmax = Average_Rank, 
+                ymin = as.numeric(Item) - 0.25, ymax = as.numeric(Item) + 0.25)) + 
+  
+  # Annotation
+  geom_text(aes(x= Average_Rank, y=Item, label = paste0("  ", Average_Rank)),
+            hjust = 0, size=9/.pt, fontface = "plain", check_overlap = FALSE) +  
+
+  # Axis Scales
+  scale_y_discrete(
+    breaks = unique(avg_rank_calc_gg$Item),
+    labels = unique(avg_rank_calc_gg$Item),
+    expand = c(0.05, 0)
+  ) +
+  
+  scale_x_continuous(
+    limits = c(-0.5, 12),
+    expand = c(0,0)
+  ) + 
+  
+  # Titles and theme
+  ggtitle(str_wrap("When purchasing a flight simulator yoke, rank the following features and capabilities from most important (1) to least important (12)?")) +
+  ylab("Feature") +
+  xlab("Average Rank") +
+
+  theme_bw() + 
+  theme(
+    # Title
+    plot.title = element_text(size=11, color = "#000000", face = "bold", margin = margin(0,0,15,0)),
+    
+    # Text
+    axis.text.x = element_text(size = 9, color = "#000000", face = "bold", margin=margin(0,0,15,0)),
+    axis.text.y = element_text(size = 9, color = "#000000", face = "plain", hjust = 0, margin = margin(t=0,r=10,b=0,l=0)),
+    axis.title.x = element_text(size = 9, color = "#000000", face = "plain", margin = margin(t=-5,r=0,b=0,l=0)),
+    axis.title.y = element_text(size = 9 , color = "#000000", face = "bold", angle = 0, margin = margin(r=-33, b=0, l=0), vjust = 1.02),
+    
+    # Gridlines
+    panel.grid = element_blank(),
+    plot.margin = unit(c(.2,.2,.2,.2),"in")) 
 
 
 ```
+[insert pic of graph]
 
 #### Conjoint Analysis / Yoke Comparison Analysis
 
@@ -456,22 +528,78 @@ avg_cjrank_calc # Mean Ranking Results
 
 **Graphing**
 
+Similar to the bar graph displaying average feature ranks, I proccessed the "Item" column values and rounded the average rank values to improve the aesthetics of the bar chart. 
+
 ``` R
+avg_cjrank_calc_gg <- avg_cjrank_calc %>% 
+  mutate(Item = Item %>%
+         sub(".*?(Y)", "\\1", .) %>%  # Remove everything prior to the first "Y"
+         gsub("_", " ", .) %>%         # Replace underscores with spaces
+         str_to_title(), # Capitalize the first letter of each word
+         Average_Rank = round(Average_Rank, 2), # Round
+         Item = ifelse(
+           Item == "Yoke A", "Yoke A\nVelocity One", Item),
+         Item = ifelse(
+           Item == "Yoke B", "Yoke B\nHoneycomb XPC", Item),
+         Item = ifelse(
+           Item == "Yoke C", "Yoke C\nTest Yoke", Item))
+
 
 ```
 
+This dataset is then inputted into a ggplot function where I create a horizontal bar chart to display the average ranks of yokes in ascending order. 
+
+```R
+
+gg_cmr <- avg_cjrank_calc_gg %>% 
+  ggplot(aes(x = Average_Rank, y = Item)) +
+  
+  # Bars
+  geom_segment(aes(x=0, xend=Average_Rank, y=Item, yend = Item), lwd=8, color = "#5EC6CC") +
+  
+  geom_rect(aes(xmin = Average_Rank, xmax = Average_Rank, 
+                ymin = Item, ymax = Item)) + 
+  
+  # Annotation
+  geom_text(aes(x= Average_Rank, y=Item, label = paste0("  ", Average_Rank)),
+            hjust = 0, size=9/.pt, fontface = "plain", check_overlap = FALSE) + 
+
+  # Axis Scaling
+  scale_y_discrete(
+    breaks = unique(avg_cjrank_calc_gg$Item),
+    labels = unique(avg_cjrank_calc_gg$Item),
+    expand = c(0.3, 0)
+  ) +
+  
+  scale_x_continuous(
+    limits = c(-0.1, 3),
+    expand = c(0,0)
+  ) + 
+  
+  # Titles and theme
+  ggtitle(str_wrap("Imagine you are looking to purchase a flight simulator yoke and are considering Yoke A, Yoke B, and Yoke C. Please rank the following yokes from most desirable (1) to least desirable (3), assuming that each yoke costs $400.", width = 75)) +
+  ylab("Yoke") +
+  xlab("Average Rank") +
+
+  theme_bw() +  # Use a clean theme
+  theme(
+    # Title
+    plot.title = element_text(size=11, color = "#000000", face = "bold", margin = margin(0,0,20,0)),
+    
+    # Text
+    axis.text.x = element_text(size = 9, color = "#000000", face = "bold", margin=margin(0,0,0,0)),
+    axis.text.y = element_text(size = 9, color = "#000000", face = "plain", hjust = 0.5, margin = margin(t=,r=10,b=0,l=0)),
+    axis.title.x = element_text(size = 9, color = "#000000", face = "plain", margin = margin(t=0,r=0,b=0,l=0)),
+    axis.title.y = element_text(size = 9 , color = "#000000", face = "bold", angle = 0, margin = margin(r=-45, b=0, l=0), vjust = 1.04),
+
+    # Gridlines
+    panel.grid = element_blank(),
+    plot.margin = unit(c(.2,.5,.2,.5),"in")) 
+
+
+```
+
+[insert pic of graph]
 
 
 
-
-
-
-
-
-
-
-
-
-## Setup 
-
-### Libraries
