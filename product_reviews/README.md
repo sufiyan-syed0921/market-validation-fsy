@@ -284,10 +284,19 @@ ggsave("donut_chart_ar.svg", plot = g_ar, width = 12, height = 4, bg = "white")
 
 ```
 
-### Qualitative Coding & Frequencies
+### Qualitative Analysis
+
+After scraping and collecting the product review data, the next step was to analyze the data qualitatively. Our intention was to see if among the reviews, any common complaints of the products aligned with our intended positioning and key value points of our product that would enter the market. The key pain points we inspected each review to contain included:
+
+#### Yoke Smoothness Issues:
+
+#### Grinding and Noisy: 
+
+#### Pitch is too strong (Travel is too heavy):
+
+#### Realism: 
 
 
 
-## Setup 
 
-### Libraries
+
