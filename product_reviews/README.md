@@ -290,11 +290,33 @@ After scraping and collecting the product review data, the next step was to anal
 
 #### Yoke Smoothness Issues:
 
+The primary improved value point of our product entering the market was an improved smoothness and quality of the pitch action. 
+
+You're analyzing Amazon reviews for the Turtle Beach Velocity One: A yoke and controller designed for flight simulation. I'm interested in determining if customers are expressing dissatisfaction with the quality and feel of the controller's yoke, especially concerning its pitch axis. Specifically, I want to know if there are complaints regarding the smoothness, stickiness, jerkiness, or any issues related to being stuck or unresponsive with the yoke's pitch axis. Additionally, I'm interested in whether customers are mentioning problems with the center dent or centering of the yoke's pitch axis. Furthermore, please identify if there are any complaints about the elevator axis affecting the yoke's performance. If any of the mentioned issues are present in the reviews, classify the response as 'Yes.' Otherwise, classify it as 'No.'
+
+#### Pitch axis is too short
+
+You're analyzing Amazon reviews for the Turtle Beach Velocity One: A yoke and controller designed for flight simulation. I'm interested in determining if customers are expressing dissatisfaction specifically with the length of travel of the Yokes pitch axis, specifically complaints that the length is too short. A sufficient length of travel for the Yokes pitch axis is crucial for providing a realistic and immersive flight simulation experience. If this is present in the review, classify the response as 'Yes'. Otherwise, classify it as 'No'.
+
+#### Looks or feels like a toy & issues with plastic construction
+
+You're analyzing Amazon reviews for the Turtle Beach Velocity One: a yoke and controller designed for flight simulation. I'm interested in determining if customers express dissatisfaction, particularly with the appearance and feel of the yoke. This includes complaints that the yoke looks or feels like a toy and grievances about its plastic construction. If any of these issues are present in the review, classify the response as 'Yes'. Otherwise, classify it as 'No'
+
+#### Realism: 
+
+You're analyzing Amazon reviews for the Turtle Beach Velocity One: a yoke and controller designed for flight simulation. I'm interested in determining if customers express dissatisfaction, particularly with the realism of the experience provided by the yoke. Specifically, I want to know if customers complain that the yoke fails to simulate real-life flight experiences effectively. If any of these issues are mentioned in the reviews, classify the response as 'Yes'. Otherwise, classify it as 'No'.
+
 #### Grinding and Noisy: 
+
+You're analyzing Amazon reviews for the Honeycomb Aeronautical Alpha Yoke: a yoke and controller designed for flight simulation. I'm interested in determining if customers express dissatisfaction, particularly with the quality and feel of the yoke's pitch axis. More Specifically, I want to know if customers complain that using the pitch axis is noisy or there is grinding in moving the yoke laterally. If any of these issues are mentioned in the reviews, classify the response as 'Yes'. Otherwise, classify it as 'No'
 
 #### Pitch is too strong (Travel is too heavy):
 
-#### Realism: 
+You're analyzing Amazon reviews for the Honeycomb Aeronautical Alpha Yoke: a yoke and controller designed for flight simulation. I'm interested in determining if customers express dissatisfaction, particularly with the quality and feel of the yoke, focusing on its pitch axis. Specifically, I want to know if customers complain about resistance or difficulty when moving the yoke's pitch axis up or down. If any of these issues are mentioned in the reviews, classify the response as 'Yes'. Otherwise, classify it as 'No'
+
+#### Pitch Stickiness
+
+You're analyzing Amazon reviews for the Thrustmaster TCA Yoke Boeing Edition: a yoke and controller designed for flight simulation. I'm interested in determining if customers express dissatisfaction, particularly with the quality and feel of the yoke's pitch axis. Specifically, I want to know if customers complain that using the pitch axis is sticky or that there is friction in moving the yoke laterally. If any of these issues are mentioned in the reviews, classify the response as 'Yes'. Otherwise, classify it as 'No'
 
 
 
