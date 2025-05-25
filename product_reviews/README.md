@@ -288,23 +288,54 @@ ggsave("donut_chart_ar.svg", plot = g_ar, width = 12, height = 4, bg = "white")
 
 After scraping and collecting the product review data, the next step was to analyze the data qualitatively. Our intention was to see if among the reviews, any common complaints of the products aligned with our intended positioning and key value points of our product that would enter the market. The key pain points we inspected each review to contain included:
 
+confirmatory topics
+3 stars or lower
+
 #### Yoke Smoothness Issues:
 
 The primary improved value point of our product entering the market was an improved smoothness and quality of the pitch action. 
 
+Thus, for each of our competitor yokes, we inspected every review to see if it contained negative sentiment and customer dissatisfaction with the quality and feel of the controller's yoke, especially concerning its pitch axis. Specifically reviews were flagged if they included complaints regarding the smoothness, stickiness, jerkiness, or any issues related to being stuck or unresponsive with the yoke's pitch axis. Additionally reviews mentioning specifc issues regarding the pitch auto-centering or "center-dent" and elevator axis negatively affecting the yokes performance.
+
+The percentage of reviews with flags were calculated for each yoke and described in the graphs above. 
+
+---
+
 You're analyzing Amazon reviews for the Turtle Beach Velocity One: A yoke and controller designed for flight simulation. I'm interested in determining if customers are expressing dissatisfaction with the quality and feel of the controller's yoke, especially concerning its pitch axis. Specifically, I want to know if there are complaints regarding the smoothness, stickiness, jerkiness, or any issues related to being stuck or unresponsive with the yoke's pitch axis. Additionally, I'm interested in whether customers are mentioning problems with the center dent or centering of the yoke's pitch axis. Furthermore, please identify if there are any complaints about the elevator axis affecting the yoke's performance. If any of the mentioned issues are present in the reviews, classify the response as 'Yes.' Otherwise, classify it as 'No.'
 
+#### Realism: 
+
+One assumption we held for our product was that due to the construction and improved mechanics, it would offer a more realistic flight simulation experience relative to our competitor yokes. Thus, we analyzed each review for the competiotor yokes to see if they contained dissatisfaction with realistic esperience provided by the yoke and if the yoke's construction fails to effectively stimulate a real-life flight experience. For the 3 competitors here is what we found:
+
+
+Velocity One: 6% (10/174) of reviews (3 stars or lower) mention realism as an issue.
+
+Thrustmaster Boeing: (0/50) - reviews (3 stars or lower) did not find explicit mentions of a poor realistic experience for this yoke.
+
+Honeycomb Alpha: 13% (11/82) of reviews (3 stars or lower) mention realism as an issue. 
+
+
+---
+
+You're analyzing Amazon reviews for the Turtle Beach Velocity One: a yoke and controller designed for flight simulation. I'm interested in determining if customers express dissatisfaction, particularly with the realism of the experience provided by the yoke. Specifically, I want to know if customers complain that the yoke fails to simulate real-life flight experiences effectively. If any of these issues are mentioned in the reviews, classify the response as 'Yes'. Otherwise, classify it as 'No'.
+
 #### Pitch axis is too short
+
+Particularly with the Velocity One, we wanted to explore explicitly if customers thought the travel in the pitch axis was too short. We hypothesized that short pitch travel was a facet of poor realism which is detailed further down this list. Ultimately we found no reviews in our analysis with this specific complaint. 
+
+---
 
 You're analyzing Amazon reviews for the Turtle Beach Velocity One: A yoke and controller designed for flight simulation. I'm interested in determining if customers are expressing dissatisfaction specifically with the length of travel of the Yokes pitch axis, specifically complaints that the length is too short. A sufficient length of travel for the Yokes pitch axis is crucial for providing a realistic and immersive flight simulation experience. If this is present in the review, classify the response as 'Yes'. Otherwise, classify it as 'No'.
 
 #### Looks or feels like a toy & issues with plastic construction
 
+Another hypothesis we had for the Velocity One yoke was that customwers could be displeased with its plastic construction and orientation as more of a gaming console controler vs a virtual flight simulation controller. Reviews with complaints of its appearance, the physical feel of the yoke and comments that characterize the yoke as "Toyish" and dissatisfactions regarding its plastic construction. Ultimatley we found that 16% (27/174) of Velocity One reviews (3 stars or lower) mention the yoke plastic, toy-like construction and related build quality as an issue. 
+
+--- 
+
 You're analyzing Amazon reviews for the Turtle Beach Velocity One: a yoke and controller designed for flight simulation. I'm interested in determining if customers express dissatisfaction, particularly with the appearance and feel of the yoke. This includes complaints that the yoke looks or feels like a toy and grievances about its plastic construction. If any of these issues are present in the review, classify the response as 'Yes'. Otherwise, classify it as 'No'
 
-#### Realism: 
 
-You're analyzing Amazon reviews for the Turtle Beach Velocity One: a yoke and controller designed for flight simulation. I'm interested in determining if customers express dissatisfaction, particularly with the realism of the experience provided by the yoke. Specifically, I want to know if customers complain that the yoke fails to simulate real-life flight experiences effectively. If any of these issues are mentioned in the reviews, classify the response as 'Yes'. Otherwise, classify it as 'No'.
 
 #### Grinding and Noisy: 
 
