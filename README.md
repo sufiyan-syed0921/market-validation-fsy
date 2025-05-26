@@ -88,3 +88,7 @@ For more detailed information on the analysis plan and data processing, please r
     - It is possible results will skew towards the default ranking (Yoke A, Yoke B, and Yoke C).
 
 ## Conclusions
+
+##### *RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings.​*
+##### *RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​*
+##### *RQ 3: Assess the comparative desirability of the current product against its primary competitors.​*
