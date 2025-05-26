@@ -67,26 +67,24 @@ For more detailed information on the analysis plan and data processing, please r
 
 ### Limitations
 
-- These research findings are entirely exploratory in nature and we do not expect them to be statistically reprentative or generalizable. 
+- Research findings are entirely exploratory and not statistically representative.
 
 - Product Review Data
-  - Adequate Sample Size, Representitve?
   - Sampling dynamics of Amazon Reviews/Webscraping. Any Bias among captured responses
-    - Can only Webscrape maximum of 100 per filter
-    - Only people who choose to leave a (negative) review is included
-    - Largley Amazon Reviews
-    - Temporal Factors in regards to product updates are ignored for this analysis
+    - Samples sizes may not be geralizable to the target consumer base. 
+    - Typically those who are satisfied with a product do not leave products so these results may be inflated. 
+    - The large majority of reviews were pulled from Amazon and biases may be inputed from reviews chosen to be shown on its platform. Amazon only shows 100 reviews per filter option. 
+    - These results only reflect the current iteration of the product of the review date. Any product updates and re-designs after the posting of the review is not accounted for. 
 
 - Survey
-  - Limited to user demo of r/flightsim and who chose to answer survey. More niche/ethusiant user group. Does not include casual users. 
-  - Sample size/representative
-  - 
-  - FR
-    - As an unintentional consequence of Qualtrics not shuffling the ranking, it is possible results were biased towards the default order shown in the previous slide. The default order has force feedback ranked last.​
-  - CMR 
-    - The difference in smoothness and feel  between yokes is difficult to capture in words.  ​
-    - It is possible results will skew towards the default ranking (Yoke A, Yoke B, and Yoke C).
-
+  - Opinons are limited to the user demographic of r/flightsim users and who those who choose to answer the survey (pursuaded by the inscentive). The use demographic of r/flightsim reflects those of more niche and enthusiast flight simulation users and we assume that this demographic does not contain many casual flight simulation users. 
+  - Samples sizes may not be geralizable to the target consumer base. 
+  - Feature Ranking
+    - As an unintentional consequence of Qualtrics not shuffling the ranking, it is possible results were biased towards the default order shown to the respondent.
+  - Yoke Ranking 
+    - The difference in smoothness and feel between yokes is difficult to capture in words and this quality may vary for each respondent.  ​
+    - As an unintentional consequence of Qualtrics not shuffling the ranking, it is possible results were biased towards the default order shown to the respondent.
+  
 ## Conclusions
 
 ##### *RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings.​*
