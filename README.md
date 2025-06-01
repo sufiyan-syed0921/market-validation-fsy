@@ -8,6 +8,12 @@ This repository aims to summarize research results from an exploratory analysis 
 ##### *RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​*
 ##### *RQ 3: Assess the comparative desirability of the current product against its primary competitors.​*
 
+## Conclusions & Key Findings 
+
+##### *RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings.​*
+##### *RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​*
+##### *RQ 3: Assess the comparative desirability of the current product against its primary competitors.​*
+
 ## Methods & Data Processing
 Our methodological approach to answering these questions included data sources in customer product reviews and survey data
 
@@ -67,26 +73,21 @@ For more detailed information on the analysis plan and data processing, please r
 
 ### Limitations
 
-- Research findings are entirely exploratory and not statistically representative.
+- Exploratory Findings
+  - Findings are exploratory and may not be representative of the broader market.
 
 - Product Review Data
-  - Sampling dynamics of Amazon Reviews/Webscraping. Any Bias among captured responses
-    - Samples sizes may not be geralizable to the target consumer base. 
-    - Typically those who are satisfied with a product do not leave products so these results may be inflated. 
-    - The large majority of reviews were pulled from Amazon and biases may be inputed from reviews chosen to be shown on its platform. Amazon only shows 100 reviews per filter option. 
-    - These results only reflect the current iteration of the product of the review date. Any product updates and re-designs after the posting of the review is not accounted for. 
+  - Review data is drawn primarily from Amazon via web scraping. Amazon’s platform only displays up to 100 reviews per filter, which may skew sample representation.
+  - Reviewers are self-selecting, and those with strong negative or to a lesser degree positive opinions are more likely to leave reviews. This may result in bias toward more extreme sentiment.
+  - The analysis reflects customer experiences tied to specific product iterations at the time of the review. Subsequent updates or redesigns are not captured.
 
 - Survey
-  - Opinons are limited to the user demographic of r/flightsim users and who those who choose to answer the survey (pursuaded by the inscentive). The use demographic of r/flightsim reflects those of more niche and enthusiast flight simulation users and we assume that this demographic does not contain many casual flight simulation users. 
+  - Possible Bias: Opinons are limited to the user demographic of r/flightsim users and who those who choose to answer the survey (pursuaded by the inscentive). The use demographic of r/flightsim reflects those of more niche and enthusiast flight simulation users and we assume that this demographic does not contain many casual flight simulation users. 
   - Samples sizes may not be geralizable to the target consumer base. 
-  - Feature Ranking
-    - As an unintentional consequence of Qualtrics not shuffling the ranking, it is possible results were biased towards the default order shown to the respondent.
-  - Yoke Ranking 
-    - The difference in smoothness and feel between yokes is difficult to capture in words and this quality may vary for each respondent.  ​
-    - As an unintentional consequence of Qualtrics not shuffling the ranking, it is possible results were biased towards the default order shown to the respondent.
-  
-## Conclusions
-
-##### *RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings.​*
-##### *RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​*
-##### *RQ 3: Assess the comparative desirability of the current product against its primary competitors.​*
+  - Possible results to both feature and yoke ranking questions were biased to default order shown to the respondent due to Qualtrics not shuffling the ranking for each respondent. 
+ 
+- Survey Data
+  - The survey sample is limited to Reddit users from r/flightsim, which likely overrepresents niche and enthusiast flight simulator users rather than casual consumers.
+  - Respondents were self-selected and may have been influenced by the incentive to participate, introducing potential bias.
+  - Due to a Qualtrics configuration issue, feature and yoke ranking questions were not randomized, possibly biasing responses based on the default item order.
+  - The perceived smoothness, feel, and precision of a yoke’s pitch axis is subjective and vary by user. Differences in this quality are difficult to describe explicitly when creating measures.
