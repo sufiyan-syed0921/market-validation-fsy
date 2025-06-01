@@ -81,11 +81,6 @@ For more detailed information on the analysis plan and data processing, please r
   - Reviewers are self-selecting, and those with strong negative or to a lesser degree positive opinions are more likely to leave reviews. This may result in bias toward more extreme sentiment.
   - The analysis reflects customer experiences tied to specific product iterations at the time of the review. Subsequent updates or redesigns are not captured.
 
-- Survey
-  - Possible Bias: Opinons are limited to the user demographic of r/flightsim users and who those who choose to answer the survey (pursuaded by the inscentive). The use demographic of r/flightsim reflects those of more niche and enthusiast flight simulation users and we assume that this demographic does not contain many casual flight simulation users. 
-  - Samples sizes may not be geralizable to the target consumer base. 
-  - Possible results to both feature and yoke ranking questions were biased to default order shown to the respondent due to Qualtrics not shuffling the ranking for each respondent. 
- 
 - Survey Data
   - The survey sample is limited to Reddit users from r/flightsim, which likely overrepresents niche and enthusiast flight simulator users rather than casual consumers.
   - Respondents were self-selected and may have been influenced by the incentive to participate, introducing potential bias.
