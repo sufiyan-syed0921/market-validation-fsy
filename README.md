@@ -17,8 +17,39 @@ This repository aims to summarize research results from an exploratory analysis 
   -  This findings highlight that our proposed product is not as much of a direct compeitor to the thrustmaster as it is to the honeycomb and Turtle Beach yokes. This makes sense given that our product and the honeycomb and turtle beach yokes both share a linear mechanism and that the thrustmaster yoke is particularly positioned to mimic a Boeing aircrafts yoke and for enthusiasts of Boeing aircraft, while the other competitors are general to most aircraft.
 -  Dissatisfaction with feel, smoothness, and precision were found higher in the survey results than the customer reviews consistent across each of the products. This reveals the discrepency vs what users feel regarding feature when asked to think criticly about its drawbacks in the survey question vs what the most significant issues are as it relates to the product in the reviews.   
 ##### *RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​*
+- Features with highest mean ranks for desirability were PC compatibility (3.71/12) and Yoke Smoothness, Feel and Precision (3.73/12).
+  - PC compatibility makes sense given our respondents were primarily more niche and enthisast users rather than gamers. This leaves Yoke Smoothness, Feel and Precision the most important feature users look for when purchasing a yoke other than platform compatibility. Though this question does not convey to the user the relative trade-offs or intensity of how poor the smoothness would be if trading it for another feature. In other words, how much quality of smoothness, feel and percision is lost if obtaining other features.
+- Features Force feedback (9.51) and Plug-in-play (8.08) were ranked on average the lowest out of all the features. This may infer that these items are more luxury features in the perspective of the user.
+- Interestingly, Adequate Resistance Force which contributes to a more realistic expeirence of flying a plane, was only ranked on average 7.8/12. This also indicates this feature and on a larger scale, realism as a more luxury feature in the perspective of the user.
+- All other features in the analysis were ranked on average between 5/12 to 7/12. Some key takeaways:
+  - Build Quality was ranked on average 5.58/12 while Metal construction was ranked on average 7.21/12. This may indicate that users are okay with plastic construction, but as long as it has good build quality
+  - A sub $400 price was ranked on average 6.96/12 which may indicate that users are open to higher prices if certain features are offered
 ##### *RQ 3: Assess the comparative desirability of the current product against its primary competitors.​*
+- Users similarly ranked on average Yoke A (Turtle Beach), Yoke B (Honeycomb), and Yoke C (Our Proposed Product) a 2/3 indicating parity in competition. 
+- Our Proposed product ranked the highest 1.87/3 out of the two competitors, indicating at least on a surface level, our proposed product would be competitive amongs the two competitor yokes.
 
+##### Limitations
+
+###### *Exploratory Findings*
+  - Findings are exploratory and may not be representative of the broader market.
+
+###### *Sampling Bias*
+  - Product Review data is drawn primarily from Amazon via web scraping. Amazon’s platform only displays up to 100 reviews per filter, which may skew sample representation.
+  - Customers posting reviews are self-selecting, and those with strong negative or to a lesser degree positive opinions are more likely to leave reviews. This may result in bias toward more extreme sentiment.  
+  - The survey sample is limited to Reddit users from r/flightsim, which likely overrepresents niche and enthusiast flight simulator users rather than casual consumers
+  - Respondents were self-selected and may have been influenced by the incentive to participate, introducing potential bias.
+
+###### *Subjectivity of pitch quality*
+  - The perceived smoothness, feel, and precision of a yoke’s pitch axis is subjective and vary by user. Differences in this quality are difficult to describe explicitly when creating measures.
+
+###### *Does Not Reflect Post-Review Product Changes*
+  - The analysis reflects customer experiences tied to specific product iterations at the time of the review. Subsequent updates or redesigns are not captured.
+
+###### *Instrumentation Bias*
+  - Due to a Qualtrics configuration issue, feature and yoke ranking questions were not randomized, possibly biasing responses based on the default item order.
+
+  
+  
 ## Methods & Data Processing
 Our methodological approach to answering these questions included data sources in customer product reviews and survey data
 
