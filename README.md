@@ -11,6 +11,11 @@ This repository aims to summarize research results from an exploratory analysis 
 ## Conclusions & Key Findings 
 
 ##### *RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings.​*
+- Analysis results find that a considerable amount of customer reviews (30%) and survey respondents (45%-55%) for the Turtle Beach and Honeycomb yoes contain or claim issues with smoothness, feel, and precion of pitch mechanism.
+- To a lesser degree, the analysis finds that 10% of customer reviews and 36% of survey respondents of the Thrustmaster Yoke contain or claim issues with smoothness, feel, and precion of pitch mechanism.
+- Findings between the customer review analysis and survey analysis are consistent in the Thrustmaster having a higher satisfaction regarding yoke smoothness compared to the other competitors. This makes sense given the Thrustmaster yoke mechanism is pendular rather than linear, and not succesiptable to smoothness issues. 
+  -  This findings highlight that our proposed product is not as much of a direct compeitor to the thrustmaster as it is to the honeycomb and Turtle Beach yokes. This makes sense given that our product and the honeycomb and turtle beach yokes both share a linear mechanism and that the thrustmaster yoke is particularly positioned to mimic a Boeing aircrafts yoke and for enthusiasts of Boeing aircraft, while the other competitors are general to most aircraft.
+-  Dissatisfaction with feel, smoothness, and precision were found higher in the survey results than the customer reviews consistent across each of the products. This reveals the discrepency vs what users feel regarding feature when asked to think criticly about its drawbacks in the survey question vs what the most significant issues are as it relates to the product in the reviews.   
 ##### *RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​*
 ##### *RQ 3: Assess the comparative desirability of the current product against its primary competitors.​*
 
@@ -73,16 +78,22 @@ For more detailed information on the analysis plan and data processing, please r
 
 ### Limitations
 
-- Exploratory Findings
+#### *Exploratory Findings*
   - Findings are exploratory and may not be representative of the broader market.
 
-- Product Review Data
-  - Review data is drawn primarily from Amazon via web scraping. Amazon’s platform only displays up to 100 reviews per filter, which may skew sample representation.
-  - Reviewers are self-selecting, and those with strong negative or to a lesser degree positive opinions are more likely to leave reviews. This may result in bias toward more extreme sentiment.
+#### *Sampling Bias*
+  - Product Review data is drawn primarily from Amazon via web scraping. Amazon’s platform only displays up to 100 reviews per filter, which may skew sample representation.
+  - Customers posting reviews are self-selecting, and those with strong negative or to a lesser degree positive opinions are more likely to leave reviews. This may result in bias toward more extreme sentiment.  
+  - The survey sample is limited to Reddit users from r/flightsim, which likely overrepresents niche and enthusiast flight simulator users rather than casual consumers
+  - Respondents were self-selected and may have been influenced by the incentive to participate, introducing potential bias.
+
+#### *Subjectivity of pitch quality*
+  - The perceived smoothness, feel, and precision of a yoke’s pitch axis is subjective and vary by user. Differences in this quality are difficult to describe explicitly when creating measures.
+
+#### *Does Not Reflect Post-Review Product Changes*
   - The analysis reflects customer experiences tied to specific product iterations at the time of the review. Subsequent updates or redesigns are not captured.
 
-- Survey Data
-  - The survey sample is limited to Reddit users from r/flightsim, which likely overrepresents niche and enthusiast flight simulator users rather than casual consumers.
-  - Respondents were self-selected and may have been influenced by the incentive to participate, introducing potential bias.
+#### *Instrumentation Bias*
   - Due to a Qualtrics configuration issue, feature and yoke ranking questions were not randomized, possibly biasing responses based on the default item order.
-  - The perceived smoothness, feel, and precision of a yoke’s pitch axis is subjective and vary by user. Differences in this quality are difficult to describe explicitly when creating measures.
+
+
