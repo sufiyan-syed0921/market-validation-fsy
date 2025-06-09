@@ -2,20 +2,31 @@
 
 ## Background
 
-This repository aims to summarize research results from an exploratory analysis on the outcome of introducing an additional product offering in the flight simulation yoke controller market.The proposed product has one main advantage over current market offerings, which we aim to test: an increased perceived feel, smoothness, and precision of yoke movement at a price point under $400. Our main product competitors we outlined for this analysis is the Turtle Beach: VelocityOne, Honeycomb XPC, and the Thrustmaster TCA Boeing. Given this, we set out to answer 3 key questions in an attempt to validate a market for this product:
+This repository summarizes findings from an exploratory analysis on the potential impact of introducing a new product offering in the flight simulation yoke controller market. The proposed product offers one key advantage over current market options: **enhanced perceived feel, smoothness, and precision of yoke movement—all at a price point under $400.**
 
-##### *RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings.​*
-##### *RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​*
-##### *RQ 3: Assess the comparative desirability of the current product against its primary competitors.​*
+The main competitors identified for this analysis are the **Turtle Beach VelocityOne**, **Honeycomb Alpha XPC**, and **Thrustmaster TCA Boeing Edition**.
+
+To explore the viability of this product, we focused on answering three key research questions:
+- **RQ1: Do users of competitors flight simulation yokes perceive issues with feel, smoothness, or precision?**
+- **RQ2: What value do users of competitors place on the feel, smoothness, and precision of a flight yoke relative to other features?​**
+- **RQ3: How desirable is the proposed product compared to its primary competitors?**
+
 
 ## Conclusions & Key Findings 
 
-##### *RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings.​*
-- Analysis results find that a considerable amount of customer reviews (30%) and survey respondents (45%-55%) for the Turtle Beach and Honeycomb yoes contain or claim issues with smoothness, feel, and precion of pitch mechanism.
-- To a lesser degree, the analysis finds that 10% of customer reviews and 36% of survey respondents of the Thrustmaster Yoke contain or claim issues with smoothness, feel, and precion of pitch mechanism.
-- Findings between the customer review analysis and survey analysis are consistent in the Thrustmaster having a higher satisfaction regarding yoke smoothness compared to the other competitors. This makes sense given the Thrustmaster yoke mechanism is pendular rather than linear, and not succesiptable to smoothness issues. 
-  -  This findings highlight that our proposed product is not as much of a direct compeitor to the thrustmaster as it is to the honeycomb and Turtle Beach yokes. This makes sense given that our product and the honeycomb and turtle beach yokes both share a linear mechanism and that the thrustmaster yoke is particularly positioned to mimic a Boeing aircrafts yoke and for enthusiasts of Boeing aircraft, while the other competitors are general to most aircraft.
--  Dissatisfaction with feel, smoothness, and precision were found higher in the survey results than the customer reviews consistent across each of the products. This reveals the discrepency vs what users feel regarding feature when asked to think criticly about its drawbacks in the survey question vs what the most significant issues are as it relates to the product in the reviews.   
+##### *RQ1: Do users of competitors flight simulation yokes perceive issues with feel, smoothness, or precision?*
+
+- **Between 30% and 55%** of customer reviews (30%) and survey respondents (45–55%) for the **Turtle Beach** and **Honeycomb** yokes reported concerns related to the feel, smoothness, and precision of the pitch mechanism.
+
+- For the **Thrustmaster** yoke, these issues were reported **less frequently**: approximately 10% of customer reviews and 36% of survey respondents indicated similar concerns.
+
+- Across both data sources, the **Thrustmaster yoke consistently showed higher satisfaction** regarding smoothness, which is consistent with its **pendular yoke mechanism**—a design less susceptible to the friction or stiffness issues common in linear mechanisms.
+
+- These findings suggest that the **proposed product competes more directly** with the **Honeycomb** and **Turtle Beach** yokes than with the Thrustmaster, both because of its similar linear mechanism and its appeal to a general aviation market (as opposed to Thrustmaster’s niche targeting of Boeing aircraft enthusiasts).
+
+- Reports of dissatisfaction were **higher in the survey** than in customer reviews across all products. This discrepancy likely reflects the difference between **prompted responses** in the survey, which asked users to reflect critically on the pitch mechanism, and **unprompted reviews**, which highlight only the most salient or bothersome product issues.
+
+
 ##### *RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​*
 - Features with highest mean ranks for desirability were PC compatibility (3.71/12) and Yoke Smoothness, Feel and Precision (3.73/12).
   - PC compatibility makes sense given our respondents were primarily more niche and enthisast users rather than gamers. This leaves Yoke Smoothness, Feel and Precision the most important feature users look for when purchasing a yoke other than platform compatibility. Though this question does not convey to the user the relative trade-offs or intensity of how poor the smoothness would be if trading it for another feature. In other words, how much quality of smoothness, feel and percision is lost if obtaining other features.
