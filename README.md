@@ -30,11 +30,36 @@ To explore the viability of this product, we focused on answering three key rese
 ##### *RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​*
 - Features with highest mean ranks for desirability were PC compatibility (3.71/12) and Yoke Smoothness, Feel and Precision (3.73/12).
   - PC compatibility makes sense given our respondents were primarily more niche and enthisast users rather than gamers. This leaves Yoke Smoothness, Feel and Precision the most important feature users look for when purchasing a yoke other than platform compatibility. Though this question does not convey to the user the relative trade-offs or intensity of how poor the smoothness would be if trading it for another feature. In other words, how much quality of smoothness, feel and percision is lost if obtaining other features.
+    
 - Features Force feedback (9.51) and Plug-in-play (8.08) were ranked on average the lowest out of all the features. This may infer that these items are more luxury features in the perspective of the user.
 - Interestingly, Adequate Resistance Force which contributes to a more realistic expeirence of flying a plane, was only ranked on average 7.8/12. This also indicates this feature and on a larger scale, realism as a more luxury feature in the perspective of the user.
+- 
 - All other features in the analysis were ranked on average between 5/12 to 7/12. Some key takeaways:
   - Build Quality was ranked on average 5.58/12 while Metal construction was ranked on average 7.21/12. This may indicate that users are okay with plastic construction, but as long as it has good build quality
   - A sub $400 price was ranked on average 6.96/12 which may indicate that users are open to higher prices if certain features are offered
+
+- **Yoke Smoothness, Feel, and Precision** and **PC Compatibility** were the two **highest-valued** features for desirability, with average rankings of 3.73/12 and 3.71/12, respectively.
+
+- Respondents’ strong preference for **PC Compatibility** aligns with our assumption that the sample consisted primarily of **enthusiast users**, who often use PCs more than gaming consoles for flight simulation. This could position **Yoke Smoothness, Feel, and Precision** as the **most important** feature beyond platform compatibility.
+
+- However, the survey question **did not capture the intensity of trade-offs**, that is, how much smoothness or precision users are willing to sacrifice in favor of gaining other features. This **limits our understanding** of the strength of user preferences when features are in conflict.
+
+- **Lower-valued** features included **Force Feedback** (9.51/12) and **Plug-and-Play Setup** (8.08/12), suggesting that users view these as **luxury or non-essential features**, rather than core purchase drivers.
+
+- **Adequate Resistance Force**, a feature that contributes to flight realism (in addition to **force feedback**), was ranked 7.80/12. This may support the idea that **realism-enhancing features are perceived as more luxury items**.
+
+- **All other features** in the analysis were ranked on average between **5/12 to 7/12**. Some key takeaways:
+  - **Build Quality** received an average rank of **5.58/12**, while **Metal Construction** was ranked higher at **7.21/12**. This suggests that users may be **comfortable with plastic construction as long as the overall build quality feels solid**.
+  - A **sub-$400 price point** received an average rank of **6.96/12**, indicating that users may be **willing to pay more if the product delivers on higher priority features**.
+
+- While this ranking question helped identify feature preferences, it did not capture how much users are willing to trade off the intensity of one feature for another. Future research could use methods to quantify the intensity of these trade-offs.
+
+While the ranking question identified which features users value most, it did not reveal how strongly users feel about those preferences—specifically, how much of one feature they’re willing to give up to gain another.
+
+Future research should explore trade-off intensity, using methods like conjoint analysis to better understand the weight users place on specific features when forced to choose between them.
+
+
+  
 ##### *RQ 3: Assess the comparative desirability of the current product against its primary competitors.​*
 - Users similarly ranked on average Yoke A (Turtle Beach), Yoke B (Honeycomb), and Yoke C (Our Proposed Product) a 2/3 indicating parity in competition. 
 - Our Proposed product ranked the highest 1.87/3 out of the two competitors, indicating at least on a surface level, our proposed product would be competitive amongs the two competitor yokes.
