@@ -52,26 +52,25 @@ To explore the viability of this product, we focused on answering three key rese
 
 
 
-##### Limitations
+## Limitations
 
-###### *Exploratory Findings*
+#### *Exploratory Findings*
   - Findings are exploratory and may not be representative of the broader market.
 
-###### *Sampling Bias*
+#### *Sampling Bias*
   - Product Review data is drawn primarily from Amazon via web scraping. Amazon’s platform only displays up to 100 reviews per filter, which may skew sample representation.
   - Customers posting reviews are self-selecting, and those with strong negative or to a lesser degree positive opinions are more likely to leave reviews. This may result in bias toward more extreme sentiment.  
   - The survey sample is limited to Reddit users from r/flightsim, which likely overrepresents niche and enthusiast flight simulator users rather than casual consumers
   - Respondents were self-selected and may have been influenced by the incentive to participate, introducing potential bias.
 
-###### *Subjectivity of pitch quality*
+#### *Subjectivity of pitch quality*
   - The perceived smoothness, feel, and precision of a yoke’s pitch axis is subjective and vary by user. Differences in this quality are difficult to describe explicitly when creating measures.
 
-###### *Does Not Reflect Post-Review Product Changes*
+#### *Does Not Reflect Post-Review Product Changes*
   - The analysis reflects customer experiences tied to specific product iterations at the time of the review. Subsequent updates or redesigns are not captured.
 
-###### *Instrumentation Bias*
+#### *Instrumentation Bias*
   - Due to a Qualtrics configuration issue, feature and yoke ranking questions were not randomized, possibly biasing responses based on the default item order.
-
   
   
 ## Methods & Data Processing
@@ -130,25 +129,4 @@ For more detailed information on the analysis plan and data processing, please r
 - Product Ranking
 
 ![Bar Chart CMR](bar_chart_cmr.svg)
-
-### Limitations
-
-#### *Exploratory Findings*
-  - Findings are exploratory and may not be representative of the broader market.
-
-#### *Sampling Bias*
-  - Product Review data is drawn primarily from Amazon via web scraping. Amazon’s platform only displays up to 100 reviews per filter, which may skew sample representation.
-  - Customers posting reviews are self-selecting, and those with strong negative or to a lesser degree positive opinions are more likely to leave reviews. This may result in bias toward more extreme sentiment.  
-  - The survey sample is limited to Reddit users from r/flightsim, which likely overrepresents niche and enthusiast flight simulator users rather than casual consumers
-  - Respondents were self-selected and may have been influenced by the incentive to participate, introducing potential bias.
-
-#### *Subjectivity of pitch quality*
-  - The perceived smoothness, feel, and precision of a yoke’s pitch axis is subjective and vary by user. Differences in this quality are difficult to describe explicitly when creating measures.
-
-#### *Does Not Reflect Post-Review Product Changes*
-  - The analysis reflects customer experiences tied to specific product iterations at the time of the review. Subsequent updates or redesigns are not captured.
-
-#### *Instrumentation Bias*
-  - Due to a Qualtrics configuration issue, feature and yoke ranking questions were not randomized, possibly biasing responses based on the default item order.
-
 
