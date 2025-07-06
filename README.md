@@ -107,13 +107,13 @@ For more detailed information on the analysis plan and data processing, please r
 ### RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings.​
 
 <div align="center">
-  <h4>Amazon Reviews</h4>
+  <h4>Product Reviews:<br><br>Percentage of reviews (3 stars or lower) that mention pitch smoothness\nand related features as an issue</h4>
 </div>
 
 ![Donut Chart AR](donut_chart_ar.svg)
   
 <div align="center">
-  <h4>Survey Question</h4>
+  <h4>Survey Question:<br><br>Do you find the smoothness and feel of the pitch axis an issue in your current yoke?</h4>
 </div>
 
 ![Donut Chart S](donut_chart_s.svg)
