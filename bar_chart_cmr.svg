@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='864.00pt' height='432.00pt' viewBox='0 0 864.00 432.00'>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='576.00pt' height='288.00pt' viewBox='0 0 576.00 288.00'>
 <defs>
   <style type='text/css'><![CDATA[
     .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
@@ -16,62 +16,50 @@
 </defs>
 <rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
 <defs>
-  <clipPath id='cpMC4wMHw4NjQuMDB8MC4wMHw0MzIuMDA='>
-    <rect x='0.00' y='0.00' width='864.00' height='432.00' />
+  <clipPath id='cpMC4wMHw1NzYuMDB8MC4wMHwyODguMDA='>
+    <rect x='0.00' y='0.00' width='576.00' height='288.00' />
   </clipPath>
 </defs>
-<g clip-path='url(#cpMC4wMHw4NjQuMDB8MC4wMHw0MzIuMDA=)'>
-<rect x='0.00' y='0.000000000000057' width='864.00' height='432.00' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHwyODguMDA=)'>
+<rect x='0.00' y='0.00' width='576.00' height='288.00' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FFFFFF;' />
 </g>
 <defs>
-  <clipPath id='cpMzkuOTJ8ODU4LjUyfDY4LjgwfDQwMi4xNA=='>
-    <rect x='39.92' y='68.80' width='818.60' height='333.33' />
+  <clipPath id='cpOTQuNDF8NTQwLjAwfDE0LjQwfDI1My45Mw=='>
+    <rect x='94.41' y='14.40' width='445.59' height='239.53' />
   </clipPath>
 </defs>
-<g clip-path='url(#cpMzkuOTJ8ODU4LjUyfDY4LjgwfDQwMi4xNA==)'>
-<rect x='39.92' y='68.80' width='818.60' height='333.33' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<polyline points='167.01,402.14 167.01,68.80 ' style='stroke-width: 0.53; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='346.76,402.14 346.76,68.80 ' style='stroke-width: 0.53; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='526.52,402.14 526.52,68.80 ' style='stroke-width: 0.53; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='706.27,402.14 706.27,68.80 ' style='stroke-width: 0.53; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='39.92,339.64 858.52,339.64 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='39.92,235.47 858.52,235.47 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='39.92,131.30 858.52,131.30 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='77.13,402.14 77.13,68.80 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='256.89,402.14 256.89,68.80 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='436.64,402.14 436.64,68.80 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='616.39,402.14 616.39,68.80 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<polyline points='796.15,402.14 796.15,68.80 ' style='stroke-width: 1.07; stroke: #EBEBEB; stroke-linecap: butt;' />
-<rect x='77.13' y='100.05' width='672.28' height='62.50' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #87CEEB;' />
-<rect x='77.13' y='204.22' width='740.58' height='62.50' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #87CEEB;' />
-<rect x='77.13' y='308.39' width='744.18' height='62.50' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #87CEEB;' />
-<text x='753.70' y='135.26' style='font-size: 11.04px; font-family: "Arial";' textLength='21.47px' lengthAdjust='spacingAndGlyphs'>1.87</text>
-<text x='822.01' y='239.43' style='font-size: 11.04px; font-family: "Arial";' textLength='21.47px' lengthAdjust='spacingAndGlyphs'>2.06</text>
-<text x='825.61' y='343.59' style='font-size: 11.04px; font-family: "Arial";' textLength='21.47px' lengthAdjust='spacingAndGlyphs'>2.07</text>
-<rect x='39.92' y='68.80' width='818.60' height='333.33' style='stroke-width: 1.07; stroke: #333333;' />
+<g clip-path='url(#cpOTQuNDF8NTQwLjAwfDE0LjQwfDI1My45Mw==)'>
+<rect x='94.41' y='14.40' width='445.59' height='239.53' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<line x1='108.78' y1='59.31' x2='377.58' y2='59.31' style='stroke-width: 17.07; stroke: #5EC6CC; stroke-linecap: butt;' />
+<line x1='108.78' y1='134.17' x2='404.89' y2='134.17' style='stroke-width: 17.07; stroke: #5EC6CC; stroke-linecap: butt;' />
+<line x1='108.78' y1='209.02' x2='406.32' y2='209.02' style='stroke-width: 17.07; stroke: #5EC6CC; stroke-linecap: butt;' />
+<rect x='377.58' y='59.31' width='0.00' height='0.00' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
+<rect x='404.89' y='134.17' width='0.00' height='0.00' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
+<rect x='406.32' y='209.02' width='0.00' height='0.00' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #595959;' />
+<text x='377.58' y='62.54' style='font-size: 9.00px; font-family: "Arial";' textLength='22.51px' lengthAdjust='spacingAndGlyphs'>  1.87</text>
+<text x='404.89' y='137.40' style='font-size: 9.00px; font-family: "Arial";' textLength='22.51px' lengthAdjust='spacingAndGlyphs'>  2.06</text>
+<text x='406.32' y='212.25' style='font-size: 9.00px; font-family: "Arial";' textLength='22.51px' lengthAdjust='spacingAndGlyphs'>  2.07</text>
+<rect x='94.41' y='14.40' width='445.59' height='239.53' style='stroke-width: 1.07; stroke: #333333;' />
 </g>
-<g clip-path='url(#cpMC4wMHw4NjQuMDB8MC4wMHw0MzIuMDA=)'>
-<text x='34.99' y='342.87' text-anchor='end' style='font-size: 9.00px;fill: #4D4D4D; font-family: "Arial";' textLength='29.02px' lengthAdjust='spacingAndGlyphs'>Yoke A</text>
-<text x='34.99' y='238.70' text-anchor='end' style='font-size: 9.00px;fill: #4D4D4D; font-family: "Arial";' textLength='29.02px' lengthAdjust='spacingAndGlyphs'>Yoke B</text>
-<text x='34.99' y='134.53' text-anchor='end' style='font-size: 9.00px;fill: #4D4D4D; font-family: "Arial";' textLength='29.51px' lengthAdjust='spacingAndGlyphs'>Yoke C</text>
-<polyline points='37.18,339.64 39.92,339.64 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='37.18,235.47 39.92,235.47 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='37.18,131.30 39.92,131.30 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='77.13,404.88 77.13,402.14 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='256.89,404.88 256.89,402.14 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='436.64,404.88 436.64,402.14 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='616.39,404.88 616.39,402.14 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='796.15,404.88 796.15,402.14 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
-<text x='77.13' y='413.38' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='12.23px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='256.89' y='413.38' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='12.23px' lengthAdjust='spacingAndGlyphs'>0.5</text>
-<text x='436.64' y='413.38' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='12.23px' lengthAdjust='spacingAndGlyphs'>1.0</text>
-<text x='616.39' y='413.38' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='12.23px' lengthAdjust='spacingAndGlyphs'>1.5</text>
-<text x='796.15' y='413.38' text-anchor='middle' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='12.23px' lengthAdjust='spacingAndGlyphs'>2.0</text>
-<text x='449.22' y='424.53' text-anchor='middle' style='font-size: 9.00px; font-family: "Arial";' textLength='57.02px' lengthAdjust='spacingAndGlyphs'>Average Rank</text>
-<text x='449.22' y='13.37' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='386.47px' lengthAdjust='spacingAndGlyphs'>Imagine you are looking to purchase a flight simulator yoke and are considering</text>
-<text x='449.22' y='25.25' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='376.64px' lengthAdjust='spacingAndGlyphs'>Yoke A, Yoke B, and Yoke C. The features of the three yokes are listed in the</text>
-<text x='449.22' y='37.13' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='376.01px' lengthAdjust='spacingAndGlyphs'>tables below. Please rank the following yokes from most desirable (1) to least</text>
-<text x='449.22' y='49.01' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='376.68px' lengthAdjust='spacingAndGlyphs'>desirable (3), assuming that each yoke costs $400. Drag and drop to rank the</text>
-<text x='449.22' y='60.89' text-anchor='middle' style='font-size: 11.00px; font-family: "Arial";' textLength='28.74px' lengthAdjust='spacingAndGlyphs'>yokes</text>
+<g clip-path='url(#cpMC4wMHw1NzYuMDB8MC4wMHwyODguMDA=)'>
+<text x='47.19' y='57.68' text-anchor='middle' style='font-size: 9.00px; font-family: "Arial";' textLength='29.51px' lengthAdjust='spacingAndGlyphs'>Yoke C</text>
+<text x='47.19' y='67.40' text-anchor='middle' style='font-size: 9.00px; font-family: "Arial";' textLength='40.51px' lengthAdjust='spacingAndGlyphs'>Test Yoke</text>
+<text x='47.19' y='132.54' text-anchor='middle' style='font-size: 9.00px; font-family: "Arial";' textLength='29.02px' lengthAdjust='spacingAndGlyphs'>Yoke B</text>
+<text x='47.19' y='142.26' text-anchor='middle' style='font-size: 9.00px; font-family: "Arial";' textLength='69.03px' lengthAdjust='spacingAndGlyphs'>Honeycomb XPC</text>
+<text x='47.19' y='207.39' text-anchor='middle' style='font-size: 9.00px; font-family: "Arial";' textLength='29.02px' lengthAdjust='spacingAndGlyphs'>Yoke A</text>
+<text x='47.19' y='217.11' text-anchor='middle' style='font-size: 9.00px; font-family: "Arial";' textLength='51.02px' lengthAdjust='spacingAndGlyphs'>Velocity One</text>
+<polyline points='91.67,59.31 94.41,59.31 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='91.67,134.17 94.41,134.17 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='91.67,209.02 94.41,209.02 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='108.78,256.67 108.78,253.93 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='252.52,256.67 252.52,253.93 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='396.26,256.67 396.26,253.93 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='540.00,256.67 540.00,253.93 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
+<text x='108.78' y='263.15' text-anchor='middle' style='font-size: 9.00px; font-weight: bold; font-family: "Arial";' textLength='5.00px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='252.52' y='263.15' text-anchor='middle' style='font-size: 9.00px; font-weight: bold; font-family: "Arial";' textLength='5.00px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='396.26' y='263.15' text-anchor='middle' style='font-size: 9.00px; font-weight: bold; font-family: "Arial";' textLength='5.00px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='540.00' y='263.15' text-anchor='middle' style='font-size: 9.00px; font-weight: bold; font-family: "Arial";' textLength='5.00px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='317.21' y='271.61' text-anchor='middle' style='font-size: 9.00px; font-family: "Arial";' textLength='57.02px' lengthAdjust='spacingAndGlyphs'>Average Rank</text>
+<text x='46.76' y='11.56' text-anchor='middle' style='font-size: 9.00px; font-weight: bold; font-family: "Arial";' textLength='21.51px' lengthAdjust='spacingAndGlyphs'>Yoke</text>
 </g>
 </svg>
