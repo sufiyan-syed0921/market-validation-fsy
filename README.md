@@ -16,7 +16,7 @@ To explore the viability of this product, we focused on answering three key rese
 
 ### *RQ1: Do users of competitors flight simulation yokes perceive issues with feel, smoothness, or precision?*
 
-- **Between 30% and 55%** of customer reviews (30%) and survey respondents (45–55%) for the **Turtle Beach** and **Honeycomb** yokes reported concerns related to the feel, smoothness, and precision of the pitch mechanism.
+- **Between 30% and 55%** of customer reviews (30%) and survey respondents (45–55%) for the **Turtle Beach** and **Honeycomb** yokes reported concerns related to the feel, smoothness, and precision of the yoke mechanism.
 
 - For the **Thrustmaster** yoke, these issues were reported **less frequently**: approximately 10% of customer reviews and 36% of survey respondents indicated similar concerns.
 
@@ -55,7 +55,7 @@ To explore the viability of this product, we focused on answering three key rese
 
 - **Exploratory Findings:** Findings are exploratory and may not be representative of the broader market.
 
-- **Subjectivity of pitch quality:** The perceived smoothness, feel, and precision of a yoke’s pitch axis is subjective and vary by user. Differences in this quality are difficult to describe explicitly when creating measures.
+- **Subjectivity of yoke quality:** The perceived smoothness, feel, and precision of a yoke is subjective and vary by user. Differences in this quality are difficult to describe explicitly when creating measures.
 
 - **Does Not Reflect Post-Review Product Changes:** The analysis reflects customer experiences tied to specific product iterations at the time of the review. Subsequent updates or redesigns are not captured.
 
