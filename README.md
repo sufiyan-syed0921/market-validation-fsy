@@ -14,7 +14,7 @@ To explore the viability of this product, we focused on answering three key rese
 
 ## Conclusions & Key Findings 
 
-##### *RQ1: Do users of competitors flight simulation yokes perceive issues with feel, smoothness, or precision?*
+### *RQ1: Do users of competitors flight simulation yokes perceive issues with feel, smoothness, or precision?*
 
 - **Between 30% and 55%** of customer reviews (30%) and survey respondents (45–55%) for the **Turtle Beach** and **Honeycomb** yokes reported concerns related to the feel, smoothness, and precision of the pitch mechanism.
 
@@ -27,7 +27,7 @@ To explore the viability of this product, we focused on answering three key rese
 - Reports of dissatisfaction were **higher in the survey** than in customer reviews across all products. This discrepancy likely reflects the difference between **prompted responses** in the survey, which asked users to reflect critically on the pitch mechanism, and **unprompted reviews**, which highlight only the most salient or bothersome product issues.
 
 
-##### *RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​*
+### *RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​*
 - **Yoke Smoothness, Feel, and Precision** and **PC Compatibility** were the two **highest-valued** features for desirability, with average rankings of 3.73/12 and 3.71/12, respectively.
 
 - Respondents’ strong preference for **PC Compatibility** aligns with our assumption that the sample consisted primarily of **enthusiast users**, who often use PCs more than gaming consoles for flight simulation. This could position **Yoke Smoothness, Feel, and Precision** as the **most important** feature beyond platform compatibility.
@@ -45,38 +45,35 @@ To explore the viability of this product, we focused on answering three key rese
 - While this ranking question helped identify feature preferences, it did **not capture** the **degree to which users are willing to trade off one feature for another**. For example, it remains unclear what level of improvement in pitch smoothness would justify sacrificing other features. Future research could apply methods to quantify the intensity and thresholds of these trade-offs, providing a clearer picture of user priorities.
 
   
-##### *RQ 3: Assess the comparative desirability of the current product against its primary competitors.​*
+### *RQ 3: Assess the comparative desirability of the proposed product against its primary competitors.​*
 - Users ranked **Yoke A (Turtle Beach)**, **Yoke B (Honeycomb)**, and **Yoke C (Proposed Product)** similarly, with **average rankings near 2 out of 3**, suggesting a perception of **competitive parity**.
 
 - The **Proposed Product** ranked the highest overall with an average of **1.87/3**, slightly ahead of both competitors. This indicates that, at least at a surface level, the proposed product would be **competitive in the this market landscape**.
 
 
-
 ## Limitations
 
-#### *Exploratory Findings*
-  - Findings are exploratory and may not be representative of the broader market.
+- **Exploratory Findings:** Findings are exploratory and may not be representative of the broader market.
 
-#### *Sampling Bias*
+- **Subjectivity of pitch quality:** The perceived smoothness, feel, and precision of a yoke’s pitch axis is subjective and vary by user. Differences in this quality are difficult to describe explicitly when creating measures.
+
+- **Does Not Reflect Post-Review Product Changes:** The analysis reflects customer experiences tied to specific product iterations at the time of the review. Subsequent updates or redesigns are not captured.
+
+- **Instrumentation Bias:** Due to a Qualtrics configuration issue, feature and yoke ranking questions were not randomized, possibly biasing responses based on the default item order.
+
+### *Sampling Bias*
   - Product Review data is drawn primarily from Amazon via web scraping. Amazon’s platform only displays up to 100 reviews per filter, which may skew sample representation.
   - Customers posting reviews are self-selecting, and those with strong negative or to a lesser degree positive opinions are more likely to leave reviews. This may result in bias toward more extreme sentiment.  
   - The survey sample is limited to Reddit users from r/flightsim, which likely overrepresents niche and enthusiast flight simulator users rather than casual consumers
   - Respondents were self-selected and may have been influenced by the incentive to participate, introducing potential bias.
 
-#### *Subjectivity of pitch quality*
-  - The perceived smoothness, feel, and precision of a yoke’s pitch axis is subjective and vary by user. Differences in this quality are difficult to describe explicitly when creating measures.
 
-#### *Does Not Reflect Post-Review Product Changes*
-  - The analysis reflects customer experiences tied to specific product iterations at the time of the review. Subsequent updates or redesigns are not captured.
-
-#### *Instrumentation Bias*
-  - Due to a Qualtrics configuration issue, feature and yoke ranking questions were not randomized, possibly biasing responses based on the default item order.
   
   
 ## Methods & Data Processing
 Our methodological approach to answering these questions included data sources in customer product reviews and survey data
 
-### Product Reviews 
+### *Product Reviews*
 Web-scraped 306 customer reviews (3 stars or under) from Amazon, Walmart, Best Buy and other popular retailers​
 
 Sample breakdown for each yoke:​
@@ -87,10 +84,10 @@ Sample breakdown for each yoke:​
 For more detailed information on the analysis plan and data processing, please review this code file and readme:
 [Product Review Data Processing & Analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/product_reviews)
 
-### Survey
+### *Survey*
 Surveyed approximately 300 yoke users on the r/flightsim subreddit using Qualtrics​. Users who took the survey were entered into a raffle for a $100 Steam gift card​. 
 
-Responses were filtered out of the final analysis for 2 key reasons: 
+Responses were removed to form the final analysis sample for two key reasons: 
 - **Yoke Ownership:**
 Users who do not own a flight yoke, or those who quit the survey after indicating yoke ownership, were removed.
 - **Inconconsitent Location Responses:**
@@ -104,10 +101,10 @@ For more detailed information on the analysis plan and data processing, please r
 
 ## Results 
 
-### RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings.​
+### *RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings*
 
 <div align="center">
-  <h4>Product Reviews:<br><br>Percentage of reviews (3 stars or lower) that mention pitch smoothness\nand related features as an issue</h4>
+  <br><h4>Product Reviews:<br><br>Percentage of reviews (3 stars or lower) that mention pitch smoothness\nand related features as an issue</h4>
 </div>
 
 ![Donut Chart AR](donut_chart_ar.svg)
@@ -118,15 +115,27 @@ For more detailed information on the analysis plan and data processing, please r
 
 ![Donut Chart S](donut_chart_s.svg)
 
-### RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features.​
+### *RQ 2: Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features*
 
-- Feature Ranking
+<div align="center">
+ <br><h4>Average Feature Ranking<br><br>Survey Question - When purchasing a flight simulator yoke, rank the following features and capabilities from most important (1) to least important (12)</h4><br>
+</div>
+
+<div align="center">
 
 ![Bar Chart AFR](bar_chart_afr.svg)
 
-### RQ 3: Assess the comparative desirability of the current product against its primary competitors.​
+</div>
 
-- Product Ranking
+### *RQ 3: Assess the comparative desirability of the proposed product against its primary competitors*​
+
+<div align="center"> 
+  <br><h4>Average Product Ranking<br><br>Survey Question - Imagine you are looking to purchase a flight simulator yoke and are considering Yoke A, Yoke B, and Yoke C.<br>Please rank the following yokes from most desirable (1) to least desirable (3), assuming that each yoke costs $400</h4><br>
+</div>
+
+<div align="center">
 
 ![Bar Chart CMR](bar_chart_cmr.svg)
+
+</div>
 
