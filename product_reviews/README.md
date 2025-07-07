@@ -1,20 +1,20 @@
 # Product Review Data Processing & Analysis
 
-The primary objective of this segment of the research is to gain insights toward RQ1: 
+The primary objective of this segment is to gain insights toward RQ1: 
 
-*Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings*.
+*What value do users of competitors place on the feel, smoothness, and precision of a flight yoke relative to other features?​*
 
-Our primary method to acheive this goal involved a qualitative analysis of product reviews on online retail websites selling the yokes. Additionally in a survey we administered after this analysis, we included a question to ask directly users of these yokes if they have any issues with the features described in RQ1 (See full survey work here: LINK). 
+Our primary method to answer this question involved a qualitative analysis of product reviews on online retail websites that sell the competitors. Additionally, in a survey we administered after this analysis, we included a question to ask directly users of these yokes if they have any issues with the features described in RQ1 (See survey work here: [Survey Data Processing & Analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/survey)). 
 
 Read each section below for more details on the data collection and analysis workflow: 
 
 ## Data Collection & Management
 
-### Webscraping Program (LINK to file)
+### Webscraping Program (LINK)
 
-To start the data collection process, I designed a program using a python notebook to scrape raw html code for any product review on the page of the inputed URL. In our case the majority of the reviews I scraped originated from Amazon, which limits the amount of reviews per page to 10. For this reason, this program needed to be ran on each page of reviews available on the given retailer website. 
+To begin the data collection process, I wrote a Python program to scrape the raw HTML code from a user-input URL of product listings on retailer websites, including product reviews. In our case, the majority of reviews were sourced from Amazon, which limits the number of reviews displayed per page to 10. As a result, the program needed to be run on each available review page for the given retailer.
 
-The program extracts details such as the reviewer name, star rating, review title, review date, purchase verification, and the review text for further analysis.
+The program extracts key details such as the reviewer's name, star rating, review title, review date, purchase verification status, and the review text for further analysis.
 
 #### Dependencies
 
@@ -42,7 +42,8 @@ def get_page(url, headers):
 ```
 Using your inputed user agent into the "headers" object the defined get_page() function uses this user agent and the url to make the HTTP request to parse and return the raw html code in the soup object. 
 
-The code below runs the get_page() function on the inputed url to retrieve the reviews. The loop aded to the function adds a check to see if the html was successfully parsed.
+The code below runs the get_page() function on the inputed url to retrieve the reviews. The loop aspect of the function adds a check to see if the html was successfully parsed.
+
 
 #### Gather HTML from URL
 
@@ -61,7 +62,7 @@ while True:
 
 ```
 
-Now we scrape the key elements from the raw html into a list. We start by locating all 'div' elements with he attribute data-hook="review" which correlates to the html code for each review and save the bs4 output. Then, by using html elements, attributes, and classes as filters to the html code to retrieve the key information as the loop iterates over each element in our reviews_content output. Lastly we append the filtered review information to the emtepy reviews_list object we created at the start. 
+Now we scrape the key elements from the raw html into a list. We start by locating all 'div' elements with he attribute data-hook="review" which correlates to the html code for each review and save the bs4 output. Then, by using html elements, attributes, and classes as filters to the html code to retrieve the review information as the loop iterates over each element in our reviews_content output. Lastly we append the filtered review information to the emtepy reviews_list object we created at the start. 
 
 #### Extract Review Data 
 
@@ -103,7 +104,7 @@ for review in review_content:
 ```
 ### Review Proccessing (LINK) 
 
-Moving on to this next program that manages the review data we just scraped. This program performs the following tasks: 
+The next program processes the review data we just scraped. Remember since we could only display 10 reviews per URL, we need to append the all the csv files to form the complete data file for a given yoke. This program performs the following tasks: 
  1. Counts and displays the number of rows in each CSV file, as well as the total number of rows across all files.
  2. Concatenates multiple CSV files into a single DataFrame.
  3. Cleans the data by removing duplicates and unnecessary columns.
@@ -116,7 +117,7 @@ This program uses *os* to retrieve and manage directories and *pandas* to save a
 
 ### Inspect Row Counts for Product Review Data Files
 
-Given the webscraping program did not include pagination functionality, the program needed to be ran every page available of product reviews. This left us with multiple csv files that needed to be concetenated and cleaned to create the analysis file. Given we are working with multiple files, I started off with a check to count the rows of each .csv file while also counting the rows of the concatenated file to ensure no duplicate or missing rows. 
+Since the web scraping program can only scrape the reviews shown on a single page, multiple CSV files are generated and each correspond to a different page of reviews for the same product listing. These csv files need to be concetenated and cleaned to create the analysis dataset for each product. Given we are working with multiple files, I started off with a check to count the rows of each .csv file while also counting the rows of the concatenated object to ensure no duplicate or missing rows are induced in the processed dataset. 
 
 This code below assumes each individual .csv file of review data starts with the same name and is in your current working directory. 
 
@@ -159,7 +160,7 @@ del csv_directory, file_counts, total_rows, file, file_name, rows_count
 
 ### Translate any non-english reviews to english  
 
-One characteristic of this webscraped data is that we collected multiple reviews that were in languages other than english. Given this I created a function to translate content outside of english using the Google Translate API (googletrans package). The function completes this by (1) detecting any (non-punctuation) text exists and (2) running all other text into an english translator. This function is then ran on all review title and text content.
+One characteristic of this webscraped data is that we collected multiple reviews that were in languages other than english. To address this I created a function to translate content outside of english using the Google Translate API (googletrans package). The function completes this by (1) detecting if any non-punctuation text exists and (2) running all this text into an english translator. This function is then ran on all review title and text content.
 
 
 ``` Python
@@ -196,7 +197,7 @@ del text_to_translate, translated_text
 
 ### Product Reviews
 
-Our goal with analyzing the qualitative data was to obatain the percentage of reviews (3 stars or lower) that mention issues of yoke smoothness or related issues for each of the 3 yoke models. After coding each of the reviews to determine if they mention smoothness issues, I uploaded a spreadsheet that contains this coding data in a column to table. For more information on the qualitative analysis process see:   
+Our goal with analyzing the qualitative data was to obatain the percentage of reviews (3 stars or lower) that mention issues with pitch smoothness or related features for each of the 3 yoke models. After coding each of the reviews to determine if they mention smoothness issues, I uploaded a spreadsheet that contains the coding results in a column to a dataframe to run descriptive statistics.
 
 ```R
 # Turtle beach
@@ -229,7 +230,7 @@ tmb_review_prop
 
 **Graphing** 
 
-After calcualting the frequencies, I used these objects to to graph them in a series of donut charts for the 3 competitor yokes. First I began by preparing a dataset that I will input into my graphing function. The dataset included 3 columns: the yoke name or "category", the response in either "Yes" or "No" for the smoothness question, and the proportions for the yes and no responses.  
+After calcualting the frequencies, we used these objects to to graph them in a series of donut charts for the 3 yoke models. First I began by preparing a dataset to input into my graphing function. The dataset included 3 columns: the yoke name or "category", the response in either "Yes" or "No" for the pitch axis smoothness coding result, and the proportions for the yes and no classfications.  
 
 ``` R
 # Prepare data: Proportions of responses for 3 sets of responses
@@ -243,7 +244,7 @@ ggpie_rdata <- data.frame(
 
 ```
 
-Since we were going to be creating multiple charts in this program, I craeted a function to save some of the formating details and specifics to run on all the charts. 
+Since we are going to be creating multiple charts in this program, I craeted a function to save some of the formating details and specifics to run on all the charts. 
 
 ```R
 # Function to create a single-level donut chart with middle label
@@ -283,56 +284,58 @@ grid.draw(g_ar)  # Draw the grob
 ggsave("donut_chart_ar.svg", plot = g_ar, width = 12, height = 4, bg = "white")
 
 ```
+View output [here](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main#rq-1-understand-whether-users-of-flight-simulation-yokes-perceive-feel-smoothness-and-precision-issues-in-current-market-offerings).
+
 
 
 ### Qualitative Analysis
 
-After scraping and collecting the product review data, the next step was to analyze the data qualitatively. Our intention was to see if among the reviews, any common complaints of the products aligned with our intended positioning and key value points of our product that would enter the market. 
+This section outlines the reasoning and criteria for the coding of product reviews. Our goal was to identify whether common complaints in the reviews aligned with the key value propositions and intended market positioning of our proposed product.
 
-Before we webscraped began to analyze the reviews, we purchased and tested our competitor yokes to generate exploratory hypotheses of what common complaints of the competitor products would exist that align with our key value points of our prototype. We coded each of the reviews if they contained each of these topics and calculated the percentage of reviews that each topic was observed. Furthermore we were able to test our hypotheses by assesing the proportion of positvely coded reviews for each topic. 
+Before we started the data collection, we purchased and tested our competitor yokes to generate exploratory hypotheses of what common complaints of the products would exist that align with the key value points of our prototype. We coded each of the reviews if they contained each of these complaints and calculated the percentage of reviews that each topic was observed. Furthermore we were able to test our hypotheses by assesing the proportion of positvely coded reviews for each complaint or topic. 
 
-Given this context of trying to asses product-market fit, we choose to only analyze reviews with 3 stars or under. We made this assumption because we assumed if reviews 3 stars or under mentioned the topics of interest, it would be more meaningful relative to influencing purchasing descisions than reviews with 4 or 5 stars. We assumed that reviews with 4 or 5 stars, the negative sentiment caused by the topic would not be significant enough to sway a purchasing decision. Furthermore instead of these reviews possibly inflating the occurance of reviews expressing negative sentiment along our target topics, we did not include these in our analysis sample. 
+Furthermore given the context of trying to asses product-market fit, we choose to only analyze reviews with 3 stars or under. We made this decision because we assumed if reviews 3 stars or under mentioned the topics of interest, it would be more meaningful in influencing purchasing descisions than reviews with 4 or 5 stars. We assumed that negative sentiment in reviews with 4 or 5 stars would not be significant enough to sway a purchasing decision. Therefore instead of these reviews possibly inflating the occurance of reviews expressing negative sentiment along our target topics, we did not include these in our analysis sample. 
 
 The key pain points we inspected each review to contain included:
 
 
 #### Yoke Smoothness Issues:
 
-The primary improved value point of our product entering the market was an improved smoothness and quality of the pitch action. 
+The primary improved value point of our proposed product entering the market was an improved smoothness and quality of the pitch action. 
 
-Thus, for each of our competitor yokes, we inspected every review to see if it contained negative sentiment and customer dissatisfaction with the quality and feel of the controller's yoke, especially concerning its pitch axis. Specifically reviews were flagged if they included complaints regarding the smoothness, stickiness, jerkiness, or any issues related to being stuck or unresponsive with the yoke's pitch axis. Additionally reviews mentioning specifc issues regarding the pitch auto-centering or "center-dent" and elevator axis negatively affecting the yokes performance. The results are shown below and described in the graphs above. 
+Thus, for each of our competitor yokes, we inspected every review to see if it contained negative sentiment and customer dissatisfaction with the quality and feel of the controller's yoke, especially concerning its pitch axis. Specifically reviews were flagged if they included complaints regarding the smoothness, stickiness, jerkiness, or any issues related to being stuck or unresponsive with the yoke's axes. Additionally reviews mentioning specifc issues regarding the pitch auto-centering or "center-dent" and elevator axis negatively affecting the yokes performance. The results are shown below and described in the graphs above. 
 
-Honeycomb Yoke: 31% (25/82) of reviews (3 stars or lower) mention the yoke smoothness and related problems as an issue.
+Honeycomb Yoke: 31% (25/82) of reviews (3 stars or lower) mention the yoke smoothness and related features as an issue.
 
-Thrustmaster Boeing: 10% (5/50) of reviews (3 stars or lower) mention the yoke smoothness and related problems as an issue.
+Thrustmaster Boeing: 10% (5/50) of reviews (3 stars or lower) mention the yoke smoothness and related features as an issue.
 
-Turtle Beach Velocity One: 30% (52/174) of reviews (3 stars or lower) mention the yoke smoothness and related problems as an issue.
+Turtle Beach Velocity One: 30% (52/174) of reviews (3 stars or lower) mention the yoke smoothness and related features as an issue.
 
 
 #### Realism: 
 
-One assumption we held for our product was that due to the construction and improved mechanics, it would offer a more realistic flight simulation experience relative to our competitor yokes. Thus, we analyzed each review for the competiotor yokes to see if they contained dissatisfaction with realistic esperience provided by the yoke and if the yoke's construction fails to effectively stimulate a real-life flight experience. For the 3 competitors here is what we found:
+One assumption we held for our product was that due to sturdier construction and improved mechanics, it would offer a more realistic flight simulation experience relative to our competitor yokes. Thus, we analyzed each review for the competiotor yokes to see if they contained dissatisfaction with realistic esperience provided by the yoke and if the yoke's construction fails to effectively stimulate a real-life flight experience. For the 3 competitors here is what we found:
 
 Velocity One: 6% (10/174) of reviews (3 stars or lower) mention realism as an issue.
 
-Thrustmaster Boeing: 0% (0/50) of reviews (3 stars or lower) did not find explicit mentions of a poor realistic experience for this yoke.
+Thrustmaster Boeing: 0% (0/50) of reviews (3 stars or lower) mention realism as an issue.
 
 Honeycomb Alpha: 13% (11/82) of reviews (3 stars or lower) mention realism as an issue. 
 
 
 #### Pitch axis is too short
 
-Particularly with the Velocity One, we wanted to explore explicitly if customers thought the travel in the pitch axis was too short. We hypothesized that short pitch travel was a facet of poor realism which is detailed further down this list. Ultimately we found no reviews in our analysis with this specific complaint. 
+Particularly with the Turtle Beach, we wanted to explore explicitly if customers thought the travel in the pitch axis was too short. We hypothesized that short pitch travel was a facet of poor realism which is detailed further down this list. Ultimately we found no reviews in our analysis with this specific complaint. 
 
 
 #### Looks or feels like a toy & issues with plastic construction
 
-Another hypothesis we had for the Velocity One yoke was that customwers could be displeased with its plastic construction and orientation as more of a gaming console controler vs a virtual flight simulation controller. Reviews with complaints of its appearance, the physical feel of the yoke and comments that characterize the yoke as "Toyish" and dissatisfactions regarding its plastic construction. Ultimatley we found that 16% (27/174) of Velocity One reviews (3 stars or lower) mention the yoke plastic, toy-like construction and related build quality as an issue. 
+Another hypothesis we had for the Turtle Beach yoke was that customwers could be displeased with its plastic construction and orientation as more of a gaming console controler vs a virtual flight simulation controller. Reviews with complaints of its appearance, the physical feel of the yoke and comments that characterize the yoke as "Toyish" and dissatisfactions regarding its plastic construction were flagged. Ultimatley we found that 16% (27/174) of Velocity One reviews (3 stars or lower) mention the yoke plastic, toy-like construction and related build quality as an issue. 
 
 
 #### Grinding and Noisy: 
 
-Specific to the Honeycomb Alpha, real life testing of the product found it's pitch axis to be particularly noisy and sometimes exhibiting a grinding feeling. We wanted to test if this was a common complaint amongst consumers of this yoke. We analyzed reviews of the Honeycomb Alpha to see any reviews mentioned a grinding feeling or noise when moving the yoke laterally. Our analysis found that 4% (3/82) of reviews (3 stars or lower) mentioned the yokes' pitch axis grinding and being noisy.
+Specific to the Honeycomb, real life testing of the product found it's pitch axis to be particularly noisy and sometimes exhibiting a grinding feeling. We wanted to test if this was a common complaint amongst consumers of this yoke. We analyzed reviews of the Honeycomb Alpha to see any reviews mentioned a grinding feeling or noise when moving the yoke laterally. Our analysis found that 4% (3/82) of reviews (3 stars or lower) mentioned the yokes' pitch axis grinding and being noisy.
 
 
 #### Pitch is too strong (Travel is too heavy):
@@ -342,5 +345,5 @@ In addition to the grinding and noisiness of the pitch action in the Honeycomb y
 
 #### Pitch Stickiness
 
-Specific to the Thrustmaster Boeing, our time testing the product revealed a sometimes sticky feeling when moving the pitch axis laterally. We tested this claim for and analyzed each review for negative sentiment revolving around a high degree of friction or "stickineess" in moving the yoke laterally. We found that 6% (3/50) of reviews (3 stars or lower) mention stickiness of the yoke as an issue. 
+Specific to the Thrustmaster, our time testing the product revealed a sometimes sticky feeling when moving the pitch axis laterally. We tested this claim for and analyzed each review for negative sentiment revolving around a high degree of friction or "stickineess" in moving the yoke laterally. We found that 6% (3/50) of reviews (3 stars or lower) mention stickiness of the yoke as an issue. 
 
