@@ -2,7 +2,9 @@
 
 ## Background
 
-This repository summarizes findings from an exploratory analysis on the potential impact of introducing a new product offering in the flight simulation yoke controller market. The proposed product offers one key advantage over current market options: **enhanced perceived feel, smoothness, and precision of yoke movement—all at a price point under $400.**
+This repository summarizes findings from an exploratory analysis on the market feasibility of introducing a new product offering in the flight simulation yoke controller market. 
+
+The proposed product offers one key advantage over current market options: **enhanced perceived feel, smoothness, and precision of yoke movement—all at a price point under $400.**
 
 The main competitors identified for this analysis are the **Turtle Beach VelocityOne**, **Honeycomb Alpha XPC**, and **Thrustmaster TCA Boeing Edition**.
 
@@ -84,7 +86,7 @@ Sample breakdown for each yoke:​
 For more detailed information on the analysis plan and data processing, please review this code file and readme:
 [Product Review Data Processing & Analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/product_reviews)
 
-### *Survey*
+### *Survey* 
 Surveyed approximately 300 yoke users on the r/flightsim subreddit using Qualtrics​. Users who took the survey were entered into a raffle for a $100 Steam gift card​. 
 
 Responses were removed to form the final analysis sample for two key reasons: 
@@ -104,7 +106,7 @@ For more detailed information on the analysis plan and data processing, please r
 ### *RQ 1: Understand whether users of flight simulation yokes perceive feel, smoothness, and precision issues in current market offerings*
 
 <div align="center">
-  <br><h4>Product Reviews:<br><br>Percentage of reviews (3 stars or lower) that mention pitch smoothness\nand related features as an issue</h4>
+  <br><h4>Product Reviews:<br><br>Percentage of reviews (3 stars or lower) that mention pitch smoothness and related features as an issue</h4>
 </div>
 
 ![Donut Chart AR](donut_chart_ar.svg)
