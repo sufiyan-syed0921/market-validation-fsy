@@ -2,11 +2,11 @@
 
 The primary objective of this segment is to gain insights toward RQ1: 
 
-*What value do users of competitors place on the feel, smoothness, and precision of a flight yoke relative to other features?​*
+*Do users of competitors flight simulation yokes perceive issues with feel, smoothness, or precision?*
 
-Our primary method to answer this question involved a qualitative analysis of product reviews on online retail websites that sell the competitors. Additionally, in a survey we administered after this analysis, we included a question to ask directly users of these yokes if they have any issues with the features described in RQ1 (See survey work here: [Survey Data Processing & Analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/survey)). 
+The methodology involved a qualitative analysis of product reviews on online retail websites that sell the competitor products. Additionally, in a survey administered after this analysis, we included a question to ask users of competitor yokes directly if they have issues with the features described in RQ1 (See survey work here: [Survey Data Processing & Analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/survey)). 
 
-Read each section below for more details on the data collection and analysis workflow: 
+Read each section below for details on the data collection and analysis process: 
 
 ## Data Collection & Management
 
@@ -62,7 +62,7 @@ while True:
 
 ```
 
-Now we scrape the key elements from the raw html into a list. We start by locating all 'div' elements with he attribute data-hook="review" which correlates to the html code for each review and save the bs4 output. Then, by using html elements, attributes, and classes as filters to the html code to retrieve the review information as the loop iterates over each element in our reviews_content output. Lastly we append the filtered review information to the emtepy reviews_list object we created at the start. 
+Now we scrape the key elements from the raw html into a list. We start by locating all 'div' elements with the attribute data-hook="review" that correlates to the html code containing the review content and saving the output. Then, by using html elements, attributes, and classes as filters to the html code to retrieve the review information as the loop iterates over each element in our reviews_content output. Lastly we append the filtered review information to the empty reviews_list object we created at the start. 
 
 #### Extract Review Data 
 
@@ -104,7 +104,7 @@ for review in review_content:
 ```
 ### Review Proccessing (LINK) 
 
-The next program processes the review data we just scraped. Remember since we could only display 10 reviews per URL, we need to append the all the csv files to form the complete data file for a given yoke. This program performs the following tasks: 
+The next program processes the review data we just scraped. Since we could only display 10 reviews per URL, we need to append the all the csv files to form the complete data file for a given yoke. This program performs the following tasks: 
  1. Counts and displays the number of rows in each CSV file, as well as the total number of rows across all files.
  2. Concatenates multiple CSV files into a single DataFrame.
  3. Cleans the data by removing duplicates and unnecessary columns.
@@ -117,7 +117,9 @@ This program uses *os* to retrieve and manage directories and *pandas* to save a
 
 ### Inspect Row Counts for Product Review Data Files
 
-Since the web scraping program can only scrape the reviews shown on a single page, multiple CSV files are generated and each correspond to a different page of reviews for the same product listing. These csv files need to be concetenated and cleaned to create the analysis dataset for each product. Given we are working with multiple files, I started off with a check to count the rows of each .csv file while also counting the rows of the concatenated object to ensure no duplicate or missing rows are induced in the processed dataset. 
+Since the web scraping program can only scrape the reviews shown on a single page, multiple CSV files are generated and each correspond to a different page of reviews for the same product listing. These csv files need to be concetenated and cleaned to create the analysis dataset for each product. 
+
+Given we are working with multiple files, I started off with a check to count the rows of each .csv file while also counting the rows of the concatenated object to ensure no duplicate or missing rows are induced in the processed dataset. 
 
 This code below assumes each individual .csv file of review data starts with the same name and is in your current working directory. 
 
@@ -160,7 +162,7 @@ del csv_directory, file_counts, total_rows, file, file_name, rows_count
 
 ### Translate any non-english reviews to english  
 
-One characteristic of this webscraped data is that we collected multiple reviews that were in languages other than english. To address this I created a function to translate content outside of english using the Google Translate API (googletrans package). The function completes this by (1) detecting if any non-punctuation text exists and (2) running all this text into an english translator. This function is then ran on all review title and text content.
+A characteristic of this data is that we collected multiple reviews in languages other than english. To address this I created a function to translate content outside of english using the Google Translate API (*googletrans* package). The function completes this by (1) detecting if any non-punctuation text exists and (2) running all this text into an english translator. This function is then ran on all review title and text content.
 
 
 ``` Python
@@ -197,7 +199,7 @@ del text_to_translate, translated_text
 
 ### Product Reviews
 
-Our goal with analyzing the qualitative data was to obatain the percentage of reviews (3 stars or lower) that mention issues with pitch smoothness or related features for each of the 3 yoke models. After coding each of the reviews to determine if they mention smoothness issues, I uploaded a spreadsheet that contains the coding results in a column to a dataframe to run descriptive statistics.
+Our goal with analyzing the qualitative data was to obatain the percentage of reviews (3 stars or lower) that mention issues with pitch smoothness or related features for each of the 3 yoke models. After coding each of the reviews to determine this, I uploaded a spreadsheet that contains the coding results in a column to a dataframe to run descriptive statistics.
 
 ```R
 # Turtle beach
@@ -230,7 +232,9 @@ tmb_review_prop
 
 **Graphing** 
 
-After calcualting the frequencies, we used these objects to to graph them in a series of donut charts for the 3 yoke models. First I began by preparing a dataset to input into my graphing function. The dataset included 3 columns: the yoke name or "category", the response in either "Yes" or "No" for the pitch axis smoothness coding result, and the proportions for the yes and no classfications.  
+After calcualting the frequencies, we graphed the objects in a series of donut charts for the 3 yoke models. 
+
+First I began by preparing a dataset to input into my graphing function. The dataset included 3 columns: the yoke name or "category", the response in either "Yes" or "No" for the pitch axis smoothness coding result, and the proportions for the yes and no classfications.  
 
 ``` R
 # Prepare data: Proportions of responses for 3 sets of responses
@@ -244,7 +248,7 @@ ggpie_rdata <- data.frame(
 
 ```
 
-Since we are going to be creating multiple charts in this program, I craeted a function to save some of the formating details and specifics to run on all the charts. 
+Since we are going to be creating multiple charts in this program, I created a function to save formating details and specifics to run on all the charts. 
 
 ```R
 # Function to create a single-level donut chart with middle label
@@ -262,7 +266,7 @@ create_donut_chart <- function(df, label) {
 
 ```
 
-Next, after running my function for each of the 3 yokes, I  used arrangeGrob to position the 3 plots together and other GridExtra functions to customize aesthetics. 
+Next, after running the function for each of the 3 yokes, I used *arrangeGrob* to position the 3 plots together and other *GridExtra* functions to customize aesthetics. 
 
 ``` R 
 
@@ -292,9 +296,9 @@ View output [here](https://github.com/sufiyan-syed0921/market-validation-fsy/tre
 
 This section outlines the reasoning and criteria for the coding of product reviews. Our goal was to identify whether common complaints in the reviews aligned with the key value propositions and intended market positioning of our proposed product.
 
-Before we started the data collection, we purchased and tested our competitor yokes to generate exploratory hypotheses of what common complaints of the products would exist that align with the key value points of our prototype. We coded each of the reviews if they contained each of these complaints and calculated the percentage of reviews that each topic was observed. Furthermore we were able to test our hypotheses by assesing the proportion of positvely coded reviews for each complaint or topic. 
+Before starting the data collection, we purchased and tested our competitor yokes to generate exploratory hypotheses of what common complaints would exist that align with key value points of our prototype. We coded each of the reviews if they contained each of these complaints and calculated the percentage of reviews that each topic was observed. Furthermore we were able to test our hypotheses by assesing the proportion of positvely coded reviews for each complaint or topic. 
 
-Furthermore given the context of trying to asses product-market fit, we choose to only analyze reviews with 3 stars or under. We made this decision because we assumed if reviews 3 stars or under mentioned the topics of interest, it would be more meaningful in influencing purchasing descisions than reviews with 4 or 5 stars. We assumed that negative sentiment in reviews with 4 or 5 stars would not be significant enough to sway a purchasing decision. Therefore instead of these reviews possibly inflating the occurance of reviews expressing negative sentiment along our target topics, we did not include these in our analysis sample. 
+Given the context of trying to asses product-market fit, we choose to only analyze reviews with 3 stars or under. We made this decision as we assumed if reviews 3 stars or under mentioned the topics of interest, it would be more significant in influencing purchasing descisions than reviews with 4 or 5 stars. We assumed that negative sentiment in reviews with 4 or 5 stars would not be significant enough to sway a purchasing decision. Therefore instead of these reviews possibly inflating the occurance of reviews expressing negative sentiment along our target topics, we did not include these in our analysis sample. 
 
 The key pain points we inspected each review to contain included:
 
@@ -330,7 +334,7 @@ Particularly with the Turtle Beach, we wanted to explore explicitly if customers
 
 #### Looks or feels like a toy & issues with plastic construction
 
-Another hypothesis we had for the Turtle Beach yoke was that customwers could be displeased with its plastic construction and orientation as more of a gaming console controler vs a virtual flight simulation controller. Reviews with complaints of its appearance, the physical feel of the yoke and comments that characterize the yoke as "Toyish" and dissatisfactions regarding its plastic construction were flagged. Ultimatley we found that 16% (27/174) of Velocity One reviews (3 stars or lower) mention the yoke plastic, toy-like construction and related build quality as an issue. 
+Another hypothesis we had for the Turtle Beach yoke was that customwers could be displeased with its plastic construction and orientation as more of a gaming console controler vs a "professonal" virtual flight simulation controller. Reviews with complaints of its appearance, the physical feel of the yoke and comments that characterize the yoke as "Toyish" and dissatisfactions regarding its plastic construction were flagged. Ultimatley we found that 16% (27/174) of Velocity One reviews (3 stars or lower) mention the yoke plastic, toy-like construction and related build quality as an issue. 
 
 
 #### Grinding and Noisy: 
