@@ -3,19 +3,18 @@
 ## Data Processing
 
 ### Clean Variable Names
-Rename question 2 and 3 columns so that they contain the feature/yoke in the suffix 
-of each column name
+The raw survey data required some processing before it could be analyzed. For example, in questions Q2 and Q3, the columns representing feature rankings were not labeled with the corresponding feature names. Instead, the dataset used generic labels such as "Q2_1", where the column represented the first feature option and the rows contained respondents’ reported rankings. To improve clarity and facilitate analysis, I renamed these columns to include the associated feature names.
 
-The raw output of the survey data required some processing to be analyized. For example for questions Q2 and Q3, the raw columns that represent the ranking results are not labeled to reflect which features they represent. Instead of having the column name be for example "Q2_1" which represents the first ranking option of the question with rows that represent the reported ranking from respondents, I renamed the column name to include the feature name for easier analysis.
+The Qualtrics survey output includes the question text and metadata in the first and second rows of the dataset. For example, the first-row value for Q2_1 is:
 
-The Qualtrics output of the survey results reports the question name and response text for each column of the data as the first row. For example the value for Q2_1 is "When purchasing a flight simulator yoke, rank the following features and capabilities from most important (1) to least important (12). Drag and drop to rank the yokes. - Xbox Compatibility". The code below extracts the feature text that is after the "-" in the first row for each column and pastes it as a suffix for the column name. This procedure is performed for both Q2 and Q3.  
+>When purchasing a flight simulator yoke, rank the following features and capabilities from most important (1) to least important (12). Drag and drop to rank the yokes. - Xbox Compatibility.
 
-- Think about creating columns_to_rename programatically
+To make the data easier to work with, the code extracts the feature name (the text appearing after the "–") from the first row of each question column and appends it as a suffix to the column name. This procedure is applied to both the Q2 and Q3 output columns.
 
 ```R 
 # Question 2 -------------------------------------------------------------------
 # : When purchasing a flight simulator yoke, rank the following features and 
-# : capabilities from most important (1)  to least important (12).
+# : capabilities from most important (1)  to least important (12). Drag and drop to rank the yokes.
 #  -----------------------------------------------------------------------------
 
 # Create temporary variable
@@ -80,9 +79,9 @@ rm(tmp, tmp2, columns_to_rename, suffixes, current_names, new_names) # Remove te
 ```
 ### Apply Survey Filters 
 
-In order to create our analysis sample, we decided to filter our data along the folloing points: 
+To create the analysis sample, the data was filtered along the folloing points.
 
-We intended to remove responses from:
+Responses were removed from:
 
 **1. Survey Preview Responses**
 <br>
@@ -90,24 +89,20 @@ Remove all preview responses relating to testing of the survey.
 
 **2. Respondents who do not own a flight simulation yoke** 
 <br>
-Some responses indicated that they did not own a yoke controller at all and these responses were removed.
+Some responses indicated that they did not own a yoke controller, and these responses were removed.
  
 **3. Respondents who only have HOTAS style controllers**
 <br>
-Some responses indicated they owned controlles in a HOTAS (Joystick) format. Opinions of those who soley own these type of controllers 
-were not of interest and outside the scope of this survey.
+Some responses indicated they owned controllers in a HOTAS (Joystick) format. Opinions of those who soley own these type of controllers 
+were outside the scope of this survey.
  
 **4. Remove respondents who quit survey after question 1** 
 <br> 
-Some respondents quit the survey after responding to question 1 and these responses were removed. 
+Some respondents quit the survey after responding to question 1 and these responses were removed.
 
 **5. Remove respondents with inconsistent location responses (Falsely claimed to live in the SF Bay Area)**
 <br> 
- We included a question (Q12) to see if any respondents lived in the SF bay area to see if they would be open to participating in a in- 
- person study. We noticed that there was a suspiciously high number of responses who claimed they were located in the bay area given this 
- survey was diseminated on a reddit forum with global reach. To address this concern of fraudulent responses, we used the location 
- coordinates from the survey metadata to implement a location filter to remove responses who "lied" about their location. See the code 
- below for details on the method of how this was done. 
+To recruit potential participants for an in-person study, we asked respondents (Q12) if they lived in the San Francisco Bay Area. However, we observed a suspiciously high number of “yes” responses, despite the survey being disseminated globally via Reddit. To address this concern, we cross-checked responses with location metadata and removed cases where the coordinates fell outside the Bay Area. See code below for details of this filtering process.
  
 ```R
 # Prepare for filtering based on location (filter 5)---------------------------------------
@@ -134,11 +129,13 @@ san_ramon_lon <- -121.978
 ```
 <br>
 
-In order to identify which respondents that took the survey only owned HOTAS style yokes, I needed to manually inspect the unique text entry responses for the Q1 "Other" response option. After inspecting these responses and identifying which controllers were HOTAS style, I included the names of the controllers in an object called "exc_filter" to use later as a filter.   
+To identify respondents who only owned HOTAS-style controllers, we manually reviewed the unique text entry responses provided under the Q1 “Other” option (*Do you own any of the following flight simulation yokes? (select all that apply)*).
+
+After identifying which controllers were HOTAS-style and determining the set of respondents who owned these exclusively, I compiled the controller names into an object called exc_filter, which was later used as a filter.
 
 ```R
 
-# Prepare to filter to include only owners of Yoke style controllers -----------
+# Prepare to filter to include only owners of Yoke style controllers (filter 3) -----------
 
 # Find unique list of text entry HOTAS style controller names that respondents provided
 unique(survey_rawdata$Q1_4_TEXT) # Run and filter manually to populate "sticks" object
@@ -171,16 +168,16 @@ tmp4 <- tmp3 %>%
   mutate(
     ## Track pre-filtered rows
     initial_sample = 1,  
-    ## If survey previews
+    ## If survey previews (filter 1)
     survey_preview = ifelse(status == "Survey Preview", 1, 0),  
-    ## If no yoke ownership
+    ## If no yoke ownership (filter 2)
     no_yoke = ifelse(grepl("I do not own a flight simulation yoke", q1, ignore.case = TRUE), 1, 0),  
-    ## If only own HOTAS yokes
+    ## If only own HOTAS yokes (filter 3)
     hotas = ifelse(q1 == "Other" & grepl(exc_filter, q1_4_text, ignore.case = TRUE), 1, 0)  
   ) %>%
   rowwise() %>%
   mutate(
-    # If quit after Q1
+    # If quit after Q1 (filter 4)
     quit_aq1 = ifelse(all(is.na(c_across(q2_1_xbox_compatibility:q15))), 1, 0)  
   ) %>%
   ungroup() %>%
@@ -192,7 +189,7 @@ tmp4 <- tmp3 %>%
                                         san_ramon_lat, san_ramon_lon),
     # If within 100 miles of San Ramon
     radius100 = ifelse(distance_to_sr <= 100, TRUE, FALSE),  
-    # Claimed Bay Area but outside 100 miles
+    # Claimed Bay Area but outside 100 miles (filter 5)
     inbay_ovr100 = ifelse(radius100 == FALSE & q12 == "Yes", TRUE, FALSE)  
   )
 
