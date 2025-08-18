@@ -103,7 +103,9 @@ Some respondents quit the survey after responding to question 1 and these respon
 **5. Remove respondents with inconsistent location responses (Falsely claimed to live in the SF Bay Area)**
 <br> 
 To recruit potential participants for an in-person study, we asked respondents (Q12) if they lived in the San Francisco Bay Area. However, we observed a suspiciously high number of “yes” responses, despite the survey being disseminated globally via Reddit. To address this concern, we cross-checked responses with location metadata and removed cases where the coordinates fell outside the Bay Area. See code below for details of this filtering process.
- 
+
+The location filter flagged responses where the reported coordinates were more than 100 miles outside the Bay Area, despite the respondent indicating they lived there. The code below prepares for this filtering by creating a distance function, which is applied later in the program.
+
 ```R
 # Prepare for filtering based on location (filter 5)---------------------------------------
 # We remove all responses who claimed to live in the SF bay area but coordinates 
@@ -155,7 +157,8 @@ exc_filter <- paste(sticks, collapse = "|")
 
 ```
 <br> 
-My approach to filtering the data was to create dummy variables for each of the 5 filters and a binary analysis sample variable (ansamp) that defines which rows are part of the final sample. 
+
+The approach to filtering the data included creating dummy variables for each of the five filters, along with a binary analysis sample variable (ansamp) that indicates which rows are included in the final sample.
 
 ```R
 
@@ -196,7 +199,7 @@ tmp4 <- tmp3 %>%
 ```
 <br>
 
-Here I cretate the ansamp variable tha defines the analysis sample and creating the filtered processed data file. 
+Next, the ansamp variable that defines the analysis sample is created used to form the filtered processed data file. 
 ```R
 # Filter data ------------------------------------------------------------------
 
@@ -218,7 +221,7 @@ data <- tmp5 %>%
 
 #### Check Filtering 
 
-I run these checks to see how many rows were removed and inspect the removed rows. 
+These checks are run to see how many rows were removed and to inspect the removed rows. 
 ```{r}
 # Check Number of Rows Removed ------------------------------------------------------------------
 
@@ -232,8 +235,8 @@ paste0("New N: ", nrow(data))
 removed_rows <- tmp5 %>% filter(ansamp == 0)
 ```
 <br> 
-This table helps understand why rows were filtered out by displaying how many rows were filtered for each combination of the 5 filter variables. 
 
+This table provides insight into why rows were filtered out by showing the number of responses removed for each combination of the five filter variables.
 ```R
 # Check Filters ----------------------------------------------------------------------------------
 
@@ -251,8 +254,8 @@ tmp5 %>% select(survey_preview,
 
 ```
 <br>
-These checks inspect the post-processed data to make sure the filters were applied correctly. 
 
+These checks inspect the post-processed data to make sure the filters were applied correctly. 
 ```R
 # (1) Survey previews and (2) Yoke Ownership
 data %>% select(status, q1) %>% 
@@ -282,29 +285,36 @@ locfilter_check <- data %>%
 
 ## Analysis
 
-### Survey Results 
+### General Yoke Pitch Smoothness
 
-#### Baseline Characteristics?
+To supplement the **product review analysis/LINK**, we fielded a survey to over 300 flight simulation enthusiasts and owners of competitor yokes. To address RQ1, respondents were asked (Q9):
 
-#### General Yoke Pitch Smoothness
-
-To supplement the **review analysisLINK**, in survey to over 300 flight simulation enthisiasts and owners of our competitor yokes we asked the following question:
-
-"Do you find the smoothness and feel of the pitch axis an issue in your current yoke? (select all that apply)"
+*"Do you find the smoothness and feel of the pitch axis an issue in your current yoke? (select all that apply)"*
 
 with possible answers of:
 
-Yes, this is an issue for the Turtle Beach: Velocity One
-Yes, this is an issue for the Honeycomb Alpha
-Yes, this is an issue for the Thrustmaster TCA Boeing
-Yes, this is an issue for [Q1 Text Entry]
-Pitch Axis smoothness is not an issue for any of these yokes
+- Yes, this is an issue for the Turtle Beach: Velocity One <br> 
+- Yes, this is an issue for the Honeycomb Alpha <br>
+- Yes, this is an issue for the Thrustmaster TCA Boeing <br>
+- Yes, this is an issue for [Q1 Text Entry] <br>
+- Pitch Axis smoothness is not an issue for any of these yokes <br>
 
 [add pic of survet q]
 
-At the very beggining of the survey, respondents were asked if they own any of the yokes present in the responses above and if not any of the 3, to write in the one they own as a text entry response. Using the Qualtrics question parameters, respondents were only shown responses options for this question to the yoke's they own. If respondents indicated that they owned more than one yoke, they were presented multiple response options as a select all that apply question that reflects the yoke that they own.
+At the beginning of the survey, respondents were asked whether they owned any of the three yokes listed above, or if not, to specify their yoke in a text entry field. Using Qualtrics display logic, respondents only saw response options corresponding to the yokes they owned. If a respondent indicated ownership of multiple yokes, the question was presented in a “select all that apply” format so that feedback could be captured for each relevant yoke.
 
-The code below demostrates how I proceeded to process and generate frequencies for this question. This was replicated for each of the three main yokes and an aggregate statistic for respondents who did not own any of the 3 main yokes.
+The code below illustrates how responses were processed and frequencies generated for this question. This procedure was replicated separately for each of the three main yokes, as well as for an aggregated category of respondents who did not own any of the three primary competitors.
+
+To prepare the data for frequency calculations, subsets were created for each of the four yoke categories (the three primary competitors and the “other yokes” group). Each subset was filtered using three parameters. In the example below for the Turtle Beach yoke, the filtering steps are as follows:
+
+1. **Ownership filter** – Select only respondents who indicated in Q1 that they own the Turtle Beach yoke. This ensures the analysis sample is restricted to relevant owners.
+2. **Response filter** – From Q9, select responses that either (a) mention the Turtle Beach yoke by name, or (b) include “not” (corresponding to the option “Pitch axis smoothness is not an issue for any of these yokes”).
+3. **Combined subset** – The resulting dataset includes only:
+ - Respondents who own the Turtle Beach yoke
+ - Their responses indicating whether or not they experienced pitch smoothness issues.
+
+Once filtered, the subset can be tabulated to calculate the frequency of respondents reporting issues with the pitch axis for the Turtle Beach yoke. This same process was repeated for the Honeycomb and Thrustmaster yokes, as well as for the aggregated “other yokes” category.
+
 
 ```R
 
@@ -317,7 +327,14 @@ q9_tb_data <- data %>%
 table(q9_tb_data$q9)
 
 ```
-To prep for the frequencies, I subsetted datasets for each of these 4 yokes that filters on three parameters. In the example above, we first select responses for Q1 that matches to the Turtle Beach yoke name to ensuring our total sample contains only those who own the yoke. The second argument in the filter function selects responses of Q9 that contain the Turtle Beach Yoke name or responses of Q9 that contain "not" (which selects the "Pitch Axis smoothness is not an issue for any of these yokes" response level). In result these filters subset the data to incude only 1. Those who own the Turtle Beach Yoke, 2. Those who either responded that the Turtle Beach yoke had pitch smoothness issues and those who did not. Tabling this subseted dataset can then be used to get the frequency of respondents who had perceived issues with pitch smoothness for the Turtle Beach yoke.
+
+Using the subsetted data from the previous section, I generated frequencies with the code below. First, a new column (q9) was created to recode the raw responses into a binary yes/no variable, indicating whether respondents reported pitch smoothness issues for the given yoke. Next, `summarize()` was used to calculate:
+
+- The proportion of respondents who reported issues (yes_p),
+- The numerator (the count of “yes” responses), and
+- The denominator (the total number of respondents in the subset).
+
+The yes_p column from this summarized dataset is then used in the next section to graph the findings across yokes.
 
 ```R
 
@@ -328,11 +345,10 @@ q9_tb_propy <- q9_tb_data %>%
 q9_tb_propy
 
 ```
-Using the subseted data from the previous section for Q9, I use the code above to generate the frequencies. Furthermore I create another column named q9 to recode the raw variable to a yes/no binary variable and then use summarize to generate the proportion of those who found issues in pitch smoothness in the yoke (yes), and the denominator and numerator for that calculation (the total sample size and count of "yes" responses". The "yes_p" column of this dataset is then used for graphing donut charts of these findings. 
 
 **Graphing** 
 
-The process for creating these charts were very similar to the donut charts created for the product review findings outlined here LINK. 
+The process for creating these donut charts is very similar to the charts created for the product review findings outlined here **LINK**. 
 
 ```R
 # Prepare data: Proportions of responses for 4 sets of responses
@@ -346,9 +362,6 @@ ggdonut_sq_data <- data.frame(
 )
 
 ```
-
-Compared to the donut charts created for the product reviews I altered the graphing function to incorporate a fourth donut chart, slightly decreasing the font size for the labels and increasing the width of the donut. 
-
 ```R
 
 # Function to create a single-level donut chart
@@ -366,7 +379,7 @@ create_donut_chart <- function(df, label) {
 
 ```
 
-Next, after running my function for each of the 4 cateogories, I  used arrangeGrob to position the plots together and other GridExtra functions to customize aesthetics. 
+Next, after running my function for each of the 3 cateogories, I  used arrangeGrob to position the plots together and other GridExtra functions to customize aesthetics. 
 
 ```R
 
@@ -389,13 +402,13 @@ ggsave("donut_chart_ar.svg", plot = gd_pr, width = 12, height = 4, bg = "white")
 
 ```
 
-#### Average Feature Rank
+### Average Feature Rank
 
-To adress our second research question RQ2: "Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features" we asked the following question that asks respondents to rank a list of common flight simulation yoke features: 
+To address our second research question (RQ2): “Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features”, we asked respondents to complete a ranking task pertaining to common flight simulation yoke features (Q2):
 
-When purchasing a flight simulator yoke, rank the following features and capabilities from most important (1) to least important (2) 
+“When purchasing a flight simulator yoke, rank the following features and capabilities from most important (1) to least important (2). Drag and drop to rank the yokes.”
 
-To analyze and present the results for this question, I subset the dataset to only include columns that reflect this question, and converted the rows to numeric data to generate the mean ranking for each feature in the next step.
+For analysis, I subset the dataset to include only the columns corresponding to this ranking question and converted responses to numeric values. This allowed me to calculate the mean ranking for each feature, which serves as the basis for comparing their relative importance in the next step.
 
 ```R
 
@@ -406,7 +419,7 @@ avg_rank_data <- data %>%
 
 ```
 
-To generate the means, I take the mean of all columns using the summarize_all function and then pivot the resulting output to long format to better view the output and in order using arrange(). 
+To generate the mean rankings, I applied the `summarize_all()` function across all columns to calculate the average score for each feature. The results were then pivoted into long format to make the output easier to interpret and ordered using `arrange()`.
 
 ```R
 avg_rank_calc <- avg_rank_data %>% 
@@ -421,7 +434,7 @@ avg_rank_calc # Mean Ranking Results
 
 **Graphing** 
 
-Before inputting our data into the graphing function, I ran some data processing to prepare the data for the desired aesthetics of the graphs. Particularly in cleaning the values of the "Item" column using regular expressions and wrapping the strings to best fit the y-axis labels of the graph. Additinoally this code rounds the "Average_Rank" column and orders the rows from lowest to largest average rank.
+Before visualizing the results, I processed the data to match the desired aesthetics of the graphs. This included cleaning the values in the Item column using regular expressions and wrapping text to ensure labels fit neatly along the y-axis. I also rounded the values in the Average_Rank column and ordered the rows from lowest to highest average rank to improve readability in the final graphs.
 
 ```R
 
@@ -446,7 +459,7 @@ avg_rank_calc_gg <- avg_rank_calc %>%
 
 ```
 
-The preceeding dataset is then inputted into a ggplot function where I create a horizontal bar chart to display the average ranks of features in ascending order. 
+The preceeding dataset is then inputted into a ggplot function that creates a horizontal bar chart displaying average ranks of features in ascending order. 
 
 ```R
 
@@ -499,7 +512,7 @@ gg_afr <- avg_rank_calc_gg %>%
 ```
 [insert pic of graph]
 
-#### Conjoint Analysis / Yoke Comparison Analysis
+### Conjoint Analysis / Yoke Comparison Analysis
 
 To answer our third research question R3: "Assess the comparative desirability of the current product against its primary competitors" we employed the use of a survey question aiming to perform a conjoint analysis. Respondents where given a scenario where they were asked to imagine themselves purchasing a flight simulation yoke and given 4 options each with a unique composition of features to rank from most favorable to least. 3 of the 4 options had mimiced features of the competitor yokes in this analysis, but were unamed to remove any branding bias. The fourth yoke had a composition of features that represented our proposed product. Our goal was to see if the composition of features in our product would be competitive to the composition of features to our competitors, thus testing how the product would hold up in this consumer groups market. ...
 
