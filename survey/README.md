@@ -1,4 +1,11 @@
-## Overview
+# Survey Data Processing & Analysis
+
+The primary objective of this segment is twofold:
+
+1. To process the survey data in order to establish the analysis sample.
+2. To analyze three survey questions that align with our three research questions.
+
+Details on the methodology for each question are provided in the corresponding section for each research question and its associated survey question. The following sections outline the data processing steps and the analysis conducted for each question.
 
 ## Data Processing
 
@@ -285,7 +292,7 @@ locfilter_check <- data %>%
 
 ## Analysis
 
-### General Yoke Pitch Smoothness
+### RQ1: General Yoke Pitch Smoothness
 
 To supplement the **product review analysis/LINK**, we fielded a survey to over 300 flight simulation enthusiasts and owners of competitor yokes. To address RQ1, respondents were asked (Q9):
 
@@ -402,7 +409,7 @@ ggsave("donut_chart_ar.svg", plot = gd_pr, width = 12, height = 4, bg = "white")
 
 ```
 
-### Average Feature Rank
+### RQ2: Average Feature Rank
 
 To address our second research question (RQ2): “Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features”, we asked respondents to complete a ranking task pertaining to common flight simulation yoke features (Q2):
 
@@ -512,7 +519,7 @@ gg_afr <- avg_rank_calc_gg %>%
 ```
 [insert pic of graph]
 
-### Yoke Comparison / Conjoint Analysis
+### RQ3: Yoke Comparison / Conjoint Analysis
 To address our third research question, RQ3: *“Assess the comparative desirability of the current product against its primary competitors”*, we designed a survey question modeled after a conjoint-style analysis.
 
 Respondents were asked to imagine purchasing a flight simulation yoke priced under $400 and to rank four options from most to least desirable. Each option included a list of its features. Two of the options were designed to closely mirror the feature sets of leading competitor yokes (with branding removed to reduce bias), while the third represented our proposed product.
