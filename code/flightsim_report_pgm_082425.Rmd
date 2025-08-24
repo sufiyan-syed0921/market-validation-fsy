@@ -1,0 +1,865 @@
+---
+title: "flightsim_survey_pgm"
+date: "`r Sys.Date()`"
+output:
+    html_document:
+      theme: cosmo
+      df_print: paged 
+      number_sections: yes
+---
+--------------------------------------------------------------------------------
+
+# Documentation Block
+
+--------------------------------------------------------------------------------
+
+
+**PURPOSE**
+- This program is used to process and analyze data used in the research report
+**SELECTS**
+- This program uses two data sources: A set of web-scraped product reviews and survey data to flight simulation enthusiasts
+**NOTES**
+
+**DATA REQUIRED**
+```{r echo=FALSE, message=FALSE, warning=FALSE, results="show"}
+
+# ---------------------- DEPENDENCIES ----------------------------------
+
+library(tidyverse) # dplyr/data processing 
+library(janitor) # clean variable names/data processing
+library(readxl) # read excel files
+library(ggplot2) # for graphing
+library(gridExtra) # Arranging Plots
+library(grid) # Arranging Plots
+library(svglite) # Saving SVG files
+library(flextable) # for tabling
+library(tools) # for graphing aesthetics
+
+# ---------------------- R ENVIORNMENT ----------------------------------
+
+# Turn off scientific notation 
+options(scipen = 999)
+
+# Suppress display of Rmd chunk code by default 
+knitr::opts_chunk$set(echo=FALSE)
+
+# Create program metadata variables
+filpath <- rstudioapi::getActiveDocumentContext()$path # File Path 
+prgname <- str_sub(str_extract(filpath, "[^/]*$"), end = 5) # Program Name
+prgdate <- format(Sys.Date(), '%y%m%d') # Program Date
+
+# ---------------------- DATA FILES AND DIRECTORIES ----------------------------------
+
+# Input Directories
+usedir1 <- "~/Desktop/Flightsim/survey/"
+usedir2 <- "~/Desktop/Flightsim/survey/review_data"
+
+# Input Files 
+usefil1 <- "flightsim_survey_rawdata.csv" # Survey Data
+usefil2 <- "velocityone_class60524.xlsx" # Turtle Beach Review Data 
+usefil3 <- "honeycomb_class60524.xlsx" # Honey Comb Review Data 
+usefil4 <- "thrustmaster_class60524.xlsx" # Thrustmaster Boeing Review Data 
+
+# Output Directories 
+#savdir1 
+
+# Output Files
+#savfil1
+
+```
+
+--------------------------------------------------------------------------------
+
+# Read in files
+
+--------------------------------------------------------------------------------
+
+
+### Survey Data
+
+```{r}
+# Import survey data
+survey_rawdata <- read_csv(file.path(usedir1, usefil1))
+
+# Inspect/preview data
+head(survey_rawdata)
+```
+
+
+### Customer Reviews
+
+**Turtle Beach**
+```{r}
+# Import Product Reviews
+prod_reviews_tb_rawdata <- read_xlsx(file.path(usedir2, usefil2))
+
+# Inspect/preview data
+head(prod_reviews_tb_rawdata)
+```
+
+**Honeycomb**
+```{r}
+prod_reviews_hc_rawdata <- read_xlsx(file.path(usedir2, usefil3))
+
+head(prod_reviews_hc_rawdata)
+```
+
+**Thrustmaster**
+```{r}
+prod_reviews_tmb_rawdata <- read_xlsx(file.path(usedir2, usefil4))
+
+head(prod_reviews_tb_rawdata)
+```
+
+
+--------------------------------------------------------------------------------
+
+# Data Processing
+
+--------------------------------------------------------------------------------
+
+
+### Customer Reviews 
+
+**Yoke Smoothness**
+Clean and and prepare qualitative coding results for negative reviews (3 stars or lower) with negative sentiment toward Yoke Smoothness. For more information on the coding criteria of yoke smoothness and qualitative process, see *LINK*
+
+```{r}
+# Turtle Beach------------------------------------------------------------------
+table(prod_reviews_tb_rawdata$yokesmooth_class_result2) # view raw coding results
+
+turtlebeach_reviewdata <- prod_reviews_tb_rawdata %>% 
+  clean_names() %>% # clean variable names
+  mutate(yokesmooth_class_result2 = case_when( 
+    yokesmooth_class_result2 %in% c("No", "No.") ~ "No", # Change "No." to "No"
+    yokesmooth_class_result2 %in% c("Yes", "Yes.") ~ "Yes" # Change "Yes." to "Yes"
+  ))
+
+table(turtlebeach_reviewdata$yokesmooth_class_result2)  # Check
+
+```
+
+```{r}
+# Honeycomb---------------------------------------------------------------------
+table(prod_reviews_hc_rawdata$yksmooth_class_result...10) # view raw coding results
+
+honeycomb_reviewdata <- prod_reviews_hc_rawdata %>%
+  mutate(yksmooth_class_result...10 = case_when(
+    yksmooth_class_result...10 %in% c("No", "No.") ~ "No", # Change "No." to "No"
+    yksmooth_class_result...10 %in% c("Yes", "Yes.") ~ "Yes" # Change "Yes." to "Yes"
+  )) %>% 
+  clean_names() # clean variable names
+
+table(honeycomb_reviewdata$yksmooth_class_result_10) # Check
+
+```
+
+```{r}
+# Thrustmaster------------------------------------------------------------------
+table(prod_reviews_tmb_rawdata$yksmooth_class_result_r) # view raw coding results
+
+thrustmaster_reviewdata <- prod_reviews_tmb_rawdata %>% 
+  clean_names() %>% # clean variable names
+  mutate(yksmooth_class_result_r = case_when(
+    yksmooth_class_result_r %in% c("No", "No.") ~ "No", # Change "No." to "No" 
+    yksmooth_class_result_r %in% c("Yes", "Yes.") ~ "Yes" # Change "Yes." to "Yes"
+  ))
+
+table(thrustmaster_reviewdata$yksmooth_class_result_r) # Check
+
+```
+
+
+```{r}
+# Clean environment
+
+rm(prod_reviews_hc_rawdata, prod_reviews_tb_rawdata, prod_reviews_tmb_rawdata)
+```
+
+
+### Survey
+
+**Clean Variable Names**
+Rename question 2 and 3 columns so that they contain the feature/yoke in the suffix 
+of each column name
+
+```{r}
+# Question 2 -------------------------------------------------------------------
+# : When purchasing a flight simulator yoke, rank the following features and 
+# : capabilities from most important (1)  to least important (12). Drag and drop to rank the yokes.
+#  -----------------------------------------------------------------------------
+
+# Create temporary variable
+tmp <- survey_rawdata
+
+# Specify the columns to rename
+columns_to_rename <- survey_rawdata %>% select(starts_with("Q2_")) %>% names()
+
+# Extract parts after "-" from the first row for the specified columns
+suffixes <- sapply(tmp[1, columns_to_rename], function(x) sub(".*-", "", x))
+
+# Get current column names
+current_names <- colnames(tmp)
+
+# Create new names for the specified columns
+new_names <- paste(columns_to_rename, suffixes, sep = "_")
+
+# Rename the specified columns
+colnames(tmp)[colnames(tmp) %in% columns_to_rename] <- new_names
+
+# Clean names
+tmp2 <- tmp %>% clean_names() 
+
+# Remove temporary variables
+rm(tmp, columns_to_rename, suffixes, current_names, new_names) 
+```
+
+```{r}
+# Question 3 -------------------------------------------------------------------
+# : Imagine you are looking to purchase a flight simulator yoke and are 
+# : considering Yoke A, Yoke B, and Yoke C. The features of the three yokes are 
+# : listed in the tables below. Please rank #the following yokes from most 
+# : desirable (1) to least desirable (3), assuming that each yoke costs $400. 
+# : Drag and drop to rank the yokes.
+#  -----------------------------------------------------------------------------
+
+# Create temporary variable
+tmp <- tmp2
+
+# Specify the columns to rename
+columns_to_rename <- tmp %>% select(starts_with("q3_")) %>% names()
+
+# Extract parts after "-" from the first row for the specified columns
+suffixes <- sapply(tmp[1, columns_to_rename], function(x) sub(".*-", "", x))
+
+# Get current column names
+current_names <- colnames(tmp)
+
+# Create new names for the specified columns
+new_names <- paste(columns_to_rename, suffixes, sep = "_")
+
+# Rename the specified columns
+colnames(tmp)[colnames(tmp) %in% columns_to_rename] <- new_names
+
+# Create temporary variables
+tmp3 <- tmp
+
+# Remove temporary variables
+rm(tmp, tmp2, columns_to_rename, suffixes, current_names, new_names) # Remove temporary variables
+```
+
+
+**Apply Survey Filters**
+
+Remove responses from:
+ 1. Survey Preview Responses
+ 2. Respondents who do not own a flight simulation yoke
+ 3. Respondents who only have HOTAS style controllers
+ 4. Remove respondents who quit survey after question 1
+ 5. Remove respondents with inconsistent location responses (Falsely claimed to live in the SF Bay Area)
+
+```{r}
+# Prepare for filtering based on location (filter 5)---------------------------------------
+# We remove all responses who claimed to live in the SF bay area but coordinates 
+# reported by Qualtrics were outside a 100 mile radius of San Ramon, CA.  
+
+## Function to calculate haversine distance
+haversine_distance <- function(lat1, lon1, lat2, lon2) {
+  R <- 3959  # Earth radius in miles
+  dLat <- (lat2 - lat1) * pi / 180
+  dLon <- (lon2 - lon1) * pi / 180
+  lat1 <- lat1 * pi / 180
+  lat2 <- lat2 * pi / 180
+  a <- sin(dLat/2) * sin(dLat/2) + sin(dLon/2) * sin(dLon/2) * cos(lat1) * cos(lat2)
+  c <- 2 * atan2(sqrt(a), sqrt(1 - a))
+  d <- R * c
+  return(d)
+}
+
+## San Ramon, CA coordinates
+san_ramon_lat <- 37.7799
+san_ramon_lon <- -121.978
+
+```
+
+```{r}
+# Prepare to filter to include only owners of Yoke style controllers -----------
+
+# Find unique list of text entry HOTAS style controller names that respondents provided
+unique(survey_rawdata$Q1_4_TEXT) # Run and filter manually to populate "sticks" object
+
+# Gather responses with flight sticks
+sticks <- c("Thrustmaster Warthog", 
+           "Thrustmaster TCA Sidestick", 
+           "Thrustmaster TCA Airbus", 
+           "Thrustmaster Hotas Warthog", 
+           "Sidewinder Force Feedback 2", 
+           "Logitech x52 hotas", 
+           "Logitech extreme 3d pro (I’m cheap)", 
+           "Have HOTAS")
+
+# Assign names to filter object
+exc_filter <- paste(sticks, collapse = "|")
+
+```
+
+```{r}
+# Create dummy variables for filters -------------------------------------------
+
+tmp4 <- tmp3 %>%
+  # Remove header rows
+  slice(-(1:2)) %>%  
+  # Create dummies
+  mutate(
+    ## Track pre-filtered rows
+    initial_sample = 1,  
+    ## If survey previews (filter 1)
+    survey_preview = ifelse(status == "Survey Preview", 1, 0),  
+    ## If no yoke ownership (filter 2)
+    no_yoke = ifelse(grepl("I do not own a flight simulation yoke", q1, ignore.case = TRUE), 1, 0),  
+    ## If only own HOTAS yokes (filter 3)
+    hotas = ifelse(q1 == "Other" & grepl(exc_filter, q1_4_text, ignore.case = TRUE), 1, 0)  
+  ) %>%
+  rowwise() %>%
+  mutate(
+    # If quit after Q1 (filter 4)
+    quit_aq1 = ifelse(all(is.na(c_across(q2_1_xbox_compatibility:q15))), 1, 0)  
+  ) %>%
+  ungroup() %>%
+  mutate(
+    location_latitude2 = as.numeric(location_latitude), # Make coordinates numeric
+    location_longitude2 = as.numeric(location_longitude),
+    # Calculate distance from San Ramon
+    distance_to_sr = haversine_distance(location_latitude2, location_longitude2, 
+                                        san_ramon_lat, san_ramon_lon),
+    # If within 100 miles of San Ramon
+    radius100 = ifelse(distance_to_sr <= 100, TRUE, FALSE),  
+    # Claimed Bay Area but outside 100 miles (filter 5)
+    inbay_ovr100 = ifelse(radius100 == FALSE & q12 == "Yes", TRUE, FALSE)  
+  )
+
+```
+
+```{r}
+# Filter data ------------------------------------------------------------------
+
+# Apply the filters to get the final analysis sample
+tmp5 <- tmp4 %>%
+  mutate(ansamp = ifelse( # change this mutate and have this define the ansamp == 1
+    survey_preview == 0 & # (1) Remove survey previews 
+    no_yoke == 0 & # (2) Remove respondents who don't have a yoke
+    hotas == 0 &  # (3) Remove respondents who only have HOTAS controllers
+    quit_aq1 == 0 & # (4) Remove respondents who quit survey after Q1
+    inbay_ovr100 == FALSE, 1, 0)) # (5) Remove respondents with inconsistent location responses
+
+# Create final data for analysis  
+data <- tmp5 %>% 
+  select(-survey_preview, -no_yoke, -hotas, -quit_aq1) %>% # remove filter variables
+  filter(ansamp == 1) # filter to include analysis sample only
+
+```
+
+
+**Check Number of Rows Removed**
+```{r}
+# OLD 
+paste0("Old N: ", nrow(tmp4))
+
+# NEW
+paste0("New N: ", nrow(data))
+
+```
+
+```{r}
+# Spot check removed rows 
+removed_rows <- tmp5 %>% filter(ansamp == 0)
+
+# Table filters
+tmp5 %>% select(survey_preview,
+                no_yoke,
+                hotas,
+                quit_aq1,
+                inbay_ovr100, 
+                ansamp) %>% 
+  group_by_all() %>% 
+  summarise(N = n(), .groups = "drop") %>% 
+  flextable() %>% 
+  autofit()
+```
+
+
+**Check Filtered**
+```{r}
+# (1) Survey previews and (2) yoke ownership
+data %>% select(status, q1) %>% 
+  group_by_all() %>% 
+  summarise(N = n(), .groups = "drop") %>% 
+  flextable() %>% # create table
+  autofit()
+
+```
+
+```{r}
+# (3) No hotas ownership 
+table(data$q1_4_text)
+
+```
+
+```{r}
+# (4) Respondents quitting after Q1
+data %>% filter(if_all(q2_1_xbox_compatibility:q15, is.na))
+
+# (5) Inconsistent location responses
+locfilter_check <- data %>% 
+  select(q12, ends_with("e2"), ends_with("100"), distance_to_sr, ansamp) %>% 
+  filter(q12 == "Yes")
+```
+
+
+```{r}
+# Clean environment
+rm(tmp3, tmp4, tmp5, locfilter_check, removed_rows)
+rm(exc_filter, san_ramon_lat, san_ramon_lon, sticks, haversine_distance)
+```
+
+
+--------------------------------------------------------------------------------
+
+# Analysis
+
+--------------------------------------------------------------------------------
+
+
+### Product Reviews 
+
+Qualitative Analysis Results
+- % of reviews (3 stars or lower) that mention yoke smoothness and related problems as an issue.
+```{r}
+# Turtle beach
+addmargins(table(turtlebeach_reviewdata$yokesmooth_class_result2))
+
+# Save proportion for later graphing
+tb_review_prop <- round(mean(turtlebeach_reviewdata$yokesmooth_class_result2 == "Yes"), 2)
+tb_review_prop 
+```
+
+```{r}
+# Honeycomb
+addmargins(table(honeycomb_reviewdata$yksmooth_class_result_10))
+
+# Save proportion for later graphing
+hc_review_prop <- round(mean(honeycomb_reviewdata$yksmooth_class_result_10 == "Yes"), 2)
+hc_review_prop 
+```
+
+```{r}
+# Thrustmaster
+addmargins(table(thrustmaster_reviewdata$yksmooth_class_result_r))
+
+# Save proportion for later graphing
+tmb_review_prop <- round(mean(thrustmaster_reviewdata$yksmooth_class_result_r == "Yes"), 2)
+tmb_review_prop
+```
+
+
+**Donut Chart (Product Reviews)**
+```{r}
+# Prepare data: proportions of responses for 3 sets of responses
+ggdonut_pr_data <- data.frame(
+  Category = rep(c("turtle beach", "honeycomb", "thrustmaster"), each = 2),  # 3 categories of responses
+  Response = rep(c("Yes", "No"), times = 3),  # Single question, 2 possible answers (Yes/No)
+  Proportion = c(tb_review_prop, (1-tb_review_prop),   # Proportions for turtle beach
+                 hc_review_prop, (1-hc_review_prop),   # Proportions for honeycomb
+                 tmb_review_prop, (1-tmb_review_prop))  # Proportions for thrustmaster
+)
+
+# Function to create a single-level donut chart with middle label
+create_donut_chart <- function(df, label) {
+  ggplot(df, aes(x = 2, y = Proportion, fill = Response)) +
+    geom_bar(stat = "identity", width = 0.8, color = "white") +  # Single donut
+    coord_polar(theta = "y") +
+    theme_void() +  # Remove axis and background
+    xlim(0.5, 2.5) +  # Adjust the limit to create the hole
+    geom_text(aes(label = ifelse(Response == "Yes", scales::percent(Proportion), "")),
+              position = position_stack(vjust = 0.5), color = "black") +  # Percentage labels in black
+    annotate("text", x = 0.5, y = 0, label = label, size = 4, color = "black") +  # Center label in black
+    theme(legend.position = "none")  # Remove the legend
+}
+
+# Prepare graphs for the three categories
+donut1 <- create_donut_chart(filter(ggdonut_pr_data, Category == "turtle beach"), "Turtle Beach")
+donut2 <- create_donut_chart(filter(ggdonut_pr_data, Category == "honeycomb"), "Honeycomb")
+donut3 <- create_donut_chart(filter(ggdonut_pr_data, Category == "thrustmaster"), "Thrustmaster")
+
+# Arrange the three charts horizontally
+gd_pr <- arrangeGrob(donut1, donut2, donut3, ncol = 3)
+
+# Add a main title with adjusted positioning
+grid.newpage()  # Clear the current page
+grid.rect(gp = gpar(fill = "white", col = NA))  # Set background color behind all charts
+grid.text("Product Reviews:\nPercentage of reviews (3 stars or lower) that mention pitch smoothness\nand related features as an issue", x = 0.5, y = 0.85, gp = gpar(fontsize = 11, fontface = "bold"))  # Adjust title position
+
+grid.draw(gd_pr)  # Draw the grob
+
+ggsave("donut_chart_ar.svg", plot = gd_pr, width = 12, height = 4, bg = "white")
+```
+
+
+```{r}
+# clean environment 
+
+rm(donut1, donut2, donut3, ggdonut_pr_data, 
+   hc_review_prop, tb_review_prop, tmb_review_prop) # clean environment
+```
+
+
+### Survey 
+
+#### Analysis
+
+####### **General Yoke Smoothness**
+
+- **Turtle Beach**
+```{r}
+# Process data
+q9_tb_data <- data %>%
+  filter(grepl("Turtle Beach Velocity One", q1, ignore.case = TRUE),
+         (grepl("Turtle Beach: Velocity One", q9, ignore.case = TRUE) | 
+          grepl("not", q9, ignore.case = TRUE)))
+         
+
+# Create a frequency table for the column 'q9' in the filtered data
+table(q9_tb_data$q9)
+
+# Summarize data
+q9_tb_propy <- q9_tb_data %>%
+  mutate(q9 = ifelse(grepl(" not ", q9, ignore.case = TRUE), "no", "yes")) %>%
+  summarise(yes_p = mean(q9 == "yes"), total_n = n(), yes_n = sum(q9 == "yes"))
+
+q9_tb_propy
+
+```
+
+- **Honeycomb**
+```{r}
+q9_hc_data <- data %>%
+  filter(grepl("Honeycomb", q1, ignore.case = TRUE),
+         (grepl("Honeycomb", q9, ignore.case = TRUE) | 
+          grepl(" not ", q9, ignore.case = TRUE)))
+         
+
+table(q9_hc_data$q9)
+
+q9_hc_propy <- q9_hc_data %>%
+  mutate(q9 = ifelse(grepl(" not ", q9, ignore.case = TRUE), "no", "yes")) %>%
+  summarise(yes_p = mean(q9 == "yes"), total_n = n(), yes_n = sum(q9 == "yes"))
+
+q9_hc_propy
+
+```
+
+- **Thrustmaster**
+```{r}
+q9_tmb_data <- data %>%
+  filter(grepl("Thrustmaster", q1, ignore.case = TRUE),
+         (grepl("Thrustmaster", q9, ignore.case = TRUE) | 
+          grepl(" not ", q9, ignore.case = TRUE)))
+         
+
+table(q9_tmb_data$q9)
+
+q9_tmb_propy <- q9_tmb_data %>%  
+  mutate(q9 = ifelse(grepl(" not ", q9, ignore.case = TRUE), "no", "yes")) %>%
+  summarise(yes_p = mean(q9 == "yes"), total_n = n(), yes_n = sum(q9 == "yes"))
+
+q9_tmb_propy
+  
+
+```
+
+- **Other**
+```{r}
+q9_othr_data <- data %>%
+  filter(grepl("other", q1, ignore.case = TRUE),
+         (grepl("ChoiceTextEntryValue", q9, ignore.case = TRUE) | 
+          grepl(" not ", q9, ignore.case = TRUE)))
+         
+
+table(q9_othr_data$q9)
+
+q9_othr_propy <- q9_othr_data %>%
+  mutate(q9 = ifelse(grepl(" not ", q9, ignore.case = TRUE), "no", "yes")) %>%
+  summarise(yes_p = mean(q9 == "yes"), total_n = n(), yes_n = sum(q9 == "yes"))
+
+q9_othr_propy
+
+```
+
+**Pie Chart (Survey)**
+```{r, fig.width=12, fig.height=4}
+# Prepare data: Proportions of responses for 4 sets of responses
+ggdonut_sq_data <- data.frame(
+  Category = rep(c("turtle beach", "honeycomb", "thrustmaster", "other"), each = 2),  # 4 categories of responses
+  Response = rep(c("Yes", "No"), times = 4),  # Only the "Yes" responses
+  Proportion = c(q9_tb_propy$yes_p, (1-q9_tb_propy$yes_p),   # Proportions for turtle beach
+                 q9_hc_propy$yes_p, (1-q9_hc_propy$yes_p),   # Proportions for honeycomb
+                 q9_tmb_propy$yes_p, (1-q9_tmb_propy$yes_p),  # Proportions for thrustmaster
+                 q9_othr_propy$yes_p, (1-q9_othr_propy$yes_p)) # Proportions for other
+)
+
+# Prepare data for the four categories
+donut1 <- create_donut_chart(filter(ggdonut_sq_data, Category == "turtle beach"), "Turtle Beach")
+donut2 <- create_donut_chart(filter(ggdonut_sq_data, Category == "honeycomb"), "Honeycomb")
+donut3 <- create_donut_chart(filter(ggdonut_sq_data, Category == "thrustmaster"), "Thrustmaster")
+
+# Arrange the three charts horizontally
+gd_s <- arrangeGrob(donut1, donut2, donut3, ncol = 3)
+
+# Add a main title with adjusted positioning
+grid.newpage()  # Clear the current page
+grid.draw(gd_s)  # Draw the final grob
+grid.text("Survey Question:\nDo you find the smoothness and feel of the pitch axis an issue in your current yoke?\n", 
+          x = 0.5, y = 0.85, gp = gpar(fontsize = 11, fontface = "bold"))  # Adjusted title position
+
+grid.draw(gd_s)  # Draw the grob
+
+ggsave("donut_chart_s.svg", plot = gd_s, width = 12, height = 4, bg = "white")
+```
+
+
+```{r}
+# Clean workspace
+rm(q9_hc_data, q9_hc_propy, q9_othr_data, q9_othr_propy, q9_tb_data, q9_tb_propy, q9_tmb_data, q9_tmb_propy,
+   ggdonut_sq_data, donut1, donut2, donut3)
+
+```
+
+
+####### **Average Feature Rank**
+
+```{r}
+# Display the modified data frame
+avg_rank_data <- data %>%
+  select(starts_with("q2"), response_id) %>% 
+  mutate_at(vars(starts_with("q2")), as.numeric) # Convert to numeric
+
+avg_rank_calc <- avg_rank_data %>% 
+  select(-response_id) %>%
+  summarise_all(mean, na.rm = TRUE) %>%  # Calculate the mean rank for each item
+  gather(key = "Item", value = "Average_Rank") %>%  # Convert to long format for easier interpretation
+  arrange(Average_Rank)  # Sort by average rank
+
+avg_rank_calc # Mean ranking results
+```
+
+**Graphing**
+```{r, fig.height=8, fig.width=8}
+# Process data
+avg_rank_calc_gg <- avg_rank_calc %>% 
+  mutate(Item = Item %>%
+         sub("q2_[0-9]+_", "", .) %>%  # Remove the dynamic prefix
+         gsub("_", " ", .) %>%         # Replace underscores with spaces
+         toTitleCase(), # Capitalize the first letter of each word
+         Average_Rank = round(Average_Rank, 2),
+         Item = ifelse(
+           Item == "Smoothness Feel and Precision of the Control Axes", "Smoothness, Feel, and\nPrecision of Control Axes", Item),
+         Item = ifelse(
+           Item == "Included Throttle Control", "Included\nThrottle Control", Item),
+         Item = ifelse(
+           Item == "Included Rudder Brake Control", "Included Rudder\nBrake Control", Item),
+         Item = ifelse(
+           Item == "Adequate Resistance Force", "Adequate Resistance\nForce", Item),
+         Item = ifelse(
+           Item == "Play", "Plug-In-Play", Item)
+         )  %>% # Round 
+  arrange(desc(Average_Rank)) # Order from lowest to largest average rank           
+
+# Factor
+avg_rank_calc_gg$Item <- factor(avg_rank_calc_gg$Item, levels = avg_rank_calc_gg$Item)
+
+
+# Create a horizontal bar plot with values displayed on the bars
+gg_afr <- avg_rank_calc_gg %>% 
+  ggplot(aes(x = Average_Rank, y = Item)) +
+  
+  # Bars
+  geom_segment(aes(x=0, xend=Average_Rank, y=Item, yend = Item), lwd=8, color = "#5EC6CC") +
+  
+  geom_rect(aes(xmin = Average_Rank, xmax = Average_Rank, 
+                ymin = as.numeric(Item) - 0.25, ymax = as.numeric(Item) + 0.25)) + 
+  
+  # Annotation
+  geom_text(aes(x= Average_Rank, y=Item, label = paste0("  ", Average_Rank)),
+            hjust = 0, size=9/.pt, fontface = "plain", check_overlap = FALSE) +  
+  
+  scale_y_discrete(
+    breaks = unique(avg_rank_calc_gg$Item),
+    labels = unique(avg_rank_calc_gg$Item),
+    expand = c(0.05, 0)
+  ) +
+  
+  scale_x_continuous(
+    limits = c(-0.5, 12),
+    expand = c(0,0)
+  ) + 
+  
+  # Titles and theme
+  ylab("Feature") +
+  xlab("Average Rank") +
+
+  theme_bw() +  # Use a clean theme
+  theme(
+    # Title
+    plot.title = element_text(size=11, color = "#000000", face = "bold", margin = margin(0,0,15,0)),
+    
+    # Text
+    axis.text.x = element_text(size = 9, color = "#000000", face = "bold", margin=margin(0,0,15,0)),
+    axis.text.y = element_text(size = 9, color = "#000000", face = "plain", hjust = 0, margin = margin(t=0,r=10,b=0,l=0)),
+    axis.title.x = element_text(size = 9, color = "#000000", face = "plain", margin = margin(t=-5,r=0,b=0,l=0)),
+    axis.title.y = element_text(size = 9 , color = "#000000", face = "bold", angle = 0, margin = margin(r=-33, b=0, l=0), vjust = 1.02),
+
+    # Gridlines
+    panel.grid = element_blank(),
+    plot.margin = unit(c(.2,.2,.2,.2),"in")) 
+
+
+# Preview 
+gg_afr
+
+# Save
+ggsave("bar_chart_afr.svg", plot = gg_afr, width = 8, height = 8)
+
+```
+
+
+####### **Conjoint Analysis Mean Ranking**
+
+```{r}
+avg_cjrank_data <- data %>%
+  select(starts_with("q3"), response_id) %>% 
+  mutate_at(vars(starts_with("q3")), as.numeric) # Convert to numeric
+
+avg_cjrank_calc <- avg_cjrank_data %>% 
+  select(-response_id) %>%
+  summarise_all(mean, na.rm = TRUE) %>%  # Calculate the mean rank for each item
+  gather(key = "Item", value = "Average_Rank") %>%  # Convert to long format for easier interpretation
+  arrange(Average_Rank)  # Sort by average rank
+
+avg_cjrank_calc # Mean ranking results
+```
+
+**Graphing**
+```{r, fig.height= = 8, fig.width=8}
+#
+avg_cjrank_calc_gg <- avg_cjrank_calc %>% 
+  mutate(Item = Item %>%
+         sub(".*?(Y)", "\\1", .) %>%  # Remove everything prior to the first "Y"
+         gsub("_", " ", .) %>%         # Replace underscores with spaces
+         str_to_title(), # Capitalize the first letter of each word
+         Average_Rank = round(Average_Rank, 2), # Round
+         Item = ifelse(
+           Item == "Yoke A", "Yoke A\nVelocity One", Item),
+         Item = ifelse(
+           Item == "Yoke B", "Yoke B\nHoneycomb XPC", Item),
+         Item = ifelse(
+           Item == "Yoke C", "Yoke C\nTest Yoke", Item))              
+
+
+# Create a horizontal bar plot with values displayed on the bars
+gg_cmr <- avg_cjrank_calc_gg %>% 
+  ggplot(aes(x = Average_Rank, y = Item)) +
+  
+  # Bars
+  geom_segment(aes(x=0, xend=Average_Rank, y=Item, yend = Item), lwd=8, color = "#5EC6CC") +
+  
+  geom_rect(aes(xmin = Average_Rank, xmax = Average_Rank, 
+                ymin = Item, ymax = Item)) + 
+  
+  # Annotation
+  geom_text(aes(x= Average_Rank, y=Item, label = paste0("  ", Average_Rank)),
+            hjust = 0, size=9/.pt, fontface = "plain", check_overlap = FALSE) + 
+  
+  scale_y_discrete(
+    breaks = unique(avg_cjrank_calc_gg$Item),
+    labels = unique(avg_cjrank_calc_gg$Item),
+    expand = c(0.3, 0)
+  ) +
+  
+  scale_x_continuous(
+    limits = c(-0.1, 3),
+    expand = c(0,0)
+  ) + 
+  
+  # Titles and caption
+  ylab("Yoke") +
+  xlab("Average Rank") +
+
+  theme_bw() +  # Use a clean theme
+  theme(
+    # Title
+    plot.title = element_text(size=11, color = "#000000", face = "bold", margin = margin(0,0,20,0)),
+    
+    # Text
+    axis.text.x = element_text(size = 9, color = "#000000", face = "bold", margin=margin(0,0,0,0)),
+    axis.text.y = element_text(size = 9, color = "#000000", face = "plain", hjust = 0.5, margin = margin(t=,r=10,b=0,l=0)),
+    axis.title.x = element_text(size = 9, color = "#000000", face = "plain", margin = margin(t=0,r=0,b=0,l=0)),
+    axis.title.y = element_text(size = 9 , color = "#000000", face = "bold", angle = 0, margin = margin(r=-45, b=0, l=0), vjust = 1.04),
+
+    
+    # Gridlines
+    panel.grid = element_blank(),
+    plot.margin = unit(c(.2,.5,.2,.5),"in")) 
+
+
+gg_cmr
+
+ggsave("bar_chart_cmr.svg", plot = gg_cmr, width = 8, height = 4)
+
+```
+
+
+####### **Force Feedback**
+
+```{r}
+ff_data <- data %>% 
+  select(q11) %>% 
+  filter(grepl("^[0-9]+$", q11)) %>% 
+  mutate(q11 = as.numeric(q11))
+
+mean(ff_data$q11)
+  
+addmargins(table(ff_data$q11), margin = 1, FUN = sum) # Mean Ranking Results
+```
+
+
+<!--Remove This for REPO--
+
+# US emails
+```{r}
+library(maps)
+library(writexl)
+
+cord_data <- survey_rawdata %>% 
+  select(Q15, LocationLatitude, LocationLongitude) %>% 
+  filter(!is.na(Q15)) %>%
+  slice(-c(1, 2)) %>%       # Remove the first 2 rows
+  filter(str_detect(Q15, "@")) # Keep rows where 'a' contains the '@' symbol
+
+# Sample list of coordinates (longitude, latitude)
+coordinates <- data.frame(
+  lon = c(-77.0365, -118.2437, -3.7038),
+  lat = c(38.8977, 34.0522, 40.4168)
+)
+
+# Function to check where each coordinate falls
+usa_filter <- map.where("usa", cord_data$LocationLongitude, cord_data$LocationLatitude)
+
+# Filter only coordinates within the USA (non-NA values)
+coordinates_in_usa <- cord_data[!is.na(usa_filter), ]
+
+# Print the filtered coordinates
+print(coordinates_in_usa)
+
+write_xlsx(coordinates_in_usa, path = "emails_in_usa.xlsx")
+```
+
