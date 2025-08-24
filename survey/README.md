@@ -28,7 +28,7 @@ To make the data easier to work with, the code extracts the feature name (the te
 tmp <- survey_rawdata
 
 # Specify the columns to rename
-columns_to_rename <- c("Q2_1", "Q2_2", "Q2_3", "Q2_4", "Q2_5", "Q2_6", "Q2_7", "Q2_8", "Q2_9", "Q2_10", "Q2_11", "Q2_12")
+columns_to_rename <- survey_rawdata %>% select(starts_with("Q2_")) %>% names()
 
 # Extract parts after "-" from the first row for the specified columns
 suffixes <- sapply(tmp[1, columns_to_rename], function(x) sub(".*-", "", x))
@@ -63,7 +63,7 @@ rm(tmp, columns_to_rename, suffixes, current_names, new_names)
 tmp <- tmp2
 
 # Specify the columns to rename
-columns_to_rename <- c("q3_1", "q3_2", "q3_3")
+columns_to_rename <- tmp %>% select(starts_with("q3_")) %>% names()
 
 # Extract parts after "-" from the first row for the specified columns
 suffixes <- sapply(tmp[1, columns_to_rename], function(x) sub(".*-", "", x))
@@ -296,7 +296,7 @@ locfilter_check <- data %>%
 
 To supplement the **product review analysis/LINK**, we fielded a survey to over 300 flight simulation enthusiasts and owners of competitor yokes. To address RQ1, respondents were asked (Q9):
 
-*"Do you find the smoothness and feel of the pitch axis an issue in your current yoke? (select all that apply)"*
+>Do you find the smoothness and feel of the pitch axis an issue in your current yoke? (select all that apply)
 
 with possible answers of:
 
@@ -335,6 +335,7 @@ table(q9_tb_data$q9)
 
 ```
 
+
 Using the subsetted data from the previous section, I generated frequencies with the code below. First, a new column (q9) was created to recode the raw responses into a binary yes/no variable, indicating whether respondents reported pitch smoothness issues for the given yoke. Next, `summarize()` was used to calculate:
 
 - The proportion of respondents who reported issues (yes_p),
@@ -342,6 +343,7 @@ Using the subsetted data from the previous section, I generated frequencies with
 - The denominator (the total number of respondents in the subset).
 
 The yes_p column from this summarized dataset is then used in the next section to graph the findings across yokes.
+
 
 ```R
 
@@ -352,6 +354,7 @@ q9_tb_propy <- q9_tb_data %>%
 q9_tb_propy
 
 ```
+
 
 **Graphing** 
 
@@ -374,13 +377,13 @@ ggdonut_sq_data <- data.frame(
 # Function to create a single-level donut chart
 create_donut_chart <- function(df, label) {
   ggplot(df, aes(x = 2, y = Proportion, fill = Response)) +
-    geom_bar(stat = "identity", width = 1, color = "white") +  # Single donut
-    coord_polar(theta = "y") +  
+    geom_bar(stat = "identity", width = 0.8, color = "white") +  # Single donut
+    coord_polar(theta = "y") +
     theme_void() +  # Remove axis and background
     xlim(0.5, 2.5) +  # Adjust the limit to create the hole
     geom_text(aes(label = ifelse(Response == "Yes", scales::percent(Proportion), "")),
               position = position_stack(vjust = 0.5), color = "black") +  # Percentage labels in black
-    annotate("text", x = 0.5, y = 0, label = label, size = 3.5, color = "black") +  # Center label
+    annotate("text", x = 0.5, y = 0, label = label, size = 4, color = "black") +  # Center label in black
     theme(legend.position = "none")  # Remove the legend
 }
 
@@ -400,12 +403,13 @@ gd_pr <- arrangeGrob(donut1, donut2, donut3, ncol = 3)
 
 # Add a main title with adjusted positioning
 grid.newpage()  # Clear the current page
-grid.rect(gp = gpar(fill = "white", col = NA))  # Set background color behind all charts
-grid.text("Percentage of reviews (3 stars or lower) that mention yoke smoothness\nand related problems as an issue", x = 0.5, y = 0.85, gp = gpar(fontsize = 11, fontface = "bold"))  # Adjusted title position
+grid.draw(gd_s)  # Draw the final grob
+grid.text("Survey Question:\nDo you find the smoothness and feel of the pitch axis an issue in your current yoke?\n", 
+          x = 0.5, y = 0.85, gp = gpar(fontsize = 11, fontface = "bold"))  # Adjusted title position
 
-grid.draw(gd_pr)  # Draw the grob
+grid.draw(gd_s)  # Draw the grob
 
-ggsave("donut_chart_ar.svg", plot = gd_pr, width = 12, height = 4, bg = "white")
+ggsave("donut_chart_s.svg", plot = gd_s, width = 12, height = 4, bg = "white")
 
 ```
 
@@ -413,7 +417,7 @@ ggsave("donut_chart_ar.svg", plot = gd_pr, width = 12, height = 4, bg = "white")
 
 To address our second research question (RQ2): “Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features”, we asked respondents to complete a ranking task pertaining to common flight simulation yoke features (Q2):
 
-“When purchasing a flight simulator yoke, rank the following features and capabilities from most important (1) to least important (2). Drag and drop to rank the yokes.”
+>When purchasing a flight simulator yoke, rank the following features and capabilities from most important (1) to least important (2). Drag and drop to rank the yokes.
 
 For analysis, I subset the dataset to include only the columns corresponding to this ranking question and converted responses to numeric values. This allowed me to calculate the mean ranking for each feature, which serves as the basis for comparing their relative importance in the next step.
 
@@ -496,7 +500,6 @@ gg_afr <- avg_rank_calc_gg %>%
   ) + 
   
   # Titles and theme
-  ggtitle(str_wrap("When purchasing a flight simulator yoke, rank the following features and capabilities from most important (1) to least important (12)?")) +
   ylab("Feature") +
   xlab("Average Rank") +
 
@@ -515,6 +518,11 @@ gg_afr <- avg_rank_calc_gg %>%
     panel.grid = element_blank(),
     plot.margin = unit(c(.2,.2,.2,.2),"in")) 
 
+# Preview 
+gg_afr
+
+# Save
+ggsave("bar_chart_afr.svg", plot = gg_afr, width = 8, height = 8)
 
 ```
 [insert pic of graph]
@@ -601,7 +609,6 @@ gg_cmr <- avg_cjrank_calc_gg %>%
   ) + 
   
   # Titles and theme
-  ggtitle(str_wrap("Imagine you are looking to purchase a flight simulator yoke and are considering Yoke A, Yoke B, and Yoke C. Please rank the following yokes from most desirable (1) to least desirable (3), assuming that each yoke costs $400.", width = 75)) +
   ylab("Yoke") +
   xlab("Average Rank") +
 
@@ -620,6 +627,9 @@ gg_cmr <- avg_cjrank_calc_gg %>%
     panel.grid = element_blank(),
     plot.margin = unit(c(.2,.5,.2,.5),"in")) 
 
+gg_cmr
+
+ggsave("bar_chart_cmr.svg", plot = gg_cmr, width = 8, height = 4)
 
 ```
 
