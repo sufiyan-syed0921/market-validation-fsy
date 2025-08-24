@@ -42,7 +42,7 @@ new_names <- paste(columns_to_rename, suffixes, sep = "_")
 # Rename the specified columns
 colnames(tmp)[colnames(tmp) %in% columns_to_rename] <- new_names
 
-# clean names
+# Clean names
 tmp2 <- tmp %>% clean_names() 
 
 # Remove temporary variables
@@ -59,7 +59,7 @@ rm(tmp, columns_to_rename, suffixes, current_names, new_names)
 # : Drag and drop to rank the yokes.
 #  -----------------------------------------------------------------------------
 
-# create temporary variable
+# Create temporary variable
 tmp <- tmp2
 
 # Specify the columns to rename
@@ -77,10 +77,10 @@ new_names <- paste(columns_to_rename, suffixes, sep = "_")
 # Rename the specified columns
 colnames(tmp)[colnames(tmp) %in% columns_to_rename] <- new_names
 
-# create temporary variables
+# Create temporary variables
 tmp3 <- tmp
 
-# remove temporary variables
+# Remove temporary variables
 rm(tmp, tmp2, columns_to_rename, suffixes, current_names, new_names) # Remove temporary variables
 
 ```
@@ -192,7 +192,7 @@ tmp4 <- tmp3 %>%
   ) %>%
   ungroup() %>%
   mutate(
-    location_latitude2 = as.numeric(location_latitude), # make coordinates numeric
+    location_latitude2 = as.numeric(location_latitude), # Make coordinates numeric
     location_longitude2 = as.numeric(location_longitude),
     # Calculate distance from San Ramon
     distance_to_sr = haversine_distance(location_latitude2, location_longitude2, 
@@ -238,14 +238,14 @@ paste0("Old N: ", nrow(tmp4))
 ## NEW
 paste0("New N: ", nrow(data))
 
-## Spot Check Removed Rows 
+## Spot check removed rows 
 removed_rows <- tmp5 %>% filter(ansamp == 0)
 ```
 <br> 
 
 This table provides insight into why rows were filtered out by showing the number of responses removed for each combination of the five filter variables.
 ```R
-# Check Filters ----------------------------------------------------------------------------------
+# Check filters ----------------------------------------------------------------------------------
 
 ## Table all filters
 tmp5 %>% select(survey_preview,
@@ -280,7 +280,7 @@ table(data$q1_4_text)
 ```
 
 ```R
-# (4) Respondents Quitting After Q1
+# (4) Respondents quitting after Q1
 data %>% filter(if_all(q2_1_xbox_compatibility:q15, is.na))
 
 # (5) Inconsistent location responses
@@ -324,7 +324,7 @@ Once filtered, the subset can be tabulated to calculate the frequency of respond
 
 
 ```R
-
+# Process data
 q9_tb_data <- data %>%
   filter(grepl("Turtle Beach Velocity One", q1, ignore.case = TRUE),
          (grepl("Turtle Beach: Velocity One", q9, ignore.case = TRUE) | 
@@ -346,7 +346,7 @@ The yes_p column from this summarized dataset is then used in the next section t
 
 
 ```R
-
+# Summarize data
 q9_tb_propy <- q9_tb_data %>%
   mutate(q9 = ifelse(grepl(" not ", q9, ignore.case = TRUE), "no", "yes")) %>%
   summarise(yes_p = mean(q9 == "yes"), total_n = n(), yes_n = sum(q9 == "yes"))
@@ -439,7 +439,7 @@ avg_rank_calc <- avg_rank_data %>%
   gather(key = "Item", value = "Average_Rank") %>%  # Convert to long format for easier interpretation
   arrange(Average_Rank)  # Sort by average rank
 
-avg_rank_calc # Mean Ranking Results
+avg_rank_calc # Mean ranking results
 
 ```
 
@@ -466,7 +466,7 @@ avg_rank_calc_gg <- avg_rank_calc %>%
          Item = ifelse(
            Item == "Play", "Plug-In-Play", Item)
          )  %>% 
-  arrange(desc(Average_Rank)) # order from lowest to largest average rank             
+  arrange(desc(Average_Rank)) # Order from lowest to largest average rank             
 
 ```
 
@@ -546,7 +546,7 @@ Similar to the analysis of the feature ranking question, I completed the same wo
 ``` R
 avg_cjrank_data <- data %>%
   select(starts_with("q3"), response_id) %>% 
-  mutate_at(vars(starts_with("q3")), as.numeric) # Convert to Numeric
+  mutate_at(vars(starts_with("q3")), as.numeric) # Convert to numeric
 
 avg_cjrank_calc <- avg_cjrank_data %>% 
   select(-response_id) %>%
@@ -596,7 +596,7 @@ gg_cmr <- avg_cjrank_calc_gg %>%
   geom_text(aes(x= Average_Rank, y=Item, label = paste0("  ", Average_Rank)),
             hjust = 0, size=9/.pt, fontface = "plain", check_overlap = FALSE) + 
 
-  # Axis Scaling
+  # Axis scaling
   scale_y_discrete(
     breaks = unique(avg_cjrank_calc_gg$Item),
     labels = unique(avg_cjrank_calc_gg$Item),
