@@ -6,7 +6,7 @@ The primary objective of this segment is to gain insights toward RQ1:
 
 The methodology involved a qualitative analysis of product reviews on online retail websites that sell the competitor products. Additionally, in a survey administered after this analysis, we included a question to ask users of competitor yokes directly if they have issues with the features described in RQ1 (See survey work here: [Survey Data Processing & Analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/survey)). 
 
-Read each section below for details on the data collection and analysis process: 
+Read each section below for details on the data collection and analysis process. Note that the workflow was completed for each competitor product, but the code shown here reflects only one of the three competitors.
 
 ## Data Collection & Management
 
