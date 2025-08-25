@@ -23,10 +23,10 @@ This program uses the *urllib* package to interface and connect with the inputed
 #### Prepare function to extract reviews 
 
 ```Python
-# add headers
+# Add headers
 headers = {"User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36"}
 
-# define function to get webpage results into Beautifulsoup object 
+# Define function to get webpage results into Beautifulsoup object 
 def get_page(url, headers):
     try:
         encoded_headers = {key: value.encode('utf-8') for key, value in headers.items()}
@@ -50,7 +50,7 @@ The code below runs the get_page() function on the inputed url to retrieve the r
 ``` Python
 # Loop until header1 is not None
 while True:
-    # Get html
+    # Get html (replace URL for each page of reviews)
     soup = get_page("https://www.amazon.com/Thrustmaster-Yoke-PACK-Boeing-Xbox-x/dp/B09DPYHM55/ref=sr_1_5?crid=29KZ42OY0C859&dib=eyJ2IjoiMSJ9.gQXGQTXbcMi54OeLHcBcCdy8bUzAiP_khKF2HF5sDWteRLmjwsCoEm-T8ES3RJDk_pwvrXj5zel4nKbkyOA8Kc_d9eOe7P4LdnBf0ENU7pdjnW7xTK1Qdyl53s_jPhNO8xJh635sqWj92SiLQhRkqB6v3zgWbPwxbaXYM6A05uYAoi3s7d1u3lfAfrqrdOXxUbA2DWaManb3dv3M-e02zwsWrCouonZwu86t9YX1RCs.cKc6vAHkdCKax4iiYjtUPIMLhnIJikbZP9z_UlLYEaM&dib_tag=se&keywords=thrustmaster&qid=1733025366&sprefix=thrustmas%2Caps%2C203&sr=8-5&th=1", headers=headers)
 
     # Get h1
@@ -62,7 +62,7 @@ while True:
 
 ```
 
-Now we scrape the key elements from the raw html into a list. We start by locating all 'div' elements with the attribute data-hook="review" that correlates to the html code containing the review content and saving the output. Then, by using html elements, attributes, and classes as filters to the html code to retrieve the review information as the loop iterates over each element in our reviews_content output. Lastly we append the filtered review information to the empty reviews_list object we created at the start. 
+After running a few checks to the output, we scrape the key elements from the raw html into a list. We start by locating all 'div' elements with the attribute data-hook="review" that correlates to the html code containing the review content and saving the output. Then, by using html elements, attributes, and classes as filters to the html code to retrieve the review information as the loop iterates over each element in our reviews_content output. Lastly we append the filtered review information to the empty reviews_list object we created at the start. 
 
 #### Extract Review Data 
 
@@ -72,7 +72,7 @@ reviews_list = []
 
 review_content = soup.find_all('div', {'data-hook': 'review'})
 
-# Extract Contents
+# Extract contents
 for review in review_content:
     reviewer_name = review.find('span', {'class': 'a-profile-name'}).get_text().strip()
     star_rating_tag = review.find('i', {'data-hook': ['review-star-rating', 'cmps-review-star-rating']})
