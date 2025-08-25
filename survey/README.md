@@ -527,14 +527,14 @@ ggsave("bar_chart_afr.svg", plot = gg_afr, width = 8, height = 8)
 ```
 [insert pic of graph]
 
-### RQ3: Yoke Comparison / Conjoint Analysis
+### RQ3: Yoke Comparison Analysis
 To address our third research question, RQ3: *“Assess the comparative desirability of the current product against its primary competitors”*, we designed a survey question modeled after a conjoint-style analysis.
 
 Respondents were asked to imagine purchasing a flight simulation yoke priced under $400 and to rank four options from most to least desirable. Each option included a list of its features. Two of the options were designed to closely mirror the feature sets of leading competitor yokes (with branding removed to reduce bias), while the third represented our proposed product.
 
 Specifically, Yoke A resembled the Turtle Beach model, Yoke B resembled the Honeycomb model, and Yoke C reflected our proposed product. We chose not to include the Thrustmaster yoke in this analysis, based on the assumption that it was less directly comparable to the proposed product.
 
-The purpose of this design was to test whether the composition of features in our product could stand competitively against existing alternatives in this consumer group’s market.
+This ranking exercise was conjoint-inspired in that it asked respondents to make tradeoffs between realistic product bundles, but it stopped short of a full conjoint design that decomposes the value of individual features. For our purposes, however, this streamlined approach was well-suited: our primary interest was not in estimating utilities for each feature (See RQ2), but rather in testing whether the combination of features in our proposed product could stand competitively against existing alternatives. By forcing respondents to directly compare bundled product options, the task produced evidence to evaluate relative desirability in this specific market context.
 
 Full question text:
 >Imagine you are looking to purchase a flight simulator yoke and are considering Yoke A, Yoke B, and Yoke C. The features of the three yokes are listed in the table below. Please rank the following yokes from (1) most desirable to (3) least desirable, assuming each yoke costs $400. Drag and drop to rank the yokes.
