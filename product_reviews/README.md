@@ -159,6 +159,7 @@ print(f"\nTotal number of rows across all files: {total_rows}")
 del csv_directory, file_counts, total_rows, file, file_name, rows_count 
 
 ```
+After this step, each inspected data file is appended and cleaned for translation. See **LINK** to view this code. 
 
 ### Translate any non-english reviews to english  
 
@@ -166,7 +167,7 @@ A characteristic of this data is that we collected multiple reviews in languages
 
 
 ``` Python
-## Define Translation Function
+## Define translation function
 def translate_to_english(text, src_language='auto'):
     try:
         if pd.isnull(text):
@@ -186,12 +187,30 @@ def translate_to_english(text, src_language='auto'):
         traceback.print_exc()  # Print the traceback for debugging
         return text
 
-## Test Function
+## Test function
 text_to_translate = "Bonjour tout le monde"  # French text
 translated_text = translate_to_english(text_to_translate)
 print(translated_text)  # Output: Hello everyone
 
 del text_to_translate, translated_text
+
+```
+Next, this function is applied to the product review data 
+
+```python
+
+## Translate review title and text
+tmp2 = tmp
+
+## Review titles
+tmp2['review_title_oeng'] = tmp.apply(lambda row: translate_to_english(row['review_title']) 
+                                 if row['review_title'] != 'en' 
+                                 else row['review_title'], axis=1)
+
+## Review text
+tmp2['review_text_oeng'] = tmp.apply(lambda row: translate_to_english(row['Review Text']) 
+                                 if row['Review Text'] != 'en'
+                                 else row['Review Text'], axis=1)
 
 ```
 
