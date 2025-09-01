@@ -19,7 +19,7 @@ output:
 **SELECTS**
 - This program uses two data sources: A set of web-scraped product reviews and survey data to flight simulation enthusiasts
 **NOTES**
-
+-
 **DATA REQUIRED**
 ```{r echo=FALSE, message=FALSE, warning=FALSE, results="show"}
 
@@ -37,10 +37,10 @@ library(tools) # for graphing aesthetics
 
 # ---------------------- R ENVIORNMENT ----------------------------------
 
-# Turn off scientific notation 
+# Turn off scientific notation
 options(scipen = 999)
 
-# Suppress display of Rmd chunk code by default 
+# Suppress display of Rmd chunk code by default
 knitr::opts_chunk$set(echo=FALSE)
 
 # Create program metadata variables
@@ -54,17 +54,20 @@ prgdate <- format(Sys.Date(), '%y%m%d') # Program Date
 usedir1 <- "~/Desktop/Flightsim/survey/"
 usedir2 <- "~/Desktop/Flightsim/survey/review_data"
 
-# Input Files 
+# Input Files
 usefil1 <- "flightsim_survey_rawdata.csv" # Survey Data
 usefil2 <- "velocityone_class60524.xlsx" # Turtle Beach Review Data 
 usefil3 <- "honeycomb_class60524.xlsx" # Honey Comb Review Data 
 usefil4 <- "thrustmaster_class60524.xlsx" # Thrustmaster Boeing Review Data 
 
-# Output Directories 
-#savdir1 
+# Output Directories
+savdir1 <- getwd()
 
 # Output Files
-#savfil1
+savfil1 <- "donut_chart_ar.svg"
+savfil2 <- "donut_chart_s.svg"
+savfil3 <- "bar_chart_afr.svg"
+savfil4 <- "bar_chart_cmr.svg"
 
 ```
 
@@ -501,7 +504,9 @@ grid.text("Product Reviews:\nPercentage of reviews (3 stars or lower) that menti
 
 grid.draw(gd_pr)  # Draw the grob
 
-ggsave("donut_chart_ar.svg", plot = gd_pr, width = 12, height = 4, bg = "white")
+# Preview
+gd_pr
+
 ```
 
 
@@ -514,8 +519,6 @@ rm(donut1, donut2, donut3, ggdonut_pr_data,
 
 
 ### Survey 
-
-#### Analysis
 
 ####### **General Yoke Smoothness**
 
@@ -595,7 +598,7 @@ q9_othr_propy
 
 ```
 
-**Pie Chart (Survey)**
+- **Pie Chart (Survey)**
 ```{r, fig.width=12, fig.height=4}
 # Prepare data: Proportions of responses for 4 sets of responses
 ggdonut_sq_data <- data.frame(
@@ -623,7 +626,9 @@ grid.text("Survey Question:\nDo you find the smoothness and feel of the pitch ax
 
 grid.draw(gd_s)  # Draw the grob
 
-ggsave("donut_chart_s.svg", plot = gd_s, width = 12, height = 4, bg = "white")
+# Preview
+gd_s
+
 ```
 
 
@@ -726,8 +731,6 @@ gg_afr <- avg_rank_calc_gg %>%
 # Preview 
 gg_afr
 
-# Save
-ggsave("bar_chart_afr.svg", plot = gg_afr, width = 8, height = 8)
 
 ```
 
@@ -810,10 +813,25 @@ gg_cmr <- avg_cjrank_calc_gg %>%
     panel.grid = element_blank(),
     plot.margin = unit(c(.2,.5,.2,.5),"in")) 
 
-
+# Preview
 gg_cmr
 
-ggsave("bar_chart_cmr.svg", plot = gg_cmr, width = 8, height = 4)
+
+```
+
+# Output 
+
+```{r}
+# Save files 
+
+## Donut Charts 
+ggsave(savfil1, plot = gd_pr, width = 12, height = 4, bg = "white")
+ggsave(savfil2, plot = gd_s, width = 12, height = 4, bg = "white")
+
+
+## Bar Graphs
+ggsave(savfil3, plot = gg_afr, width = 8, height = 8)
+ggsave(savfil4, plot = gg_cmr, width = 8, height = 4)
 
 ```
 
