@@ -308,7 +308,6 @@ with possible answers of:
 - Yes, this is an issue for [Q1 Text Entry] <br>
 - Pitch Axis smoothness is not an issue for any of these yokes <br>
 
-[add pic of survet q]
 
 At the beginning of the survey, respondents were asked whether they owned any of the three yokes listed above, or if not, to specify their yoke in a text entry field. Using Qualtrics display logic, respondents only saw response options corresponding to the yokes they owned. If a respondent indicated ownership of multiple yokes, the question was presented in a “select all that apply” format so that feedback could be captured for each relevant yoke.
 
@@ -527,7 +526,12 @@ gg_afr
 ggsave("bar_chart_afr.svg", plot = gg_afr, width = 8, height = 8)
 
 ```
-[insert pic of graph]
+
+<div align="center">
+
+![Bar Chart AFR](../bar_chart_afr.svg)
+
+</div>
 
 ### RQ3: Yoke Comparison Analysis
 To address the third research question, RQ3: *“Assess the comparative desirability of the current product against its primary competitors”*, a survey question was designed and modeled after a conjoint-style analysis.
@@ -541,7 +545,11 @@ This ranking exercise was conjoint-inspired in that it asked respondents to make
 Full question text:
 >Imagine you are looking to purchase a flight simulator yoke and are considering Yoke A, Yoke B, and Yoke C. The features of the three yokes are listed in the table below. Please rank the following yokes from (1) most desirable to (3) least desirable, assuming each yoke costs $400. Drag and drop to rank the yokes.
 
-[add pic of survet q]
+<div align="center"> 
+
+![Bar Chart CMR](../survey_q3_screenshot.png)
+
+</div>
 
 Similar to the analysis of the feature ranking question, I completed the same workflow for this question
 
@@ -636,7 +644,7 @@ ggsave("bar_chart_cmr.svg", plot = gg_cmr, width = 8, height = 4)
 ```
 <div align="center"> 
 
-![Bar Chart CMR](bar_chart_cmr.svg)
+![Bar Chart CMR](../bar_chart_cmr.svg)
 
 </div>
 
