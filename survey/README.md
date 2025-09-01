@@ -294,7 +294,7 @@ locfilter_check <- data %>%
 
 ### RQ1: General Yoke Pitch Smoothness
 
-To supplement the **product review analysis/LINK**, a survey was feilded to over 300 flight simulation enthusiasts and owners of competitor yokes. To address RQ1, respondents were asked (Q9):
+To supplement the [product review analysis](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/product_reviews), a survey was feilded to over 300 flight simulation enthusiasts and owners of competitor yokes. To address RQ1, respondents were asked (Q9):
 
 >Do you find the smoothness and feel of the pitch axis an issue in your current yoke? (select all that apply)
 
@@ -358,7 +358,7 @@ q9_tb_propy
 
 **Graphing** 
 
-The process for creating these donut charts is very similar to the charts created for the product review findings outlined here **LINK**. 
+The process for creating these donut charts is very similar to the charts created for the product review findings outlined [here](https://github.com/sufiyan-syed0921/market-validation-fsy/tree/main/product_reviews). 
 
 ```R
 # Prepare data: Proportions of responses for 4 sets of responses
@@ -532,7 +532,7 @@ To address the third research question, RQ3: *“Assess the comparative desirabi
 
 Respondents were asked to imagine purchasing a flight simulation yoke priced under $400 and to rank four options from most to least desirable. Each option included a list of its features. Two of the options were designed to closely mirror the feature sets of leading competitor yokes (with branding removed to reduce bias), while the third represented our proposed product.
 
-Specifically, Yoke A resembled the Turtle Beach model, Yoke B resembled the Honeycomb model, and Yoke C reflected our proposed product. I chose not to include the Thrustmaster yoke in this analysis, based on the assumption that it was less directly comparable to the proposed product (Read here/**LINK**).
+Specifically, Yoke A resembled the Turtle Beach model, Yoke B resembled the Honeycomb model, and Yoke C reflected our proposed product. I chose not to include the Thrustmaster yoke in this analysis, based on the assumption that it was less directly comparable to the proposed product (Read [here](https://github.com/sufiyan-syed0921/market-validation-fsy/blob/main/README.md#rq1-do-users-of-competitors-flight-simulation-yokes-perceive-issues-with-feel-smoothness-or-precision).
 
 This ranking exercise was conjoint-inspired in that it asked respondents to make tradeoffs between realistic product bundles, but it stopped short of a full conjoint design that decomposes the value of individual features. For our purposes, however, this streamlined approach was well-suited: our primary interest was not in estimating utilities for each feature (See RQ2), but rather in testing whether the combination of features in our proposed product could stand competitively against existing alternatives. By forcing respondents to directly compare bundled product options, the task produced evidence to evaluate relative desirability in this specific market context.
 
