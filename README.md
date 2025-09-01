@@ -133,11 +133,11 @@ For more detailed information on the analysis plan and data processing, please r
 
 <div align="center"> 
   <br><h4>Average Product Ranking<br><br>Survey Question - Imagine you are looking to purchase a flight simulator yoke and are considering Yoke A, Yoke B, and Yoke C.<br>Please rank the following yokes from most desirable (1) to least desirable (3), assuming that each yoke costs $400</h4><br>
-</div>
-
-<div align="center">
 
 ![Bar Chart CMR](bar_chart_cmr.svg)
 
-</div>
+  <br>**Product Features in Survey Question**<br>
 
+![Bar Chart CMR](Survey_q3_screenshot.png)
+
+</div>
