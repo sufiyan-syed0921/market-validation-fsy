@@ -7,6 +7,8 @@ The primary objective of this segment is twofold:
 
 Details on the methodology for each question are provided in the corresponding section for each research question and its associated survey question. The following sections outline the data processing steps and the analysis conducted for each question.
 
+The full program refrenced in this section can be found [here](https://github.com/sufiyan-syed0921/market-validation-fsy/blob/main/code/flightsim_report_pgm_082425.Rmd)
+
 ## Data Processing
 
 ### Clean Variable Names
