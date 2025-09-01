@@ -35,7 +35,7 @@ library(svglite) # Saving SVG files
 library(flextable) # for tabling
 library(tools) # for graphing aesthetics
 
-# ---------------------- R ENVIORNMENT ----------------------------------
+# ---------------------- ENVIORNMENT ----------------------------------
 
 # Turn off scientific notation
 options(scipen = 999)
@@ -48,7 +48,7 @@ filpath <- rstudioapi::getActiveDocumentContext()$path # File Path
 prgname <- str_sub(str_extract(filpath, "[^/]*$"), end = 5) # Program Name
 prgdate <- format(Sys.Date(), '%y%m%d') # Program Date
 
-# ---------------------- DATA FILES AND DIRECTORIES ----------------------------------
+# ---------------------- FILES AND DIRECTORIES ----------------------------------
 
 # Input Directories
 usedir1 <- "~/Desktop/Flightsim/survey/"
