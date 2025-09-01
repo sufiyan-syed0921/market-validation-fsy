@@ -138,6 +138,6 @@ For more detailed information on the analysis plan and data processing, please r
 
   <br>**Product Features in Survey Question**<br>
 
-![Bar Chart CMR](Survey_q3_screenshot.png)
+![Bar Chart CMR](survey_q3_screenshot.png)
 
 </div>
