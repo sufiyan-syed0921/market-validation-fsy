@@ -634,8 +634,10 @@ gg_cmr
 ggsave("bar_chart_cmr.svg", plot = gg_cmr, width = 8, height = 4)
 
 ```
+<div align="center"> 
 
-[insert pic of graph]
+![Bar Chart CMR](bar_chart_cmr.svg)
 
+</div>
 
 
