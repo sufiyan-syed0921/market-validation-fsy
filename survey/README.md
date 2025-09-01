@@ -3,14 +3,14 @@
 The primary objective of this segment is twofold:
 
 1. To process the survey data in order to establish the analysis sample.
-2. To analyze three survey questions that align with our three research questions.
+2. To analyze three survey questions that align with the three research questions.
 
 Details on the methodology for each question are provided in the corresponding section for each research question and its associated survey question. The following sections outline the data processing steps and the analysis conducted for each question.
 
 ## Data Processing
 
 ### Clean Variable Names
-The raw survey data required some processing before it could be analyzed. For example, in questions Q2 and Q3, the columns representing feature rankings were not labeled with the corresponding feature names. Instead, the dataset used generic labels such as "Q2_1", where the column represented the first feature option and the rows contained respondents’ reported rankings. To improve clarity and facilitate analysis, I renamed these columns to include the associated feature names.
+The raw survey data required processing before it could be analyzed. For example, in questions Q2 and Q3, the columns representing feature rankings were not labeled with the corresponding feature names. Instead, the dataset used generic labels such as "Q2_1", where the column represented the first feature option and the rows contained respondents’ reported rankings. To improve clarity and facilitate analysis, these columns were renamed to include the associated feature names.
 
 The Qualtrics survey output includes the question text and metadata in the first and second rows of the dataset. For example, the first-row value for Q2_1 is:
 
@@ -109,7 +109,7 @@ Some respondents quit the survey after responding to question 1 and these respon
 
 **5. Remove respondents with inconsistent location responses (Falsely claimed to live in the SF Bay Area)**
 <br> 
-To recruit potential participants for an in-person study, we asked respondents (Q12) if they lived in the San Francisco Bay Area. However, we observed a suspiciously high number of “yes” responses, despite the survey being disseminated globally via Reddit. To address this concern, we cross-checked responses with location metadata and removed cases where the coordinates fell outside the Bay Area. See code below for details of this filtering process.
+To recruit potential participants for an in-person study, we asked respondents (Q12) if they lived in the San Francisco Bay Area. However, a suspiciously high number of “yes” responses were observed, despite the survey being disseminated globally via Reddit. To address this concern, we cross-checked responses with location metadata and removed cases where the coordinates fell outside the Bay Area. See code below for details of this filtering process.
 
 The location filter flagged responses where the reported coordinates were more than 100 miles outside the Bay Area, despite the respondent indicating they lived there. The code below prepares for this filtering by creating a distance function, which is applied later in the program.
 
@@ -138,7 +138,7 @@ san_ramon_lon <- -121.978
 ```
 <br>
 
-To identify respondents who only owned HOTAS-style controllers, we manually reviewed the unique text entry responses provided under the Q1 “Other” option (*Do you own any of the following flight simulation yokes? (select all that apply)*).
+To identify respondents who only owned HOTAS-style controllers, each unique text entry responses provided under the Q1 “Other” option (*Do you own any of the following flight simulation yokes? (select all that apply)*) were reviewed.
 
 After identifying which controllers were HOTAS-style and determining the set of respondents who owned these exclusively, I compiled the controller names into an object called exc_filter, which was later used as a filter.
 
@@ -294,7 +294,7 @@ locfilter_check <- data %>%
 
 ### RQ1: General Yoke Pitch Smoothness
 
-To supplement the **product review analysis/LINK**, we fielded a survey to over 300 flight simulation enthusiasts and owners of competitor yokes. To address RQ1, respondents were asked (Q9):
+To supplement the **product review analysis/LINK**, a survey was feilded to over 300 flight simulation enthusiasts and owners of competitor yokes. To address RQ1, respondents were asked (Q9):
 
 >Do you find the smoothness and feel of the pitch axis an issue in your current yoke? (select all that apply)
 
@@ -389,7 +389,7 @@ create_donut_chart <- function(df, label) {
 
 ```
 
-Next, after running my function for each of the 3 cateogories, I  used arrangeGrob to position the plots together and other GridExtra functions to customize aesthetics. 
+Next, after running the function for each of the 3 cateogories, I  used *arrangeGrob* to position the plots together and other *GridExtra* functions to customize aesthetics. 
 
 ```R
 
@@ -415,11 +415,11 @@ ggsave("donut_chart_s.svg", plot = gd_s, width = 12, height = 4, bg = "white")
 
 ### RQ2: Average Feature Rank
 
-To address our second research question (RQ2): “Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features”, we asked respondents to complete a ranking task pertaining to common flight simulation yoke features (Q2):
+To address the second research question (RQ2): “Determine the value users place on the feel, smoothness, and precision of a flight yoke relative to other features”, we asked respondents to complete a ranking task pertaining to common flight simulation yoke features (Q2):
 
 >When purchasing a flight simulator yoke, rank the following features and capabilities from most important (1) to least important (2). Drag and drop to rank the yokes.
 
-For analysis, I subset the dataset to include only the columns corresponding to this ranking question and converted responses to numeric values. This allowed me to calculate the mean ranking for each feature, which serves as the basis for comparing their relative importance in the next step.
+For analysis, the dataset was subsetted to include only columns corresponding to this ranking question and converted responses to numeric values. This allowed the calculation of the mean rank for each feature, which serves as the basis for comparing their relative importance in the next step.
 
 ```R
 
@@ -528,11 +528,11 @@ ggsave("bar_chart_afr.svg", plot = gg_afr, width = 8, height = 8)
 [insert pic of graph]
 
 ### RQ3: Yoke Comparison Analysis
-To address our third research question, RQ3: *“Assess the comparative desirability of the current product against its primary competitors”*, we designed a survey question modeled after a conjoint-style analysis.
+To address the third research question, RQ3: *“Assess the comparative desirability of the current product against its primary competitors”*, a survey question was designed and modeled after a conjoint-style analysis.
 
 Respondents were asked to imagine purchasing a flight simulation yoke priced under $400 and to rank four options from most to least desirable. Each option included a list of its features. Two of the options were designed to closely mirror the feature sets of leading competitor yokes (with branding removed to reduce bias), while the third represented our proposed product.
 
-Specifically, Yoke A resembled the Turtle Beach model, Yoke B resembled the Honeycomb model, and Yoke C reflected our proposed product. We chose not to include the Thrustmaster yoke in this analysis, based on the assumption that it was less directly comparable to the proposed product.
+Specifically, Yoke A resembled the Turtle Beach model, Yoke B resembled the Honeycomb model, and Yoke C reflected our proposed product. I chose not to include the Thrustmaster yoke in this analysis, based on the assumption that it was less directly comparable to the proposed product (Read here/**LINK**).
 
 This ranking exercise was conjoint-inspired in that it asked respondents to make tradeoffs between realistic product bundles, but it stopped short of a full conjoint design that decomposes the value of individual features. For our purposes, however, this streamlined approach was well-suited: our primary interest was not in estimating utilities for each feature (See RQ2), but rather in testing whether the combination of features in our proposed product could stand competitively against existing alternatives. By forcing respondents to directly compare bundled product options, the task produced evidence to evaluate relative desirability in this specific market context.
 
