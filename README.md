@@ -18,7 +18,7 @@ To explore the viability of this product, we focused on answering three key rese
 
 ### *RQ1: Do users of competitors flight simulation yokes perceive issues with feel, smoothness, or precision?*
 
-- **Between 30% and 55%** of customer reviews (30%) and survey respondents (45–55%) for the **Turtle Beach** and **Honeycomb** yokes reported concerns related to the feel, smoothness, and precision of the yoke mechanism.
+- **Between 30% and 55%** of customer reviews (30%) and survey responses (45–55%) for **Turtle Beach** and **Honeycomb** yoke users reported concerns related to the feel, smoothness, and precision of the yoke mechanism.
 
 - For the **Thrustmaster** yoke, these issues were reported **less frequently**: approximately 10% of customer reviews and 36% of survey respondents indicated similar concerns.
 
@@ -59,21 +59,19 @@ To explore the viability of this product, we focused on answering three key rese
 
 - **Subjectivity of yoke quality:** The perceived smoothness, feel, and precision of a yoke is subjective and vary by user. Differences in this quality are difficult to describe explicitly when creating measures.
 
-- **Does Not Reflect Post-Review Product Changes:** The analysis reflects customer experiences tied to specific product iterations at the time of the review. Subsequent updates or redesigns are not captured.
+- **Does Not Reflect Post-Review Product Changes:** The analysis reflects customer experiences with the specific product versions available at the time of their review or at the point of survey completion. Subsequent updates or redesigns are not captured.
 
 - **Instrumentation Bias:** Due to a Qualtrics configuration issue, feature and yoke ranking questions were not randomized, possibly biasing responses based on the default item order.
 
 ### *Sampling Bias*
   - Product Review data is drawn primarily from Amazon via web scraping. Amazon’s platform only displays up to 100 reviews per filter, which may skew sample representation.
-  - Customers posting reviews are self-selecting, and those with strong negative or to a lesser degree positive opinions are more likely to leave reviews. This may result in bias toward more extreme sentiment.  
-  - The survey sample is limited to Reddit users from r/flightsim, which likely overrepresents niche and enthusiast flight simulator users rather than casual consumers
+  - Customers posting reviews are self-selecting, and those with strong negative opinions are more likely to leave reviews. This may result in bias toward more extreme sentiment.  
+  - The survey sample is limited to Reddit users from r/flightsim, which likely overrepresents niche and enthusiast flight simulator users rather than casual consumers.
   - Respondents were self-selected and may have been influenced by the incentive to participate, introducing potential bias.
-
-
-  
+ 
   
 ## Methods & Data Processing
-Our methodological approach to answering these questions included data sources in customer product reviews and survey data
+The methodological approach to answering these questions included data sources in customer product reviews and survey data
 
 ### *Product Reviews*
 Web-scraped 306 customer reviews (3 stars or under) from Amazon, Walmart, Best Buy and other popular retailers​
