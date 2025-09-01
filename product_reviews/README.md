@@ -10,7 +10,7 @@ Read each section below for details on the data collection and analysis process.
 
 ## Data Collection & Management
 
-### Webscraping Program (LINK)
+### [Webscraping Program](https://github.com/sufiyan-syed0921/market-validation-fsy/blob/main/code/product_review_scraper_bs4_082425.ipynb)
 
 To begin the data collection process, I wrote a Python program to scrape the raw HTML code from a user-input URL of product listings on retailer websites, including product reviews. In this case, the majority of reviews were sourced from Amazon, which limits the number of reviews displayed per page to 10. As a result, the program needed to be run on each available review page for the given retailer.
 
@@ -102,7 +102,7 @@ for review in review_content:
                          'Purchase Verification': purchase_verification,
                          'Review Text': review_text})
 ```
-### Review Proccessing (LINK) 
+### [Review Proccessing](https://github.com/sufiyan-syed0921/market-validation-fsy/blob/main/code/Honeycomb_reviews_processing_082425.ipynb)
 
 The next program processes the scraped review data. Since 10 reviews could be displayed per URL, all the csv files needed to be appended to form the complete data file for a given yoke. This program performs the following tasks: 
  1. Counts and displays the number of rows in each CSV file, as well as the total number of rows across all files.
@@ -159,7 +159,7 @@ print(f"\nTotal number of rows across all files: {total_rows}")
 del csv_directory, file_counts, total_rows, file, file_name, rows_count 
 
 ```
-After this step, each inspected data file is appended and cleaned for translation. See **LINK** to view this code. 
+After this step, each inspected data file is appended and cleaned for translation. See [here](https://github.com/sufiyan-syed0921/market-validation-fsy/blob/main/code/Honeycomb_reviews_processing_082425.ipynb) to view the full code. 
 
 ### Translate any non-english reviews to english  
 
