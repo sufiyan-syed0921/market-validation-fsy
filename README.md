@@ -13,6 +13,7 @@ To explore the viability of this product, we focused on answering three key rese
 - **RQ2: What value do users of competitors place on the feel, smoothness, and precision of a flight yoke relative to other features?​**
 - **RQ3: How desirable is the proposed product compared to its primary competitors?**
 
+These questions were answered using data souces in customer product reviews and survey data. 
 
 ## Conclusions & Key Findings 
 
